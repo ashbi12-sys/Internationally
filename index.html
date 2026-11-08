@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marketplace | Buy, sell and give things away worldwide</title>
+<meta name="description" content="Buy, sell and give things away anywhere in the world. Free to use, with photos, chat, and safety tools.">
+<meta property="og:title" content="Marketplace">
+<meta property="og:description" content="Buy, sell and give things away anywhere in the world.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1a56db">
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--ink:#14213d;--mute:#5b6479;--line:#e2e6f0;--pri:#1a56db;--pri2:#0e9f8e;--onpri:#fff;--acc:#f5a400;--red:#d62839;--ok:#15803d;--soft:#e8efff;--shadow:0 1px 2px rgba(20,33,61,.05),0 8px 24px rgba(20,33,61,.07)}
+@media(prefers-color-scheme:dark){:root{--bg:#0e1424;--card:#161e33;--ink:#eaf0ff;--mute:#9aa6c4;--line:#263152;--pri:#6ea0ff;--pri2:#35d1bd;--onpri:#08122b;--acc:#ffc233;--red:#ff6b7a;--ok:#4ade80;--soft:#1d2a4d;--shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3)}}
+*{box-sizing:border-box}
+html{color-scheme:light dark}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55}
+.wrap{max-width:1080px;margin:0 auto;padding:0 18px}
+a{color:var(--pri)}
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-4px}
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:6px;min-height:62px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-weight:800;font-size:1.2rem;margin-right:auto;letter-spacing:-.02em}
+.brand small{display:block;font-weight:500;font-size:.66rem;color:var(--mute);letter-spacing:.14em;text-transform:uppercase;line-height:1}
+.brand svg{width:36px;height:36px}
+#nav{display:flex;align-items:center;gap:2px;flex-wrap:wrap}
+.nl{font:inherit;font-weight:600;font-size:.9rem;color:var(--ink);background:transparent;border:0;text-decoration:none;padding:8px 11px;border-radius:10px;cursor:pointer;position:relative;white-space:nowrap}
+.nl:hover{background:var(--soft)}
+.nl.learn{color:var(--pri2)}
+.badge{position:absolute;top:2px;right:0;background:var(--red);color:#fff;font-size:.68rem;font-weight:800;border-radius:999px;min-width:18px;height:18px;display:grid;place-items:center;padding:0 5px}
+.btn{font:inherit;font-weight:600;border:1.5px solid var(--pri);background:var(--pri);color:var(--onpri);border-radius:12px;padding:10px 18px;cursor:pointer;text-decoration:none;display:inline-block;text-align:center}
+.btn.sm{padding:7px 14px;font-size:.9rem}
+.btn.alt{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.alt:hover{border-color:var(--pri)}
+.btn.bad{background:transparent;color:var(--red);border-color:var(--red)}
+.btn:disabled{opacity:.55;cursor:default}
+.lnk{font:inherit;background:none;border:0;color:var(--pri);text-decoration:underline;cursor:pointer;padding:0}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+main{padding-bottom:90px;min-height:70vh}
+.hero{margin:18px 0 22px;padding:34px 26px;border-radius:28px;color:#fff;background:radial-gradient(500px 260px at 90% 0%,rgba(245,164,0,.35),transparent),linear-gradient(135deg,#1a56db,#0e9f8e);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero .eyebrow{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;opacity:.9}
+.hero h1{font-size:clamp(2.2rem,6.5vw,3.4rem);font-weight:700;letter-spacing:-.04em;line-height:1.08;margin:6px 0 6px}
+.hero p{margin:0 0 20px;font-size:1.08rem;opacity:.95;max-width:46ch}
+.hs{display:flex;gap:10px;flex-wrap:wrap}
+.hs .search{flex:1 1 260px;background:#fff;border-color:transparent}
+.hs select{background:#fff;color:#14213d;border-color:transparent;min-width:200px}
+.trust{display:flex;gap:6px 18px;flex-wrap:wrap;margin-top:16px;font-size:.84rem;font-weight:600;opacity:.95}
+.note-bar{background:color-mix(in srgb,var(--acc) 18%,var(--card));border:1px solid color-mix(in srgb,var(--acc) 50%,transparent);border-radius:14px;padding:10px 16px;font-size:.9rem;margin-bottom:14px}
+.off{display:none;background:var(--red);color:#fff;text-align:center;padding:6px;font-size:.88rem;font-weight:600}
+.search{display:flex;align-items:center;gap:10px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:0 14px}
+.search:focus-within{border-color:var(--pri)}
+.search input{flex:1;border:0;background:transparent;color:#14213d;font:inherit;padding:13px 0;outline:none;min-width:0}
+.search .ic{color:#5b6479}
+select,input,textarea{font:inherit;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;max-width:100%}
+select:focus,input:focus,textarea:focus{outline:none;border-color:var(--pri)}
+.bar2{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.cats{display:flex;gap:8px;overflow-x:auto;padding:2px 0 12px;scrollbar-width:thin}
+.cat{font:inherit;font-weight:600;font-size:.88rem;white-space:nowrap;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 15px;cursor:pointer}
+.cat[aria-pressed=true]{background:var(--pri);border-color:var(--pri);color:var(--onpri)}
+details.more{margin-bottom:16px}
+details.more summary{cursor:pointer;color:var(--mute);font-weight:600;font-size:.9rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px}
+.card{display:block;background:var(--card);border:1.5px solid var(--line);border-radius:18px;overflow:hidden;text-decoration:none;color:inherit;box-shadow:var(--shadow);transition:transform .15s,border-color .15s;position:relative}
+.card:hover{transform:translateY(-3px);border-color:var(--pri)}
+.card .im{aspect-ratio:1;background:linear-gradient(140deg,var(--soft),color-mix(in srgb,var(--pri) 20%,var(--card)));display:grid;place-items:center;overflow:hidden}
+.card .im img{width:100%;height:100%;object-fit:cover;display:block}
+.ph{font-size:3.4rem}
+.card .tx{padding:10px 12px 12px}
+.pr{font-weight:800;font-size:1.1rem}
+.pr.free{color:var(--ok)}
+.card h3{margin:2px 0 4px;font-size:.92rem;font-weight:400;line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow-wrap:anywhere}
+.mt{color:var(--mute);font-size:.78rem}
+.tag{display:inline-block;font-size:.74rem;font-weight:600;background:var(--soft);color:var(--pri);border-radius:999px;padding:2px 10px;margin:0 6px 6px 0}
+.sold{position:absolute;top:10px;left:10px;background:var(--red);color:#fff;font-size:.72rem;font-weight:800;letter-spacing:.08em;border-radius:8px;padding:2px 10px;z-index:1}
+.center{text-align:center;padding:16px 0}
+.none{text-align:center;color:var(--mute);padding:50px 10px}
+.panel{background:var(--card);border:1.5px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow);margin-bottom:16px}
+.panel h2{margin:0 0 8px;font-size:1.3rem;letter-spacing:-.02em}
+label{display:block;font-weight:600;font-size:.88rem;margin:14px 0 5px}
+.panel input,.panel select,.panel textarea,.dp input,.dp select,.dp textarea{width:100%}
+textarea{min-height:90px;resize:vertical}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:560px){.row2,.row3{grid-template-columns:1fr}}
+.chk{display:flex;gap:10px;align-items:flex-start;font-weight:400!important;font-size:.88rem!important}
+.chk input{width:auto!important;margin-top:4px}
+.err{color:var(--red);font-weight:600;font-size:.88rem;min-height:1.2em;margin:10px 0 0}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.note{color:var(--mute);font-size:.86rem}
+.det{display:grid;grid-template-columns:1.2fr 1fr;gap:24px}
+@media(max-width:760px){.det{grid-template-columns:1fr}}
+.gal .main{aspect-ratio:1;border-radius:20px;overflow:hidden;background:linear-gradient(140deg,var(--soft),color-mix(in srgb,var(--pri) 20%,var(--card)));display:grid;place-items:center;cursor:zoom-in;border:1.5px solid var(--line)}
+.gal .main img{width:100%;height:100%;object-fit:contain;background:#000}
+.gal .main .ph{font-size:6rem}
+.thumbs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.thumbs button{width:62px;height:62px;border-radius:12px;overflow:hidden;border:2px solid var(--line);padding:0;background:var(--soft);cursor:pointer}
+.thumbs button[aria-current=true]{border-color:var(--pri)}
+.thumbs img{width:100%;height:100%;object-fit:cover}
+.det h1{font-size:1.6rem;margin:0 0 4px;letter-spacing:-.02em;overflow-wrap:anywhere}
+.det .pr{font-size:1.8rem}
+.desc{white-space:pre-wrap;overflow-wrap:anywhere}
+.seller{display:flex;align-items:center;gap:12px;background:var(--bg);border-radius:14px;padding:12px;margin:14px 0}
+.av{width:44px;height:44px;border-radius:50%;background:var(--pri);color:var(--onpri);display:grid;place-items:center;font-weight:800;flex:none}
+.tips{background:color-mix(in srgb,var(--acc) 14%,var(--card));border-left:4px solid var(--acc);border-radius:0 12px 12px 0;padding:10px 14px;font-size:.85rem;margin-top:14px}
+.photos{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.photos .pv{position:relative;width:92px;height:92px;border-radius:14px;overflow:hidden;border:1.5px solid var(--line)}
+.photos .pv img{width:100%;height:100%;object-fit:cover}
+.photos .pv button{position:absolute;top:4px;right:4px;width:24px;height:24px;border-radius:50%;border:0;background:rgba(0,0,0,.65);color:#fff;cursor:pointer;line-height:1}
+.add{width:92px;height:92px;border-radius:14px;border:2px dashed var(--line);background:transparent;color:var(--mute);cursor:pointer;font:inherit;font-size:.8rem;font-weight:600}
+.add:hover{border-color:var(--pri);color:var(--pri)}
+.mine{display:flex;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line);flex-wrap:wrap}
+.mine:first-child{border-top:0}
+.mine .th{width:60px;height:60px;border-radius:12px;overflow:hidden;background:var(--soft);display:grid;place-items:center;flex:none;font-size:1.8rem}
+.mine .th img{width:100%;height:100%;object-fit:cover}
+.mine .tt{flex:1;min-width:150px}
+.inbox a.row{display:flex;gap:12px;align-items:center;padding:12px 6px;border-top:1px solid var(--line);text-decoration:none;color:inherit}
+.inbox a.row:first-child{border-top:0}
+.inbox .tt{flex:1;min-width:0}
+.inbox .tt b,.inbox .tt span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--pri);flex:none}
+.chat{display:flex;flex-direction:column;height:calc(100vh - 150px);min-height:420px}
+.chead{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.chead .th{width:48px;height:48px;border-radius:10px;overflow:hidden;background:var(--soft);display:grid;place-items:center;font-size:1.5rem;flex:none}
+.chead .th img{width:100%;height:100%;object-fit:cover}
+.msgs{flex:1;overflow-y:auto;padding:14px 4px;display:flex;flex-direction:column;gap:6px}
+.b{max-width:78%;padding:9px 13px;border-radius:18px;background:var(--card);border:1px solid var(--line);align-self:flex-start;overflow-wrap:anywhere;white-space:pre-wrap}
+.b.me{align-self:flex-end;background:var(--pri);color:var(--onpri);border-color:var(--pri)}
+.b .tm{display:block;font-size:.68rem;opacity:.7;margin-top:2px}
+.b.pend{opacity:.6}
+.b.fail{border-color:var(--red);background:color-mix(in srgb,var(--red) 12%,var(--card));color:var(--ink)}
+.day{align-self:center;font-size:.72rem;color:var(--mute);margin:8px 0}
+.compose{display:flex;gap:8px;padding-top:10px;border-top:1px solid var(--line)}
+.compose textarea{flex:1;min-height:46px;max-height:120px;margin:0;border-radius:22px}
+.quick{display:flex;gap:6px;flex-wrap:wrap;padding:8px 0}
+.quick button{font:inherit;font-size:.82rem;font-weight:600;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:5px 12px;cursor:pointer}
+.quick button:hover{border-color:var(--pri)}
+.rep{border-top:1px solid var(--line);padding:14px 0}
+.rep:first-of-type{border-top:0}
+dialog{border:0;border-radius:22px;padding:0;background:var(--card);color:var(--ink);width:min(520px,94vw);max-height:92vh;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+dialog::backdrop{background:rgba(8,12,28,.6);backdrop-filter:blur(3px)}
+.dp{padding:22px}
+.dp h2{margin:0 0 6px;font-size:1.3rem}
+.zoom{width:min(900px,96vw)}
+.zoom img{width:100%;max-height:86vh;object-fit:contain;display:block;background:#000;border-radius:22px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:11px 18px;border-radius:14px;font-weight:600;opacity:0;pointer-events:none;transition:.25s;z-index:99;max-width:92vw;text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.foot{padding-bottom:34px;color:var(--mute);font-size:.84rem;text-align:center;line-height:2}
+.foot a{margin:0 6px}
+ul.rules{padding-left:20px}ul.rules li{margin:6px 0}
+.sp{display:inline-block;width:16px;height:16px;border:2.5px solid currentColor;border-right-color:transparent;border-radius:50%;animation:rot .7s linear infinite;vertical-align:-3px}
+@keyframes rot{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="off" id="off" role="status">You are offline. Some things will not work until you reconnect.</div>
+<header class="top"><div class="wrap nav">
+<a class="brand" href="#/"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="8" fill="#f5a400"/><g stroke="#f5a400" stroke-width="3" stroke-linecap="round"><path d="M20 3v5M20 32v5M3 20h5M32 20h5M8 8l3.500 3.500M28.500 28.500 32 32M8 32l3.500-3.500M28.500 11.500 32 8"/></g><circle cx="20" cy="20" r="3" fill="#1a56db"/></svg><span>Marketplace<small>Worldwide</small></span></a>
+<nav id="nav" aria-label="Main"></nav>
+</div></header>
+<main class="wrap" id="view" tabindex="-1"></main>
+<footer class="wrap foot"><a href="learn.html">Learn</a>·<a href="#/safety">Safety</a>·<a href="#/terms">Terms</a>·<a href="#/privacy">Privacy</a><span id="contact"></span></footer>
+<dialog id="dlg"></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="config.js"></script>
+<script>
+(function(){
+"use strict";
+const C=window.MARKET_CONFIG||{};
+const BASE=String(C.url||"").trim().replace(/\/+$/,""),KEY=String(C.key||"").trim();
+const READY=/^https:\/\/\S+$/.test(BASE)&&KEY.length>20;
+const OPERATOR=String(C.operator||"").trim()||"the site operator";
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const ago=iso=>{const s=(Date.now()-new Date(iso))/1000;if(!(s>=60))return"just now";if(s<3600)return Math.floor(s/60)+" min ago";if(s<86400)return Math.floor(s/3600)+" h ago";if(s<2592000)return Math.floor(s/86400)+" d ago";return new Date(iso).toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"})};
+const uuid=()=>window.crypto&&crypto.randomUUID?crypto.randomUUID():"xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g,c=>{const r=Math.random()*16|0;return(c==="x"?r:(r&3|8)).toString(16)});
+const UUIDRE=/^[0-9a-f-]{36}$/i;
+const qv=s=>encodeURIComponent(s);
+const toast=m=>{const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("on"),2600)};
+const CATS=[["Electronics","💻"],["Mobile phones","📱"],["Home and furniture","🛋️"],["Clothing and shoes","👕"],["Books and school","📚"],["Sewing and fabric","🧵"],["Tools","🔧"],["Plants and food","🌱"],["Toys and baby","🧸"],["Sports","⚽"],["Pet supplies","🐾"],["Other","🛍️"]];
+const emoOf=c=>(CATS.find(x=>x[0]===c)||[0,"🛍️"])[1];
+/* ---- countries, currencies, shipping ---- */
+const CC="AD AE AF AG AI AL AM AO AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BV BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CR CU CV CW CX CY CZ DE DJ DK DM DO DZ EC EE EG EH ER ES ET FI FJ FK FM FO FR GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY HK HM HN HR HT HU ID IE IL IM IN IO IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SY SZ TC TD TF TG TH TJ TK TL TM TN TO TR TT TV TW TZ UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS YE YT ZA ZM ZW".split(" ");
+let DNr=null,DNc=null;try{DNr=new Intl.DisplayNames(["en"],{type:"region"});DNc=new Intl.DisplayNames(["en"],{type:"currency"})}catch(e){}
+const COUNTRIES=CC.map(c=>{let n=c;try{n=(DNr&&DNr.of(c))||c}catch(e){}return[c,n]}).sort((a,b)=>a[1].localeCompare(b[1]));
+const cname=c=>{const x=COUNTRIES.find(y=>y[0]===c);return x?x[1]:(c||"")};
+const cOpts=(sel,ph)=>`<option value="">${esc(ph)}</option>`+COUNTRIES.map(c=>`<option value="${c[0]}"${c[0]===sel?" selected":""}>${esc(c[1])}</option>`).join("");
+const myCountry=()=>{try{const m=((navigator.language||"").split("-")[1]||"").toUpperCase();return CC.includes(m)?m:""}catch(e){return""}};
+const CURS=["PHP","USD","EUR","GBP","AUD","CAD","SGD","JPY","KRW","CNY","HKD","TWD","AED","SAR","QAR","KWD","INR","MYR","THB","IDR","VND","NZD","CHF","SEK","NOK","DKK","MXN","BRL","ZAR","TRY"];
+const CURMAP={PH:"PHP",US:"USD",GB:"GBP",AU:"AUD",CA:"CAD",SG:"SGD",JP:"JPY",KR:"KRW",CN:"CNY",HK:"HKD",TW:"TWD",AE:"AED",SA:"SAR",QA:"QAR",KW:"KWD",IN:"INR",MY:"MYR",TH:"THB",ID:"IDR",VN:"VND",NZ:"NZD",CH:"CHF",SE:"SEK",NO:"NOK",DK:"DKK",MX:"MXN",BR:"BRL",ZA:"ZAR",TR:"TRY"};
+"AT BE CY DE EE ES FI FR GR HR IE IT LT LU LV MT NL PT SI SK".split(" ").forEach(c=>CURMAP[c]="EUR");
+const curFor=c=>CURMAP[c]||"USD";
+const curOpts=(sel,any)=>(any?`<option value="">${esc(any)}</option>`:"")+CURS.map(c=>{let n="";try{n=DNc&&DNc.of(c)}catch(e){}return`<option value="${c}"${c===sel?" selected":""}>${c}${n&&n!==c?" - "+esc(n):""}</option>`}).join("");
+const money=(n,c)=>{n=Number(n);if(n===0)return"Free";try{return new Intl.NumberFormat(undefined,{style:"currency",currency:c||"USD",maximumFractionDigits:2}).format(n)}catch(e){return(c||"")+" "+n}};
+const SHIP={pickup:"Local pickup only",domestic:"Ships within its country",worldwide:"Ships worldwide"};
+const place=l=>[l.city,l.region,l.country?cname(l.country):""].filter(Boolean).join(", ");
+const pub=p=>BASE+"/storage/v1/object/public/listing-photos/"+String(p).split("/").map(encodeURIComponent).join("/");
+const view=$("#view");
+if(C.contact)$("#contact").innerHTML=`<br>Report a problem or ask about your data: <a href="mailto:${esc(C.contact)}">${esc(C.contact)}</a>`;
+
+/* ================= session + network ================= */
+class HttpError extends Error{constructor(m,status,code){super(m);this.status=status;this.code=code}}
+const SK="mk-session-v1";let sess=null,me=null,unreadCount=0,isAdmin=false;
+try{sess=JSON.parse(localStorage.getItem(SK))}catch(e){}
+if(sess&&!(sess.access_token&&sess.user&&sess.user.id))sess=null;
+function setSession(s){
+ if(s&&s.access_token){sess={access_token:s.access_token,refresh_token:s.refresh_token,expires_at:s.expires_at||Math.floor(Date.now()/1000)+(s.expires_in||3600),user:s.user?{id:s.user.id,email:s.user.email}:(sess&&sess.user)};try{localStorage.setItem(SK,JSON.stringify(sess))}catch(e){}}
+ else{sess=null;me=null;unreadCount=0;isAdmin=false;try{localStorage.removeItem(SK)}catch(e){}}
+ renderHeader()}
+const friendly=m=>{m=String(m||"");const l=m.toLowerCase();
+ if(l.includes("invalid login"))return"Wrong email or password.";
+ if(l.includes("not confirmed"))return"Please confirm your email first. Check your inbox.";
+ if(l.includes("already registered")||l.includes("already been registered"))return"That email already has an account. Try logging in.";
+ if(l.includes("rate limit")||l.includes("too many requests"))return"Too many tries. Please wait a few minutes and try again.";
+ if(l.includes("password")&&l.includes("least"))return"Password must be at least 8 characters.";
+ if(l.includes("row-level security")||l.includes("permission denied"))return"You are not allowed to do that.";
+ if(l.includes("duplicate key"))return"That already exists.";
+ return m};
+async function authReq(path,method,body,tok){
+ const h={apikey:KEY,"Content-Type":"application/json"};if(tok)h.Authorization="Bearer "+tok;
+ let r;try{r=await fetch(BASE+path,{method,headers:h,body:body?JSON.stringify(body):undefined})}catch(e){throw new HttpError("No internet connection. Please try again.",0)}
+ let j=null;try{j=await r.json()}catch(e){}
+ if(!r.ok)throw new HttpError(friendly((j&&(j.msg||j.error_description||j.message))||("Error "+r.status)),r.status,j&&(j.error_code||j.code));
+ return j}
+let refreshP=null;
+function refreshSession(){
+ if(!sess)return Promise.reject(new Error("no session"));if(refreshP)return refreshP;
+ refreshP=(async()=>{try{setSession(await authReq("/auth/v1/token?grant_type=refresh_token","POST",{refresh_token:sess.refresh_token}))}catch(e){if(e.status>=400&&e.status<500)setSession(null);throw e}finally{refreshP=null}})();return refreshP}
+async function http(path,o={}){
+ const method=o.method||"GET",auth=o.auth!==false,tries=o.retry===undefined?(method==="GET"?3:1):(o.retry?3:1);let last;
+ for(let i=0;i<tries;i++){
+  try{
+   if(auth&&sess&&sess.expires_at-Date.now()/1000<45){try{await refreshSession()}catch(e){if(!sess)throw new HttpError("Please log in again.",401)}}
+   const h={apikey:KEY,...(o.headers||{})};
+   const tok=auth&&sess?sess.access_token:(KEY.startsWith("eyJ")?KEY:null);if(tok)h.Authorization="Bearer "+tok;
+   let body=o.body;if(body!==undefined&&!(body instanceof Blob)){h["Content-Type"]="application/json";body=JSON.stringify(body)}
+   let r;try{r=await fetch(BASE+path,{method,headers:h,body})}catch(e){throw new Error("No internet connection. Please try again.")}
+   if(r.status===401&&auth&&sess&&!o._r){try{await refreshSession()}catch(e){}if(sess)return http(path,{...o,_r:1});throw new HttpError("Please log in again.",401)}
+   if(!r.ok){let e={};try{e=await r.json()}catch(_){}throw new HttpError(friendly(e.message||e.msg||e.error_description||e.error||("Error "+r.status)),r.status,e.code||e.error_code)}
+   if(r.status===204)return null;const t=await r.text();return t?JSON.parse(t):null;
+  }catch(err){last=err;if(err instanceof HttpError&&err.status<500)throw err;if(i<tries-1)await sleep(500*(i+1))}
+ }
+ throw last}
+const qs=a=>a.map(x=>x[0]+"="+(x[1]===undefined?"":qv(x[1]))).join("&");
+
+/* ================= auth ================= */
+async function loadMe(){
+ if(!sess)return;
+ try{const r=await http("/rest/v1/profiles?id=eq."+sess.user.id+"&select=*");me=r&&r[0]?r[0]:null}catch(e){if(e.status===401)return}
+ if(!me)me={id:sess.user.id,display_name:(sess.user.email||"Me").split("@")[0],country:"",city:""};
+ try{isAdmin=(await http("/rest/v1/rpc/is_marketplace_admin",{method:"POST",body:{},retry:false}))===true}catch(e){isAdmin=false}
+ renderHeader()}
+async function takeAuthHash(){
+ const h=location.hash;if(!/access_token=|error_description=/.test(h))return;
+ const p=new URLSearchParams(h.replace(/^#\/?/,""));history.replaceState(null,"",location.pathname+location.search+"#/");
+ if(p.get("error_description")){toast(p.get("error_description").replace(/\+/g," "));return}
+ try{const u=await authReq("/auth/v1/user","GET",null,p.get("access_token"));
+  setSession({access_token:p.get("access_token"),refresh_token:p.get("refresh_token"),expires_at:+p.get("expires_at")||undefined,expires_in:+p.get("expires_in")||3600,user:u});
+  await loadMe();if(p.get("type")==="recovery")newPassDlg();else toast("Email confirmed. You are logged in.")}
+ catch(e){toast("That link has expired. Please try again.")}}
+async function signUp(email,password,name,country){
+ const j=await authReq("/auth/v1/signup","POST",{email,password,data:{display_name:name,country:country||""}});
+ if(j&&j.access_token){setSession(j);await loadMe();return"in"}return"confirm"}
+async function signIn(email,password){setSession(await authReq("/auth/v1/token?grant_type=password","POST",{email,password}));await loadMe()}
+let afterAuth=null;
+function needLogin(then){if(sess)return false;afterAuth=then||null;authDlg("login","Log in to continue.");return true}
+function authDlg(mode,note){
+ const su=mode==="signup";
+ openDlg(`<form class="dp" id="af" novalidate><h2>${su?"Create your account":"Log in"}</h2>${note?`<p class="note">${esc(note)}</p>`:""}
+${su?`<label for="a-name">Your name</label><input id="a-name" maxlength="40" autocomplete="name">`:""}
+<label for="a-email">Email</label><input id="a-email" type="email" autocomplete="email" required>
+<label for="a-pass">Password${su?" (at least 8 characters)":""}</label><input id="a-pass" type="password" autocomplete="${su?"new-password":"current-password"}" required>
+${su?`<label for="a-cty">Country (optional)</label><select id="a-cty">${cOpts(myCountry(),"Choose your country")}</select><label class="chk" style="margin-top:14px"><input type="checkbox" id="a-ok"> <span>I am 18 or older. I agree to the <a href="#/terms" data-close>Terms</a> and the <a href="#/privacy" data-close>Privacy Policy</a>.</span></label>`:""}
+<p class="err" id="a-err" role="alert"></p>
+<div class="acts"><button class="btn" type="submit">${su?"Sign up":"Log in"}</button><button type="button" class="btn alt" data-close>Cancel</button></div>
+<p class="note" style="margin-top:14px">${su?'Already have an account? <button type="button" class="lnk" data-act="login">Log in</button>':'New here? <button type="button" class="lnk" data-act="signup">Create an account</button> · <button type="button" class="lnk" data-act="forgot">Forgot password?</button>'}</p></form>`);
+ $("#af").onsubmit=async e=>{e.preventDefault();const err=m=>$("#a-err").textContent=m;
+  const email=$("#a-email").value.trim(),pass=$("#a-pass").value;
+  if(!/^\S+@\S+\.\S+$/.test(email))return err("Please enter a valid email.");
+  if(pass.length<8)return err("Password must be at least 8 characters.");
+  if(su){if($("#a-name").value.trim().length<2)return err("Please enter your name.");if(!$("#a-ok").checked)return err("Please confirm you are 18 or older and agree to the Terms and Privacy Policy.")}
+  if(!READY)return err("The database is not connected yet.");
+  const b=e.submitter;b.disabled=true;const old=b.textContent;b.innerHTML='<span class="sp"></span>';
+  try{
+   if(su){const r=await signUp(email,pass,$("#a-name").value.trim(),$("#a-cty").value);
+    if(r==="confirm"){$("#dlg").innerHTML=`<div class="dp"><h2>Check your email</h2><p>We sent a confirmation link to <b>${esc(email)}</b>. Open it, then come back and log in.</p><div class="acts"><button class="btn" data-close>OK</button></div></div>`;return}}
+   else await signIn(email,pass);
+   $("#dlg").close();toast("Welcome!");const f=afterAuth;afterAuth=null;if(f)f();else route()}
+  catch(x){err(x.message);b.disabled=false;b.textContent=old}}}
+function forgotDlg(){
+ openDlg(`<form class="dp" id="ff" novalidate><h2>Reset password</h2><p class="note">We will email you a link to choose a new password.</p><label for="f-email">Email</label><input id="f-email" type="email" autocomplete="email"><p class="err" id="f-err" role="alert"></p><div class="acts"><button class="btn" type="submit">Send link</button><button type="button" class="btn alt" data-close>Cancel</button></div></form>`);
+ $("#ff").onsubmit=async e=>{e.preventDefault();const em=$("#f-email").value.trim();if(!/^\S+@\S+\.\S+$/.test(em))return $("#f-err").textContent="Please enter a valid email.";
+  try{await authReq("/auth/v1/recover","POST",{email:em});$("#dlg").innerHTML=`<div class="dp"><h2>Check your email</h2><p>If that email has an account, a reset link is on the way.</p><div class="acts"><button class="btn" data-close>OK</button></div></div>`}catch(x){$("#f-err").textContent=x.message}}}
+function newPassDlg(){
+ openDlg(`<form class="dp" id="nf" novalidate><h2>Choose a new password</h2><label for="n-pass">New password (at least 8 characters)</label><input id="n-pass" type="password" autocomplete="new-password"><p class="err" id="n-err" role="alert"></p><div class="acts"><button class="btn" type="submit">Save password</button></div></form>`);
+ $("#nf").onsubmit=async e=>{e.preventDefault();const p=$("#n-pass").value;if(p.length<8)return $("#n-err").textContent="Password must be at least 8 characters.";
+  try{await authReq("/auth/v1/user","PUT",{password:p},sess.access_token);$("#dlg").close();toast("Password changed.")}catch(x){$("#n-err").textContent=x.message}}}
+function logout(){if(sess){fetch(BASE+"/auth/v1/logout",{method:"POST",headers:{apikey:KEY,Authorization:"Bearer "+sess.access_token}}).catch(()=>{})}setSession(null);toast("Logged out.");location.hash="#/";route()}
+
+/* ================= dialog + header ================= */
+const dlg=$("#dlg");
+function openDlg(h,cls){dlg.className=cls||"";dlg.innerHTML=h;if(!dlg.open)dlg.showModal()}
+dlg.addEventListener("click",e=>{if(e.target===dlg||e.target.closest("[data-close]"))dlg.close()});
+function renderHeader(){
+ const bd=unreadCount?`<span class="badge" aria-label="${unreadCount} unread">${unreadCount>9?"9+":unreadCount}</span>`:"";
+ $("#nav").innerHTML=`<a class="btn sm" href="#/sell">+ Sell</a>`+(sess?`<a class="nl" href="#/messages">Messages${bd}</a>${isAdmin?'<a class="nl" href="#/admin">Admin</a>':""}<a class="nl" href="#/me">${esc((me&&me.display_name)||"Account")}</a>`:`<button class="nl" data-act="login">Log in</button>`)+`<a class="nl" href="#/saved" aria-label="Saved items">♥</a><a class="nl learn" href="learn.html">🎓 Learn</a>`}
+const isUnread=c=>sess&&c.last_sender&&c.last_sender!==sess.user.id&&new Date(c.last_message_at)>new Date((c.buyer_id===sess.user.id?c.buyer_last_read:c.seller_last_read)||0);
+async function pollUnread(){if(!sess||!READY||document.hidden)return;try{const r=await http("/rest/v1/conversations?"+qs([["select","id,buyer_id,seller_id,last_sender,last_message_at,buyer_last_read,seller_last_read"],["order","last_message_at.desc"],["limit","100"]]));const n=r.filter(isUnread).length;if(n!==unreadCount){unreadCount=n;renderHeader()}}catch(e){}}
+
+/* ================= data helpers ================= */
+const PAGE=24,LSEL="id,title,price,currency,category,condition,country,region,city,thumbs,shipping,created_at,status,seller_id,owner:profiles(display_name)";
+async function fetchListings(f,offset){
+ const p=[["select",LSEL],["status","eq.available"]];
+ const t=(f.q||"").replace(/[,()*%\\:"]/g," ").replace(/\s+/g," ").trim();if(t)p.push(["or",`(title.ilike.*${t}*,description.ilike.*${t}*)`]);
+ if(f.cat)p.push(["category","eq."+f.cat]);if(f.country)p.push(["country","eq."+f.country]);if(f.ship)p.push(["shipping","eq."+f.ship]);
+ if(f.free)p.push(["price","eq.0"]);else if(f.cur){p.push(["currency","eq."+f.cur]);if(f.min!=="")p.push(["price","gte."+f.min]);if(f.max!=="")p.push(["price","lte."+f.max])}
+ const ps=f.cur&&!f.free&&(f.sort==="low"||f.sort==="high");
+ p.push(["order",ps&&f.sort==="low"?"price.asc,created_at.desc":ps?"price.desc,created_at.desc":"created_at.desc"],["limit",PAGE],["offset",offset]);
+ return http("/rest/v1/listings?"+qs(p))}
+async function fetchListing(id){
+ if(!UUIDRE.test(id))return null;
+ const r=await http("/rest/v1/listings?"+qs([["id","eq."+id],["select","*,owner:profiles(display_name,country,city,created_at)"]]));return r&&r[0]||null}
+const cardHtml=l=>`<a class="card" href="#/listing/${esc(l.id)}">${l.status==="sold"?'<span class="sold">SOLD</span>':""}<div class="im">${l.thumbs&&l.thumbs[0]?`<img src="${esc(pub(l.thumbs[0]))}" alt="" loading="lazy">`:`<span class="ph">${emoOf(l.category)}</span>`}</div><div class="tx"><div class="pr ${Number(l.price)===0?"free":""}">${esc(money(l.price,l.currency))}</div><h3>${esc(l.title)}</h3><div class="mt">${esc([l.city,l.country?cname(l.country):""].filter(Boolean).join(", "))}</div><div class="mt">${ago(l.created_at)}</div></div></a>`;
+function backendNeeded(){if(READY)return false;toast("The database is not connected yet.");location.hash="#/setup";return true}
+const saved=()=>{try{return JSON.parse(localStorage.getItem("mk-saved"))||[]}catch(e){return[]}};
+const setSaved=a=>{try{localStorage.setItem("mk-saved",JSON.stringify(a))}catch(e){}};
+
+/* ================= views ================= */
+let timers=[];const stopTimers=()=>{timers.forEach(clearInterval);timers=[]};
+const F={q:"",cat:"",country:"",min:"",max:"",cur:"",ship:"",free:false,sort:"new"};let gridReq=0,gridOff=0;
+function home(){
+ view.innerHTML=`<section class="hero"><span class="eyebrow">Worldwide marketplace</span><h1>Marketplace</h1><p>Buy, sell and give things away anywhere in the world.</p>
+<div class="hs"><label class="search"><svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/></svg><input id="q" type="search" placeholder="Search Marketplace" aria-label="Search" autocomplete="off" value="${esc(F.q)}"></label><select id="country" aria-label="Country">${cOpts(F.country,"Anywhere in the world")}</select></div>
+<div class="trust"><span>✓ Free to use</span><span>✓ Photos and chat</span><span>✓ Ships-worldwide filter</span><span>✓ Report and block tools</span></div></section>
+<div class="bar2"><select id="sort" aria-label="Sort"><option value="new"${F.sort==="new"?" selected":""}>Newest</option><option value="low"${F.sort==="low"?" selected":""}${F.cur?"":" disabled"}>Price: low to high</option><option value="high"${F.sort==="high"?" selected":""}${F.cur?"":" disabled"}>Price: high to low</option></select><select id="ship" aria-label="Delivery"><option value="">Any delivery option</option>${Object.entries(SHIP).map(([k,v])=>`<option value="${k}"${F.ship===k?" selected":""}>${v}</option>`).join("")}</select></div>
+<div class="cats" id="cats"></div>
+<details class="more"${F.cur||F.free?" open":""}><summary>Price filters</summary><div class="row3"><div><label for="cur">Currency</label><select id="cur">${curOpts(F.cur,"Choose currency")}</select></div><div><label for="min">Min price</label><input id="min" type="number" min="0" value="${esc(F.min)}"${F.cur?"":" disabled"}></div><div><label for="max">Max price</label><input id="max" type="number" min="0" value="${esc(F.max)}"${F.cur?"":" disabled"}></div></div><p class="note">Pick a currency to filter or sort by price.</p><label class="chk"><input type="checkbox" id="free"${F.free?" checked":""}> <span>Free items only</span></label></details>
+<div id="grid" class="grid" aria-live="polite"></div><div id="more" class="center"></div>`;
+ const cats=()=>{$("#cats").innerHTML=[["","All"],...CATS.map(c=>[c[0],c[1]+" "+c[0]])].map(c=>`<button class="cat" data-cat="${esc(c[0])}" aria-pressed="${F.cat===c[0]}">${esc(c[1])}</button>`).join("")};cats();
+ let deb;const reload=()=>{cats();loadGrid(true)};
+ $("#q").oninput=e=>{F.q=e.target.value;clearTimeout(deb);deb=setTimeout(reload,300)};
+ $("#country").onchange=e=>{F.country=e.target.value;reload()};$("#sort").onchange=e=>{F.sort=e.target.value;reload()};$("#ship").onchange=e=>{F.ship=e.target.value;reload()};
+ $("#cur").onchange=e=>{F.cur=e.target.value;$("#min").disabled=$("#max").disabled=!F.cur;$$("#sort option").forEach(o=>{if(o.value!=="new")o.disabled=!F.cur});if(!F.cur&&F.sort!=="new"){F.sort="new";$("#sort").value="new"}reload()};
+ $("#min").onchange=e=>{F.min=e.target.value;reload()};$("#max").onchange=e=>{F.max=e.target.value;reload()};$("#free").onchange=e=>{F.free=e.target.checked;reload()};
+ $("#cats").onclick=e=>{const b=e.target.closest("[data-cat]");if(b){F.cat=b.dataset.cat;reload()}};
+ loadGrid(true)}
+async function loadGrid(reset){
+ const id=++gridReq;if(reset){gridOff=0;$("#grid").innerHTML='<p class="none" style="grid-column:1/-1"><span class="sp"></span> Loading…</p>';$("#more").innerHTML=""}
+ try{const rows=await fetchListings(F,gridOff);if(id!==gridReq||!$("#grid"))return;
+  if(reset)$("#grid").innerHTML="";
+  if(reset&&!rows.length){$("#grid").innerHTML=`<p class="none" style="grid-column:1/-1">No items found. ${F.q||F.cat||F.country||F.ship||F.cur||F.free?"Try changing your filters.":"Be the first to <a href='#/sell'>sell something</a>!"}</p>`;return}
+  $("#grid").insertAdjacentHTML("beforeend",rows.map(cardHtml).join(""));gridOff+=rows.length;
+  $("#more").innerHTML=rows.length===PAGE?'<button class="btn alt" id="lm">Load more</button>':"";if($("#lm"))$("#lm").onclick=()=>loadGrid(false)}
+ catch(e){if(id!==gridReq||!$("#grid"))return;$("#grid").innerHTML=`<p class="none" style="grid-column:1/-1">Could not load items. ${esc(e.message)}<br><br><button class="btn alt" id="rt">Try again</button></p>`;$("#rt").onclick=()=>loadGrid(true)}}
+
+async function listingView(id){
+ view.innerHTML='<p class="none"><span class="sp"></span> Loading…</p>';
+ const l=await fetchListing(id);
+ if(!l){view.innerHTML='<div class="panel"><h2>Item not found</h2><p>It may have been removed.</p><a class="btn" href="#/">Back to Marketplace</a></div>';return}
+ const own=sess&&l.seller_id===sess.user.id,sv=saved().includes(l.id),ph=l.photos||[];let cur=0;
+ const draw=()=>{$("#gm").innerHTML=ph.length?`<img src="${esc(pub(ph[cur]))}" alt="Photo ${cur+1} of ${ph.length} of ${esc(l.title)}">`:`<span class="ph">${emoOf(l.category)}</span>`;$$("#gt button").forEach((b,i)=>b.setAttribute("aria-current",i===cur))};
+ const s=l.owner||{},sname=s.display_name||"Seller";
+ view.innerHTML=`<p><a href="#/">← Back</a></p><div class="det"><div class="gal"><div class="main" id="gm" role="button" tabindex="0" aria-label="Open photo bigger"></div>${ph.length>1?`<div class="thumbs" id="gt">${(l.thumbs&&l.thumbs.length===ph.length?l.thumbs:ph).map((t,i)=>`<button data-i="${i}" aria-label="Photo ${i+1}"><img src="${esc(pub(t))}" alt=""></button>`).join("")}</div>`:""}</div>
+<div>${l.status==="sold"?'<p class="tag" style="background:var(--red);color:#fff">SOLD</p>':""}<h1>${esc(l.title)}</h1><div class="pr ${Number(l.price)===0?"free":""}">${esc(money(l.price,l.currency))}</div><p class="mt">Posted ${ago(l.created_at)}${place(l)?" · "+esc(place(l)):""}</p>
+<div><span class="tag">${esc(l.category)}</span><span class="tag">${esc(l.condition)}</span><span class="tag">${esc(SHIP[l.shipping]||SHIP.pickup)}</span></div>
+${l.description?`<p class="desc">${esc(l.description)}</p>`:""}
+<div class="seller"><div class="av" aria-hidden="true">${esc(sname.charAt(0).toUpperCase())}</div><div><b>${esc(sname)}</b><div class="mt">${esc(s.country?cname(s.country):"")}${s.created_at?(s.country?" · ":"")+"member since "+new Date(s.created_at).toLocaleDateString(undefined,{month:"short",year:"numeric"}):""}</div></div></div>
+<div class="acts">${own?`<a class="btn alt" href="#/edit/${esc(l.id)}">Edit</a>${l.status==="sold"?`<button class="btn alt" data-act="avail" data-id="${esc(l.id)}">Mark available</button>`:`<button class="btn" data-act="sold" data-id="${esc(l.id)}">Mark as sold</button>`}<button class="btn bad" data-act="remove" data-id="${esc(l.id)}">Remove</button>`:`<button class="btn" data-act="msg" data-id="${esc(l.id)}"${l.status==="sold"?" disabled":""}>Message seller</button>`}<button class="btn alt" data-act="save" data-id="${esc(l.id)}">${sv?"♥ Saved":"♡ Save"}</button><button class="btn alt" data-act="share">Share</button>${own?"":`<button class="btn alt" data-act="report" data-id="${esc(l.id)}" data-uid="${esc(l.seller_id||"")}">Report</button>`}</div><p class="err" id="lerr" role="alert"></p>
+<div class="tips"><b>Stay safe:</b> meet in a busy public place or use a trusted shipping method, check the item before you pay, and never send money first or share codes or passwords. <a href="#/safety">More tips</a></div></div></div>`;
+ draw();$("#gm").onclick=()=>{if(ph.length)openDlg(`<img src="${esc(pub(ph[cur]))}" alt="${esc(l.title)}">`,"zoom")};
+ $("#gm").onkeydown=e=>{if(e.key==="Enter")$("#gm").click()};
+ if($("#gt"))$("#gt").onclick=e=>{const b=e.target.closest("button");if(b){cur=+b.dataset.i;draw()}}}
+
+function photoPipeline(){
+ const toBlob=(src,w,h,max,q)=>new Promise((res,rej)=>{const sc=Math.min(1,max/Math.max(w,h)),W=Math.round(w*sc),H=Math.round(h*sc),cv=document.createElement("canvas");cv.width=W;cv.height=H;const x=cv.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,W,H);x.drawImage(src,0,0,W,H);cv.toBlob(b=>b?res(b):rej(new Error("encode")),"image/jpeg",q)});
+ const load=async f=>{if(window.createImageBitmap){try{return await createImageBitmap(f)}catch(e){}}return new Promise((res,rej)=>{const u=URL.createObjectURL(f),i=new Image();i.onload=()=>res(i);i.onerror=()=>{URL.revokeObjectURL(u);rej(new Error("unsupported"))};i.src=u})};
+ return async f=>{const im=await load(f),w=im.width||im.naturalWidth,h=im.height||im.naturalHeight;return{main:await toBlob(im,w,h,1280,.82),thumb:await toBlob(im,w,h,480,.76)}}}
+
+async function sellView(editId){
+ if(backendNeeded())return;
+ if(!sess){view.innerHTML='<div class="panel"><h2>Log in to sell</h2><p>Create a free account or log in to post an item.</p><div class="acts"><button class="btn" data-act="login">Log in</button><button class="btn alt" data-act="signup">Create account</button></div></div>';return}
+ let l=null;if(editId){view.innerHTML='<p class="none"><span class="sp"></span> Loading…</p>';l=await fetchListing(editId);if(!l||l.seller_id!==sess.user.id){view.innerHTML='<div class="panel"><h2>You cannot edit this item</h2><a class="btn" href="#/">Back</a></div>';return}}
+ const dc=(me&&me.country)||myCountry();
+ const v=l||{title:"",description:"",price:"",currency:curFor(dc),category:"",condition:"Used",country:dc,region:"",city:(me&&me.city)||"",shipping:"pickup"};
+ let files=[];const conv=photoPipeline();
+ view.innerHTML=`<p><a href="#/">← Back</a></p><form class="panel" id="sf" novalidate><h2>${l?"Edit your item":"Sell or give away"}</h2>
+${l?`<p class="note">To change photos, remove this item and post it again.</p>`:`<label>Photos <span class="note">(up to 5, the first is the cover)</span></label><div class="photos" id="ph"></div><input id="pf" type="file" accept="image/*" multiple hidden>`}
+<label for="s-title">Title</label><input id="s-title" maxlength="80" value="${esc(v.title)}" placeholder="What are you selling?">
+<div class="row2"><div><label for="s-cat">Category</label><select id="s-cat"><option value="">Choose…</option>${CATS.map(c=>`<option${c[0]===v.category?" selected":""}>${esc(c[0])}</option>`).join("")}</select></div><div><label for="s-cond">Condition</label><select id="s-cond">${["New","Like new","Used"].map(c=>`<option${c===v.condition?" selected":""}>${c}</option>`).join("")}</select></div></div>
+<div class="row3"><div><label for="s-cur">Currency</label><select id="s-cur">${curOpts(v.currency)}</select></div><div><label for="s-price">Price</label><input id="s-price" type="number" min="0" max="1000000000" step="0.01" value="${v.price===""?"":esc(v.price)}" placeholder="0"></div><div><label>&nbsp;</label><label class="chk"><input type="checkbox" id="s-free"${l&&Number(l.price)===0?" checked":""}> <span>Give away for free</span></label></div></div>
+<label for="s-ship">Delivery</label><select id="s-ship">${Object.entries(SHIP).map(([k,t])=>`<option value="${k}"${v.shipping===k?" selected":""}>${t}</option>`).join("")}</select>
+<label for="s-desc">Description</label><textarea id="s-desc" maxlength="1000" placeholder="Size, brand, how it was used, shipping details…">${esc(v.description)}</textarea>
+<div class="row3"><div><label for="s-cty">Country</label><select id="s-cty">${cOpts(v.country,"Choose country")}</select></div><div><label for="s-reg">Region or state</label><input id="s-reg" maxlength="60" value="${esc(v.region||"")}"></div><div><label for="s-city">City or town</label><input id="s-city" maxlength="60" value="${esc(v.city||"")}"></div></div>
+<label class="chk" style="margin-top:16px"><input type="checkbox" id="s-ok"> <span>This item is allowed (see <a href="#/terms" target="_blank" rel="noopener">the rules</a>) and I am 18 or older.</span></label>
+<p class="err" id="s-err" role="alert"></p><div class="acts"><button class="btn" type="submit">${l?"Save changes":"Post item"}</button><a class="btn alt" href="#/">Cancel</a></div></form>`;
+ let curTouched=!!l;$("#s-cur").onchange=()=>{curTouched=true};
+ $("#s-cty").onchange=e=>{if(!curTouched&&e.target.value)$("#s-cur").value=curFor(e.target.value)};
+ $("#s-free").onchange=e=>{$("#s-price").disabled=e.target.checked;if(e.target.checked)$("#s-price").value="0"};if($("#s-free").checked)$("#s-price").disabled=true;
+ const drawPh=()=>{if(l)return;$("#ph").innerHTML=files.map((f,i)=>`<div class="pv"><img src="${esc(f.url)}" alt="Photo ${i+1}"><button type="button" data-rm="${i}" aria-label="Remove photo ${i+1}">×</button></div>`).join("")+(files.length<5?'<button type="button" class="add" id="addp">+ Add photo</button>':"");if($("#addp"))$("#addp").onclick=()=>$("#pf").click()};
+ if(!l){drawPh();$("#pf").onchange=e=>{const err=$("#s-err");for(const f of e.target.files){if(files.length>=5){err.textContent="You can add up to 5 photos.";break}if(!/^image\//.test(f.type)&&!/\.(jpe?g|png|webp|heic|heif)$/i.test(f.name)){err.textContent="Please choose a photo.";continue}if(f.size>20*1024*1024){err.textContent="That photo is too big (max 20 MB).";continue}files.push({file:f,url:URL.createObjectURL(f)})}e.target.value="";drawPh()};
+  $("#ph").onclick=e=>{const b=e.target.closest("[data-rm]");if(b){URL.revokeObjectURL(files[+b.dataset.rm].url);files.splice(+b.dataset.rm,1);drawPh()}}}
+ $("#sf").onsubmit=async e=>{e.preventDefault();const err=m=>{$("#s-err").textContent=m},g=id=>$(id).value.trim();
+  const price=$("#s-free").checked?0:Number(g("#s-price"));
+  if(g("#s-title").length<3)return err("Please write a title (at least 3 letters).");
+  if(!g("#s-cat"))return err("Please choose a category.");
+  if(g("#s-price")===""&&!$("#s-free").checked)return err("Please enter a price, or tick Give away for free.");
+  if(!(price>=0&&price<=1000000000))return err("Please enter a valid price.");
+  if(!g("#s-cty"))return err("Please choose the country where the item is.");
+  if(!$("#s-ok").checked)return err("Please tick the confirmation box.");
+  err("");const btn=e.submitter;btn.disabled=true;const label=btn.textContent;
+  const body={title:g("#s-title"),description:g("#s-desc"),price,currency:g("#s-cur"),category:g("#s-cat"),condition:g("#s-cond"),shipping:g("#s-ship"),country:g("#s-cty"),region:g("#s-reg"),city:g("#s-city")};
+  const up=[];
+  try{
+   if(l){await http("/rest/v1/listings?id=eq."+l.id,{method:"PATCH",body,headers:{Prefer:"return=minimal"},retry:false});toast("Saved.");location.hash="#/listing/"+l.id;return}
+   const photos=[],thumbs=[];
+   for(let i=0;i<files.length;i++){btn.innerHTML=`<span class="sp"></span> Uploading photo ${i+1} of ${files.length}`;
+    let blobs;try{blobs=await conv(files[i].file)}catch(x){throw new Error("Photo "+(i+1)+" could not be read. Try a JPG or PNG.")}
+    const n=sess.user.id+"/"+uuid(),pm=n+".jpg",pt=n+"_t.jpg";
+    for(const [p,b] of [[pm,blobs.main],[pt,blobs.thumb]]){await http("/storage/v1/object/listing-photos/"+p.split("/").map(encodeURIComponent).join("/"),{method:"POST",body:b,headers:{"Content-Type":"image/jpeg","x-upsert":"false"},retry:false});up.push(p)}
+    photos.push(pm);thumbs.push(pt)}
+   btn.innerHTML='<span class="sp"></span> Posting…';
+   const r=await http("/rest/v1/listings",{method:"POST",body:{...body,photos,thumbs},headers:{Prefer:"return=representation"},retry:false});
+   files.forEach(f=>URL.revokeObjectURL(f.url));toast("Posted!");location.hash="#/listing/"+r[0].id}
+  catch(x){if(up.length)http("/storage/v1/object/listing-photos",{method:"DELETE",body:{prefixes:up},retry:false}).catch(()=>{});err(x.message||"Could not post. Please try again.");btn.disabled=false;btn.textContent=label}}}
+
+async function startChat(id){
+ if(backendNeeded())return;if(needLogin(()=>startChat(id)))return;
+ const l=await fetchListing(id);if(!l)return;if(l.seller_id===sess.user.id)return toast("This is your own item.");
+ try{let r=await http("/rest/v1/conversations?"+qs([["listing_id","eq."+id],["buyer_id","eq."+sess.user.id],["select","id"]]));
+  if(!r.length){try{r=await http("/rest/v1/conversations",{method:"POST",body:{listing_id:id,seller_id:l.seller_id},headers:{Prefer:"return=representation"},retry:false})}catch(e){r=await http("/rest/v1/conversations?"+qs([["listing_id","eq."+id],["buyer_id","eq."+sess.user.id],["select","id"]]));if(!r.length)throw e}}
+  location.hash="#/chat/"+r[0].id}catch(e){const b=$("#lerr");if(b)b.textContent=e.message;else toast(e.message)}}
+
+const CSEL="*,listing:listings(id,title,price,currency,thumbs,status,category),buyer:profiles!conversations_buyer_fk(display_name),seller:profiles!conversations_seller_fk(display_name)";
+function needAuthView(msg){view.innerHTML=`<div class="panel"><h2>${esc(msg)}</h2><div class="acts"><button class="btn" data-act="login">Log in</button><button class="btn alt" data-act="signup">Create account</button></div></div>`}
+async function messagesView(){
+ if(backendNeeded())return;if(!sess)return needAuthView("Log in to see your messages");
+ view.innerHTML='<h1 style="font-size:1.6rem;margin:18px 0 12px">Messages</h1><div class="panel inbox" id="ib"><p class="none"><span class="sp"></span> Loading…</p></div>';
+ const load=async()=>{try{const r=await http("/rest/v1/conversations?"+qs([["select",CSEL],["order","last_message_at.desc"],["limit","50"]]));if(!$("#ib"))return;unreadCount=r.filter(isUnread).length;renderHeader();
+  $("#ib").innerHTML=r.length?r.map(c=>{const mine=c.buyer_id===sess.user.id,o=mine?c.seller:c.buyer,l=c.listing,u=isUnread(c);return`<a class="row" href="#/chat/${esc(c.id)}"><div class="av" aria-hidden="true">${esc(((o&&o.display_name)||"?").charAt(0).toUpperCase())}</div><div class="tt"><b>${esc((o&&o.display_name)||"User")} · ${esc(l?l.title:"Item removed")}</b><span class="mt">${esc(c.last_message||"No messages yet")}</span></div><div class="mt">${ago(c.last_message_at)}</div>${u?'<span class="dot" aria-label="Unread"></span>':""}</a>`}).join(""):'<p class="none">No messages yet. Open an item and tap <b>Message seller</b>.</p>'}
+  catch(e){if($("#ib"))$("#ib").innerHTML=`<p class="none">Could not load messages. ${esc(e.message)}</p>`}};
+ await load();timers.push(setInterval(()=>{if(!document.hidden)load()},10000))}
+
+async function chatView(id){
+ if(backendNeeded())return;if(!sess)return needAuthView("Log in to chat");
+ if(!UUIDRE.test(id)){view.innerHTML='<div class="panel"><h2>Chat not found</h2></div>';return}
+ view.innerHTML='<p class="none"><span class="sp"></span> Loading…</p>';
+ const rows=await http("/rest/v1/conversations?"+qs([["id","eq."+id],["select",CSEL]]));const c=rows[0];
+ if(!c){view.innerHTML='<div class="panel"><h2>Chat not found</h2><a class="btn" href="#/messages">Back to messages</a></div>';return}
+ const meId=sess.user.id,mineBuyer=c.buyer_id===meId,oid=mineBuyer?c.seller_id:c.buyer_id,o=(mineBuyer?c.seller:c.buyer)||{},l=c.listing;
+ let msgs=[],lastAt=null,blocked=false,busy=false;
+ view.innerHTML=`<div class="chat"><div class="chead"><a href="#/messages" aria-label="Back to messages">←</a>${l?`<a class="th" href="#/listing/${esc(l.id)}">${l.thumbs&&l.thumbs[0]?`<img src="${esc(pub(l.thumbs[0]))}" alt="">`:emoOf(l.category)}</a>`:""}<div style="flex:1;min-width:140px"><b>${esc(o.display_name||"User")}</b><div class="mt">${l?`<a href="#/listing/${esc(l.id)}">${esc(l.title)}</a> · ${esc(money(l.price,l.currency))}`:"Item removed"}</div></div><button class="btn alt sm" data-act="chatmenu" aria-label="Chat options">⋯</button></div><div class="msgs" id="ms" aria-live="polite"></div><div id="qk"></div><div id="cp"></div></div>`;
+ const hm=t=>new Date(t).toLocaleTimeString(undefined,{hour:"numeric",minute:"2-digit"});
+ const draw=()=>{const el=$("#ms");if(!el)return;const near=el.scrollHeight-el.scrollTop-el.clientHeight<120;let day="",h="";
+  for(const m of msgs){const d=new Date(m.created_at).toDateString();if(d!==day){day=d;h+=`<div class="day">${new Date(m.created_at).toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"})}</div>`}
+   const me_=m.sender_id===meId;h+=`<div class="b ${me_?"me":""} ${m.pending?"pend":""} ${m.failed?"fail":""}">${esc(m.body)}<span class="tm">${m.failed?`Not sent. <button class="lnk" data-retry="${esc(m.id)}">Tap to retry</button>`:m.pending?"Sending…":hm(m.created_at)}</span></div>`}
+  if(!msgs.length)h='<p class="none">Say hello! Ask if the item is still available.</p>';el.innerHTML=h;if(near||msgs[msgs.length-1]&&msgs[msgs.length-1].sender_id===meId)el.scrollTop=el.scrollHeight;
+  const q=$("#qk");if(q)q.innerHTML=!blocked&&!msgs.some(m=>m.sender_id===meId)?`<div class="quick">${["Is this still available?","What is your lowest price?","Can you ship to my country?"].map(t=>`<button data-q="${esc(t)}">${esc(t)}</button>`).join("")}</div>`:""};
+ const drawCp=()=>{$("#cp").innerHTML=blocked?`<p class="note">You blocked this user. <button class="lnk" data-act="unblock">Unblock</button></p>`:`<form class="compose" id="cf"><textarea id="ct" rows="1" maxlength="1000" placeholder="Write a message" aria-label="Message"></textarea><button class="btn" type="submit">Send</button></form>`;
+  if($("#cf")){const t=$("#ct");t.onkeydown=e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();$("#cf").requestSubmit()}};$("#cf").onsubmit=e=>{e.preventDefault();const v=t.value.trim();if(!v)return;t.value="";send(v)}}};
+ const markRead=async()=>{const last=msgs.filter(m=>!m.pending&&!m.failed).slice(-1)[0];if(!last)return;const cur=mineBuyer?c.buyer_last_read:c.seller_last_read;if(cur&&new Date(cur)>=new Date(last.created_at))return;
+  try{await http("/rest/v1/conversations?id=eq."+id,{method:"PATCH",body:mineBuyer?{buyer_last_read:last.created_at}:{seller_last_read:last.created_at},headers:{Prefer:"return=minimal"},retry:false});if(mineBuyer)c.buyer_last_read=last.created_at;else c.seller_last_read=last.created_at;pollUnread()}catch(e){}};
+ const merge=a=>{let added=0;for(const m of a)if(!msgs.some(x=>x.id===m.id)){msgs.push(m);added++}msgs.sort((x,y)=>x.created_at<y.created_at?-1:x.created_at>y.created_at?1:0);const r=msgs.filter(m=>!m.pending&&!m.failed).slice(-1)[0];if(r)lastAt=r.created_at;return added};
+ const load=async first=>{if(busy)return;busy=true;try{const a=first?(await http("/rest/v1/messages?"+qs([["conversation_id","eq."+id],["order","created_at.desc"],["limit","100"]]))).reverse():await http("/rest/v1/messages?"+qs([["conversation_id","eq."+id],["created_at","gt."+lastAt],["order","created_at.asc"],["limit","100"]]));
+  const n=merge(a);if(n||first){draw();markRead()}}catch(e){if(first){const el=$("#ms");if(el)el.innerHTML=`<p class="none">Could not load messages. ${esc(e.message)} <button class="lnk" data-act="reload">Try again</button></p>`}}finally{busy=false}};
+ const send=async(text,old)=>{let t=old;if(!t){t={id:"t"+Date.now()+Math.random(),body:text,sender_id:meId,created_at:new Date().toISOString(),pending:true};msgs.push(t)}else{t.pending=true;t.failed=false}draw();
+  try{const r=await http("/rest/v1/messages",{method:"POST",body:{conversation_id:id,body:t.body},headers:{Prefer:"return=representation"},retry:false});msgs=msgs.filter(m=>m!==t);merge(r);draw();markRead()}
+  catch(e){t.pending=false;t.failed=true;draw();toast(e.message)}};
+ view._chat={send,retry:mid=>{const m=msgs.find(x=>x.id===mid);if(m)send(null,m)},reload:()=>load(true),block:async()=>{try{await http("/rest/v1/blocks",{method:"POST",body:{blocked_id:oid},headers:{Prefer:"return=minimal"},retry:false});blocked=true;drawCp();draw();toast("User blocked.")}catch(e){toast(e.message)}},unblock:async()=>{try{await http("/rest/v1/blocks?blocked_id=eq."+oid,{method:"DELETE",headers:{Prefer:"return=minimal"},retry:false});blocked=false;drawCp();draw();toast("Unblocked.")}catch(e){toast(e.message)}},oid,lid:l&&l.id};
+ try{const b=await http("/rest/v1/blocks?"+qs([["blocked_id","eq."+oid],["select","blocked_id"]]));blocked=b.length>0}catch(e){}
+ drawCp();await load(true);
+ timers.push(setInterval(()=>{if(!document.hidden&&lastAt!==null||!document.hidden&&!msgs.length)load(msgs.length?false:true)},4000))}
+
+async function meView(){
+ if(backendNeeded())return;if(!sess)return needAuthView("Log in to see your account");
+ if(!me)await loadMe();
+ view.innerHTML=`<h1 style="font-size:1.6rem;margin:18px 0 12px">My account</h1><form class="panel" id="pf2" novalidate><h2>Profile</h2><p class="note">${esc(sess.user.email||"")}</p><label for="p-name">Display name</label><input id="p-name" maxlength="40" value="${esc(me.display_name)}"><div class="row2"><div><label for="p-cty">Country</label><select id="p-cty">${cOpts(me.country||"","Choose country")}</select></div><div><label for="p-city">City or town</label><input id="p-city" maxlength="60" value="${esc(me.city||"")}"></div></div><p class="err" id="p-err" role="alert"></p><div class="acts"><button class="btn" type="submit">Save profile</button><button type="button" class="btn alt" data-act="logout">Log out</button></div></form>
+<div class="panel"><h2>My items</h2><div id="mine"><p class="none"><span class="sp"></span> Loading…</p></div></div>
+<div class="panel"><h2>Delete my account</h2><p class="note">This removes your profile, items, photos, and messages for good.</p><button class="btn bad" data-act="delacct">Delete my account</button></div>`;
+ $("#pf2").onsubmit=async e=>{e.preventDefault();const n=$("#p-name").value.trim();if(n.length<2)return $("#p-err").textContent="Please enter a name.";
+  try{await http("/rest/v1/profiles?id=eq."+sess.user.id,{method:"PATCH",body:{display_name:n,country:$("#p-cty").value||null,city:$("#p-city").value.trim()||null},headers:{Prefer:"return=minimal"},retry:false});await loadMe();toast("Profile saved.");$("#p-err").textContent=""}catch(x){$("#p-err").textContent=x.message}};
+ try{const r=await http("/rest/v1/listings?"+qs([["seller_id","eq."+sess.user.id],["status","neq.removed"],["select","id,title,price,currency,thumbs,status,category,created_at"],["order","created_at.desc"]]));
+  $("#mine").innerHTML=r.length?r.map(l=>`<div class="mine"><div class="th">${l.thumbs&&l.thumbs[0]?`<img src="${esc(pub(l.thumbs[0]))}" alt="">`:emoOf(l.category)}</div><div class="tt"><a href="#/listing/${esc(l.id)}"><b>${esc(l.title)}</b></a><div class="mt">${esc(money(l.price,l.currency))} · ${l.status==="sold"?"Sold":"Available"} · ${ago(l.created_at)}</div></div><a class="btn alt sm" href="#/edit/${esc(l.id)}">Edit</a>${l.status==="sold"?`<button class="btn alt sm" data-act="avail" data-id="${esc(l.id)}">Mark available</button>`:`<button class="btn alt sm" data-act="sold" data-id="${esc(l.id)}">Mark sold</button>`}<button class="btn bad sm" data-act="remove" data-id="${esc(l.id)}">Remove</button></div>`).join(""):'<p class="none">You have no items yet. <a href="#/sell">Sell something</a>.</p>'}
+ catch(e){$("#mine").innerHTML=`<p class="none">Could not load. ${esc(e.message)}</p>`}}
+
+async function savedView(){
+ const ids=saved().filter(i=>UUIDRE.test(i));
+ view.innerHTML='<h1 style="font-size:1.6rem;margin:18px 0 12px">Saved items</h1><div id="grid" class="grid"></div>';
+ if(!READY){$("#grid").innerHTML='<p class="none" style="grid-column:1/-1">The database is not connected yet.</p>';return}
+ if(!ids.length){$("#grid").innerHTML='<p class="none" style="grid-column:1/-1">Nothing saved yet. Tap ♡ Save on an item. Saved items stay on this device.</p>';return}
+ try{const rows=await http("/rest/v1/listings?"+qs([["select",LSEL],["id","in.("+ids.join(",")+")"]]));
+  $("#grid").innerHTML=rows.length?rows.map(cardHtml).join(""):'<p class="none" style="grid-column:1/-1">Those items are no longer available.</p>'}
+ catch(e){$("#grid").innerHTML=`<p class="none" style="grid-column:1/-1">Could not load. ${esc(e.message)}</p>`}}
+
+async function adminView(){
+ if(backendNeeded())return;if(!sess)return needAuthView("Log in as an administrator");
+ if(!isAdmin){view.innerHTML='<div class="panel"><h2>Administrators only</h2><p>This page is for the people who run this marketplace.</p></div>';return}
+ view.innerHTML='<h1 style="font-size:1.6rem;margin:18px 0 12px">Admin: reports</h1><div class="panel" id="rp"><p class="none"><span class="sp"></span> Loading…</p></div>';
+ try{const r=await http("/rest/v1/reports?"+qs([["select","*,listing:listings(id,title,status),reporter:profiles!reports_reporter_fk(display_name),reported:profiles!reports_reported_fk(id,display_name,is_banned)"],["status","eq.open"],["order","created_at.desc"],["limit","100"]]));
+  $("#rp").innerHTML=r.length?r.map(x=>`<div class="rep"><b>${esc(x.reason)}</b> <span class="mt">· ${ago(x.created_at)} · reported by ${esc((x.reporter||{}).display_name||"someone")}</span>${x.details?`<p class="desc">${esc(x.details)}</p>`:""}<p class="mt">${x.listing?`Item: <a href="#/listing/${esc(x.listing.id)}">${esc(x.listing.title)}</a> (${esc(x.listing.status)})`:"No item attached"}${x.reported?` · User: <b>${esc(x.reported.display_name)}</b>${x.reported.is_banned?" (banned)":""}`:""}</p><div class="acts" style="margin-top:8px">${x.listing&&x.listing.status!=="removed"?`<button class="btn bad sm" data-act="adm-remove" data-id="${esc(x.listing.id)}" data-rid="${esc(x.id)}">Remove item</button>`:""}${x.reported?(x.reported.is_banned?`<button class="btn alt sm" data-act="adm-unban" data-uid="${esc(x.reported.id)}">Unban user</button>`:`<button class="btn bad sm" data-act="adm-ban" data-uid="${esc(x.reported.id)}">Ban user</button>`):""}<button class="btn alt sm" data-act="adm-done" data-rid="${esc(x.id)}">Mark resolved</button></div></div>`).join(""):'<p class="none">No open reports. 🎉</p>'}
+ catch(e){$("#rp").innerHTML=`<p class="none">Could not load reports. ${esc(e.message)}</p>`}}
+
+function safetyView(){
+ view.innerHTML=`<h1 style="font-size:1.6rem;margin:18px 0 12px">Safety tips</h1>
+<div class="panel"><h2>Buying and selling safely</h2><ul class="rules"><li>Meet in a busy public place, in daylight if you can, and bring a friend. Or use a trusted shipping method.</li><li>Check the item before you pay. Pay only when you are happy with it.</li><li>Never send money first to someone you do not know. Be careful with fake proof of payment, overpayment offers, and requests to move to another app.</li><li>For shipping, use tracked delivery and keep your receipts.</li><li>Never share passwords, one-time codes, card numbers, or your home address.</li><li>Keep chatting inside Marketplace so there is a record.</li><li>If something feels wrong, stop and use <b>Report</b> or <b>Block</b>.</li></ul><p class="note">Marketplace does not handle payments or deliveries. Deals are between the buyer and the seller.</p></div>`}
+function termsView(){
+ view.innerHTML=`<h1 style="font-size:1.6rem;margin:18px 0 12px">Terms of use</h1>
+<div class="panel"><h2>Using Marketplace</h2><ul class="rules"><li>Marketplace is run by ${esc(OPERATOR)}. It is a place where people can list items and talk to each other. We are not the buyer or seller, and we do not handle payments, delivery, or returns.</li><li>You must be <b>18 or older</b> to make an account.</li><li>You are responsible for your listings, your messages, and your deals. Only list things you own and are allowed to sell. Describe them honestly and use your own photos.</li><li>Follow the laws of your country and of the country you ship to, including import, export, tax, and sanctions rules.</li><li>Be respectful. No harassment, hate, threats, or spam.</li></ul></div>
+<div class="panel"><h2>Not allowed</h2><ul class="rules"><li>Illegal items, drugs, and prescription medicine.</li><li>Weapons, ammunition, and explosives.</li><li>Stolen, fake, or counterfeit goods.</li><li>Adult content and anything that harms children.</li><li>Protected wildlife, and anything that harms animals.</li><li>Recalled or dangerous products, and hazardous materials.</li><li>Human remains or body parts, personal data, and scams or fake listings.</li></ul></div>
+<div class="panel"><h2>Moderation</h2><ul class="rules"><li>We may remove listings or messages, and suspend or ban accounts, that break these terms or put people at risk.</li><li>You can report any item or person. You can block anyone you chat with.</li><li>The service is provided "as is". To the extent the law allows, ${esc(OPERATOR)} is not responsible for losses between users.</li><li>We may update these terms. Using the site after a change means you accept it.</li></ul>${C.contact?`<p class="note">Questions or takedown requests: <a href="mailto:${esc(C.contact)}">${esc(C.contact)}</a></p>`:""}</div>`}
+function privacyView(){
+ view.innerHTML=`<h1 style="font-size:1.6rem;margin:18px 0 12px">Privacy policy</h1>
+<div class="panel"><h2>What we collect</h2><ul class="rules"><li><b>Account:</b> email, password (stored securely by our login provider), display name, and optional country and city.</li><li><b>Content:</b> items you post, the photos you upload, your messages, and reports and blocks you make.</li><li><b>Technical:</b> your login session is kept in your browser's local storage so you stay logged in. We do not use advertising or tracking cookies.</li></ul></div>
+<div class="panel"><h2>How we use it</h2><ul class="rules"><li>To run Marketplace: show listings, let buyers and sellers chat, keep the site safe, and answer reports.</li><li>Your display name, country, city, items, and photos are public. Your email is never shown to other users. Messages can be read only by you and the other person, and by administrators when needed to handle a report or keep people safe.</li><li>We do not sell your data.</li></ul></div>
+<div class="panel"><h2>Where it is stored</h2><ul class="rules"><li>Data is stored with our hosting, database, and login provider (Supabase). Servers may be in a country different from yours, so your data can be transferred internationally.</li></ul></div>
+<div class="panel"><h2>Your choices</h2><ul class="rules"><li>You can edit your profile and remove your items at any time.</li><li>You can delete your account in <b>My account</b>. This removes your profile, items, photos, and messages.</li><li>You can ask about your data, or ask for a correction, using the contact below. The data is kept until you delete it.</li><li>Marketplace is for people aged 18 and over.</li></ul>${C.contact?`<p class="note">Controller: ${esc(OPERATOR)}. Contact: <a href="mailto:${esc(C.contact)}">${esc(C.contact)}</a></p>`:""}</div>`}
+function setupView(){
+ view.innerHTML=`<div class="panel"><h2>${READY?"Marketplace is connected":"Almost ready: connect the database"}</h2>${READY?"<p>Everything is set up.</p>":`<p>This site needs its database to show items, store photos, and run chat. If you are the owner, follow <b>README.txt</b>:</p><ol class="rules"><li>Create a free project at supabase.com.</li><li>Run <b>setup.sql</b> in the SQL Editor.</li><li>Copy the Project URL and the public key into <b>config.js</b>.</li><li>Commit the change on GitHub and reload this page.</li></ol>`}</div>`}
+
+/* ================= actions ================= */
+async function setStatus(id,status){
+ if(!UUIDRE.test(id))return;
+ if(status==="removed"&&!confirm("Remove this item?"))return;
+ try{await http("/rest/v1/listings?id=eq."+id,{method:"PATCH",body:{status},headers:{Prefer:"return=minimal"},retry:false});
+  if(status==="removed"){const l=await fetchListing(id).catch(()=>null);const ps=l?[...(l.photos||[]),...(l.thumbs||[])]:[];if(ps.length)http("/storage/v1/object/listing-photos",{method:"DELETE",body:{prefixes:ps},retry:false}).catch(()=>{})}
+  toast(status==="removed"?"Removed.":"Updated.");if(status==="removed")location.hash="#/me";route()}catch(e){toast(e.message)}}
+function reportDlg(lid,uid){
+ openDlg(`<form class="dp" id="rf" novalidate><h2>Report</h2><label for="r-why">What is wrong?</label><select id="r-why">${["Scam or fraud","Prohibited item","Wrong category or fake listing","Spam","Harassment or unsafe behavior","Other"].map(r=>`<option>${r}</option>`).join("")}</select><label for="r-det">Details (optional)</label><textarea id="r-det" maxlength="500"></textarea><p class="err" id="r-err" role="alert"></p><div class="acts"><button class="btn" type="submit">Send report</button><button type="button" class="btn alt" data-close>Cancel</button></div></form>`);
+ $("#rf").onsubmit=async e=>{e.preventDefault();try{await http("/rest/v1/reports",{method:"POST",body:{listing_id:lid||null,reported_user_id:uid||null,reason:$("#r-why").value,details:$("#r-det").value.trim()||null},headers:{Prefer:"return=minimal"},retry:false});$("#dlg").close();toast("Thanks. We will look into it.")}catch(x){$("#r-err").textContent=x.message}}}
+function delDlg(){
+ openDlg(`<form class="dp" id="df" novalidate><h2>Delete your account?</h2><p>This cannot be undone. Type <b>DELETE</b> to confirm.</p><input id="d-in" autocomplete="off"><p class="err" id="d-err" role="alert"></p><div class="acts"><button class="btn bad" type="submit">Delete forever</button><button type="button" class="btn alt" data-close>Cancel</button></div></form>`);
+ $("#df").onsubmit=async e=>{e.preventDefault();if($("#d-in").value.trim()!=="DELETE")return $("#d-err").textContent="Type DELETE in capital letters.";
+  try{try{const mine=await http("/rest/v1/listings?"+qs([["seller_id","eq."+sess.user.id],["select","photos,thumbs"]]));const ps=mine.flatMap(x=>[...(x.photos||[]),...(x.thumbs||[])]);if(ps.length)await http("/storage/v1/object/listing-photos",{method:"DELETE",body:{prefixes:ps},retry:false})}catch(_){}
+   await http("/rest/v1/rpc/delete_my_account",{method:"POST",body:{},retry:false});$("#dlg").close();setSession(null);toast("Your account was deleted.");location.hash="#/";route()}catch(x){$("#d-err").textContent=x.message}}}
+function chatMenu(){const k=view._chat;if(!k)return;openDlg(`<div class="dp"><h2>Options</h2><div class="acts" style="flex-direction:column"><button class="btn alt" data-act="reportuser">Report this person</button><button class="btn bad" data-act="blockuser">Block this person</button><button class="btn alt" data-close>Close</button></div></div>`)}
+async function admDo(fn,msg){try{await fn();toast(msg);adminView()}catch(e){toast(e.message)}}
+
+document.addEventListener("click",async e=>{
+ const rt=e.target.closest("[data-retry]");if(rt&&view._chat){view._chat.retry(rt.dataset.retry);return}
+ const qk=e.target.closest("[data-q]");if(qk&&view._chat){view._chat.send(qk.dataset.q);return}
+ const a=e.target.closest("[data-act]");if(!a)return;const k=a.dataset.act,id=a.dataset.id;
+ if(k==="login"){dlg.open&&dlg.close();authDlg("login")}else if(k==="signup"){dlg.open&&dlg.close();authDlg("signup")}else if(k==="forgot"){dlg.close();forgotDlg()}
+ else if(k==="logout")logout();else if(k==="msg")startChat(id);
+ else if(k==="save"){const s=saved();const n=s.includes(id)?s.filter(x=>x!==id):[...s,id];setSaved(n);a.textContent=n.includes(id)?"♥ Saved":"♡ Save"}
+ else if(k==="share"){const u=location.href;if(navigator.share){navigator.share({title:document.title,url:u}).catch(()=>{})}else{try{await navigator.clipboard.writeText(u);toast("Link copied.")}catch(x){toast(u)}}}
+ else if(k==="report"){if(backendNeeded())return;const uid=a.dataset.uid;if(needLogin(()=>reportDlg(id,uid)))return;reportDlg(id,uid)}
+ else if(k==="sold")setStatus(id,"sold");else if(k==="avail")setStatus(id,"available");else if(k==="remove")setStatus(id,"removed");
+ else if(k==="delacct")delDlg();else if(k==="chatmenu")chatMenu();
+ else if(k==="reportuser"){dlg.close();reportDlg(view._chat.lid,view._chat.oid)}else if(k==="blockuser"){dlg.close();if(confirm("Block this person? Neither of you can send messages in this chat."))view._chat.block()}
+ else if(k==="unblock")view._chat.unblock();else if(k==="reload")view._chat.reload();
+ else if(k==="adm-remove"){if(confirm("Remove this item?"))admDo(async()=>{await http("/rest/v1/listings?id=eq."+id,{method:"PATCH",body:{status:"removed"},headers:{Prefer:"return=minimal"},retry:false});await http("/rest/v1/reports?id=eq."+a.dataset.rid,{method:"PATCH",body:{status:"resolved"},headers:{Prefer:"return=minimal"},retry:false})},"Item removed.")}
+ else if(k==="adm-ban"||k==="adm-unban"){const ban=k==="adm-ban";if(!ban||confirm("Ban this user? They will not be able to post or message."))admDo(()=>http("/rest/v1/rpc/admin_set_ban",{method:"POST",body:{target:a.dataset.uid,banned:ban},retry:false}),ban?"User banned.":"User unbanned.")}
+ else if(k==="adm-done")admDo(()=>http("/rest/v1/reports?id=eq."+a.dataset.rid,{method:"PATCH",body:{status:"resolved"},headers:{Prefer:"return=minimal"},retry:false}),"Marked resolved.")});
+
+/* ================= router ================= */
+async function route(){
+ stopTimers();view._chat=null;const parts=location.hash.replace(/^#\/?/,"").split("/"),name=parts[0]||"home",arg=parts[1]||"";
+ window.scrollTo(0,0);
+ try{
+  if(!READY&&!["safety","terms","privacy","setup"].includes(name)){setupView();return}
+  if(name==="home")home();else if(name==="listing")await listingView(arg);else if(name==="sell")await sellView();else if(name==="edit")await sellView(arg);
+  else if(name==="messages")await messagesView();else if(name==="chat")await chatView(arg);else if(name==="me")await meView();else if(name==="admin")await adminView();
+  else if(name==="saved")await savedView();else if(name==="safety")safetyView();else if(name==="terms")termsView();else if(name==="privacy")privacyView();else if(name==="setup")setupView();else home()}
+ catch(e){view.innerHTML=`<div class="panel"><h2>Something went wrong</h2><p>${esc(e.message||"Please try again.")}</p><button class="btn" id="rt2">Try again</button></div>`;$("#rt2").onclick=route}}
+window.addEventListener("hashchange",()=>{if(/access_token=/.test(location.hash))takeAuthHash().then(route);else route()});
+window.addEventListener("online",()=>{$("#off").style.display="none";pollUnread()});window.addEventListener("offline",()=>{$("#off").style.display="block"});
+if(!navigator.onLine)$("#off").style.display="block";
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)pollUnread()});
+(async function boot(){
+ renderHeader();
+ if(READY){await takeAuthHash();if(sess){await loadMe()}setInterval(pollUnread,30000);pollUnread()}
+ route()})();
+})();
+</script>
+</body>
+</html>

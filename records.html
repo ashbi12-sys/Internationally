@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{localStorage.setItem("hub-last",JSON.stringify({t:"Class Record",href:"records.html"}))}catch(e){}</script>
+<title>Class Record Dashboard | Learning Hub</title>
+<style>
+:root{--bg:#eef3f1;--ink:#12302f;--card:#fff;--line:#c9d8d4;--ok:#15803d;--bad:#b91c1c;--head:#12302f;--headtxt:#f4f7f6;--acc:#0f766e;--onacc:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#0d1c1c;--ink:#e6efed;--card:#142a2a;--line:#2b4545;--ok:#4ade80;--bad:#f87171;--head:#071212;--acc:#2dd4bf;--onacc:#04201d}}
+*{box-sizing:border-box}
+body{margin:0;font-family:Lexend,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+.top{background:var(--head);color:var(--headtxt);position:sticky;top:0;z-index:5}
+.top .wrap{display:flex;align-items:center;gap:8px 22px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
+.brand{font-weight:800;font-size:1.05rem;color:inherit;text-decoration:none;margin-right:auto}
+.top nav{display:flex;gap:4px;flex-wrap:wrap}
+.top nav a{color:inherit;text-decoration:none;font-weight:600;font-size:.9rem;padding:6px 12px;border-radius:6px;opacity:.8}
+.top nav a:hover{opacity:1}
+.top nav a[aria-current=page]{background:rgba(255,255,255,.16);opacity:1}
+main{padding-top:28px;padding-bottom:56px}
+h1{font-size:clamp(1.8rem,5vw,2.7rem);font-weight:800;letter-spacing:-.02em;line-height:1.15;margin:0 0 8px}
+.lead{max-width:56ch;opacity:.85;margin:0 0 26px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.hub{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-top:8px solid var(--c);border-radius:8px;padding:22px}
+.hub:hover{border-color:var(--c)}
+.hub .ic{font-size:2.2rem}
+.hub h2{margin:6px 0}
+.hub p{margin:0;opacity:.85;font-size:.95rem}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0;padding:0;list-style:none}
+.chips li{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:4px 14px;font-size:.88rem;font-weight:600}
+h3{margin:34px 0 12px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tab{font:inherit;font-weight:600;padding:9px 16px;border-radius:6px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.tab[aria-selected=true]{background:var(--acc);border-color:var(--acc);color:var(--onacc)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:24px}
+.panel h2{margin:0 0 4px}
+.panel>p{margin:0 0 12px;opacity:.85}
+.btn{font:inherit;font-weight:600;border:2px solid var(--acc);background:var(--acc);color:var(--onacc);padding:8px 18px;border-radius:6px;cursor:pointer}
+.btn.alt{background:transparent;color:var(--ink);border-color:var(--ink)}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:6px;padding:8px 10px;max-width:100%}
+textarea{width:100%;min-height:100px}
+label{display:block;font-weight:600;margin:12px 0 4px}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.big{font-size:2.6rem;font-weight:800;color:var(--acc);line-height:1.2}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.cols{display:flex;gap:14px;flex-wrap:wrap}
+.cols>div{flex:1 1 140px}
+.cols input,.cols select{width:100%}
+.bits{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}
+.bit{font:inherit;width:56px;border:2px solid var(--line);background:var(--bg);color:var(--ink);border-radius:6px;padding:6px 0;cursor:pointer;display:flex;flex-direction:column;align-items:center}
+.bit small{font-size:.75rem;opacity:.75}
+.bit b{font-size:1.5rem}
+.bit.on{background:var(--acc);border-color:var(--acc);color:var(--onacc)}
+.out{margin-top:16px;padding:14px;border-radius:6px;background:var(--bg);border:1px solid var(--line)}
+.out ul{margin:6px 0 0;padding-left:20px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:480px;margin-top:14px}
+.card{aspect-ratio:1;font:inherit;font-weight:600;font-size:.82rem;border-radius:8px;border:2px solid var(--line);background:var(--acc);color:var(--onacc);cursor:pointer;display:grid;place-items:center;padding:2px}
+.card.up,.card.done{background:var(--bg);color:var(--ink)}
+.card.done{border-color:var(--ok)}
+.card.emo{font-size:1.9rem}
+.scr{font-size:clamp(1.6rem,6vw,2.4rem);font-weight:800;letter-spacing:.3em;margin:10px 0;word-break:break-all}
+.msg{min-height:1.6em;font-weight:600;margin-top:10px}
+.msg.g{color:var(--ok)}.msg.r{color:var(--bad)}
+footer{text-align:center;font-size:.8rem;opacity:.7;padding:0 20px 28px}
+</style>
+<style>
+:root{color-scheme:light;--bg:#f5f7fb;--ink:#1c2b4a;--card:#fff;--line:#dde4ef;--head:#e3ecf8;--headtxt:#1c2b4a;--acc:#3b6bb5;--onacc:#fff;--serif:Georgia,"Times New Roman",serif;--c0:#5b7db1;--c1:#a9bde0;--c2:#e6b87a;--c3:#d08555;--c4:#7bb394;--c5:#b59ad1}
+.top nav a[aria-current=page]{background:rgba(28,43,74,.1)}
+.band{background:var(--head);padding:26px 0 76px}
+.eyebrow{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:#8a5a2b;font-weight:600}
+.eyebrow input{font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;background:transparent;border:0;border-bottom:1px dashed #c9a57c;border-radius:0;padding:0 2px;width:16em}
+.band h1{font-family:var(--serif);font-weight:400;margin:6px 0 4px}
+.meta{opacity:.75;font-size:.92rem}
+main.wrap{padding-top:0;margin-top:-52px}
+.kpis{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.kpi,.box{background:var(--card);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 3px rgba(28,43,74,.06)}
+.kpi{padding:16px 18px}
+.kpi.top1{background:#fdebd3;border-color:#ecc791}
+.kpi small{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;opacity:.75;font-weight:600}
+.kpi b{display:block;font-family:var(--serif);font-weight:400;font-size:2rem;line-height:1.25;overflow-wrap:anywhere}
+.kpi span{font-size:.85rem;opacity:.8}
+.mid{display:grid;gap:16px;grid-template-columns:minmax(0,2fr) minmax(260px,1fr);margin:18px 0}
+@media(max-width:760px){.mid{grid-template-columns:1fr}}
+.box{padding:20px 22px}
+.box h2{font-family:var(--serif);font-weight:400;font-size:1.4rem;margin:0}
+.sub{margin:2px 0 10px;font-size:.88rem;opacity:.75}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.85rem;margin-bottom:6px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.chartbox{overflow-x:auto}
+.chartbox svg text{fill:var(--ink);font-family:Lexend,sans-serif}
+.rk{margin-top:14px}
+.rk .h{display:flex;justify-content:space-between;font-family:var(--serif);font-size:1.15rem}
+.rk .h b{font-family:Lexend,sans-serif;font-size:1.05rem}
+.trk{height:10px;border-radius:5px;background:#e8edf5;margin:6px 0}
+.trk div{height:100%;border-radius:5px;background:var(--acc)}
+.pill{display:inline-block;font-size:.78rem;padding:2px 12px;border-radius:20px;border:1px solid transparent;font-weight:600}
+.p-out{background:#dbe7fb;color:#1c3a74;border-color:#b5cbf2}
+.p-pro{background:#fde9cf;color:#7a3f12;border-color:#ecc791}
+.p-dev{background:#ece8df;color:#51493a;border-color:#d8d1c2}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;opacity:.85;padding:8px 6px;border-bottom:2px solid var(--ink);text-align:right;white-space:nowrap}
+td{padding:4px 6px;border-bottom:1px solid var(--line);text-align:right}
+th.l,td.l{text-align:left}
+td input,th input{border:1px solid transparent;background:transparent;border-radius:4px;padding:4px 6px;text-align:right;width:70px}
+td input:hover,th input:hover{border-color:var(--line)}
+th input.nm{width:125px;text-transform:uppercase;letter-spacing:.08em;font-size:.74rem;font-weight:600}
+td input.l{text-align:left;width:100%;min-width:110px;font-family:var(--serif);font-size:1.05rem}
+input.hi{font-weight:700;color:#1c3a74}
+input.lo{font-weight:700;color:#a4531c}
+.x{font:inherit;border:0;background:transparent;color:var(--ink);opacity:.45;cursor:pointer;font-size:1.1rem}
+.x:hover{opacity:1}
+tr.foot td{background:#f0e6d4;font-weight:700;border-bottom:0;padding:10px 6px}
+.note{font-size:.8rem;opacity:.75;margin:10px 0 0}
+.empty{opacity:.7;padding:20px 0}
+@media print{.top,.tools,.x{display:none}.band{padding-bottom:70px}}
+.qp{margin-top:18px}
+.qp small{font-family:Lexend,sans-serif;font-size:.8rem;opacity:.7}
+.mid2{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:18px}
+.ins{border:1px solid var(--line);border-radius:8px;padding:14px 16px;background:var(--bg)}
+.ins h3{margin:0 0 8px;font-family:var(--serif);font-weight:400;font-size:1.15rem}
+.ins ul{margin:0;padding-left:18px}
+.ins li{margin:4px 0;font-size:.92rem}
+.ins p{margin:6px 0 0}
+#qcodes{font-size:.8rem}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="learn.html">Learning Hub</a>
+<nav aria-label="Main"><a href="learn.html">Home</a><a href="quiz.html">Quizzes</a><a href="labs.html">Labs</a><a href="games.html">Games</a><a href="records.html" aria-current="page">Records</a><a href="index.html">Marketplace</a></nav>
+</div></header>
+<div class="band"><div class="wrap">
+<div class="eyebrow">Class record &middot; <input id="sec" aria-label="Section or subject" placeholder="Section / Subject"></div>
+<h1>Student Grade Dashboard</h1>
+<div class="meta" id="meta"></div>
+</div></div>
+<main class="wrap">
+<div class="kpis" id="kpis"></div>
+<div class="mid">
+<section class="box"><h2>Scores by assessment</h2><p class="sub">Each student's score on every assessment, out of 100.</p><div class="legend" id="legend"></div><div class="chartbox" id="chart"></div></section>
+<section class="box"><h2>Ranking</h2><p class="sub">By average score.</p><div id="rank"></div></section>
+</div>
+<section class="box">
+<div class="tools">
+<button class="btn" id="addS">+ Add student</button><button class="btn alt" id="addA">+ Add assessment</button><button class="btn alt" id="csv">Download CSV</button><button class="btn alt" id="print">Print</button><button class="btn alt" id="reset">Clear all</button>
+</div>
+<div class="tablewrap"><table id="tbl"></table></div>
+<p class="empty" id="hint"></p>
+<p class="note">Click any name or score to edit. Blue bold = highest in column, brown bold = lowest. Total is the sum of all scores. Standing: 90+ Outstanding, 80+ Proficient, below 80 Developing. Data is saved in this browser only, so use Download CSV to keep a copy.</p>
+</section>
+<section class="box qp" id="qp">
+<h2>Quiz progress <small>(automatic)</small></h2>
+<p class="sub">Scores from quizzes taken on this device appear here by themselves. For students on other devices, paste their progress codes.</p>
+<div class="tools"><button class="btn" id="q2r">Add quiz scores to class record</button><button class="btn alt" id="qimp">Import progress codes</button><button class="btn alt" id="qcsv">Download CSV</button><button class="btn alt" id="qclr">Clear quiz log</button></div>
+<div id="qimpbox" hidden><label for="qcodes">Paste one code per line</label><textarea id="qcodes" placeholder="LH1:..."></textarea><div class="row"><button class="btn" id="qgo">Import</button><span id="qmsg" class="msg" aria-live="polite"></span></div></div>
+<div class="tablewrap" id="qtbl"></div>
+<div class="mid2" id="ins"></div>
+</section>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt=n=>String(+n.toFixed(2));
+const BLANK=()=>({sec:"",assess:[],students:[]});
+let data;
+try{data=JSON.parse(localStorage.getItem("class-record-v2"))}catch(e){}
+if(!data||!data.assess||!data.students)data=BLANK();
+const save=()=>{try{localStorage.setItem("class-record-v2",JSON.stringify(data))}catch(e){}};
+const col=j=>"var(--c"+(j%6)+")";
+const stand=a=>a>=90?["Outstanding","p-out"]:a>=80?["Proficient","p-pro"]:["Developing","p-dev"];
+
+function stats(){
+  const A=data.assess,S=data.students;
+  const rows=S.map(s=>{const t=s.scores.reduce((a,b)=>a+b,0);return{s,t,a:A.length?t/A.length:0}});
+  const means=A.map((_,j)=>S.length?S.reduce((a,s)=>a+s.scores[j],0)/S.length:0);
+  return{rows,means};
+}
+
+function buildTable(){
+  const A=data.assess,S=data.students;
+  $("tbl").innerHTML=`<thead><tr><th class="l">Student</th>${A.map((a,j)=>`<th><input class="nm" data-a="${j}" value="${esc(a)}" aria-label="Assessment name"><button class="x" data-ra="${j}" aria-label="Remove assessment">&times;</button></th>`).join("")}<th>Total</th><th>Average</th><th>Standing</th><th></th></tr></thead><tbody>${S.map((s,i)=>`<tr><td class="l"><input class="l" data-s="${i}" value="${esc(s.name)}" aria-label="Student name"></td>${s.scores.map((v,j)=>`<td><input class="sc" type="number" min="0" max="100" data-i="${i}" data-j="${j}" value="${v}" aria-label="${esc(s.name)} ${esc(A[j])}"></td>`).join("")}<td class="tot"></td><td class="avg"></td><td><span class="pill"></span></td><td><button class="x" data-rs="${i}" aria-label="Remove student">&times;</button></td></tr>`).join("")}<tr class="foot"><td class="l">Class average</td>${A.map(()=>`<td class="cm"></td>`).join("")}<td id="ft"></td><td id="fa"></td><td></td><td></td></tr></tbody>`;
+}
+
+function update(){
+  const A=data.assess,S=data.students,{rows,means}=stats();
+  $("sec").value=data.sec||"";
+  $("meta").textContent=`${S.length} student${S.length===1?"":"s"} · ${A.length} assessment${A.length===1?"":"s"} · 100 pts each`;
+  const trs=$("tbl").querySelectorAll("tbody tr:not(.foot)");
+  rows.forEach((r,i)=>{
+    trs[i].querySelector(".tot").textContent=r.t;trs[i].querySelector(".avg").textContent=fmt(r.a);
+    const st=A.length?stand(r.a):["No scores yet","p-dev"],p=trs[i].querySelector(".pill");p.textContent=st[0];p.className="pill "+st[1];
+  });
+  $("tbl").querySelectorAll(".cm").forEach((c,j)=>c.textContent=fmt(means[j]));
+  const cavg=rows.length?rows.reduce((a,r)=>a+r.a,0)/rows.length:0;
+  $("ft").textContent=rows.length?fmt(rows.reduce((a,r)=>a+r.t,0)/rows.length):"";$("fa").textContent=rows.length?fmt(cavg):"";
+  A.forEach((_,j)=>{
+    const vals=S.map(s=>s.scores[j]),mx=Math.max(...vals),mn=Math.min(...vals);
+    $("tbl").querySelectorAll(`.sc[data-j="${j}"]`).forEach(inp=>{const v=S[inp.dataset.i].scores[j];inp.classList.toggle("hi",S.length>1&&mx!==mn&&v===mx);inp.classList.toggle("lo",S.length>1&&mx!==mn&&v===mn)});
+  });
+  const sorted=rows.slice().sort((a,b)=>b.a-a.a),top=sorted[0];
+  const hiM=means.indexOf(Math.max(...means)),loM=means.indexOf(Math.min(...means));
+  $("kpis").innerHTML=S.length&&A.length?`<div class="kpi top1"><small>Top student</small><b>${esc(top.s.name)}</b><span>${fmt(top.a)} average · ${top.t} total</span></div><div class="kpi"><small>Class average</small><b>${fmt(cavg)}</b><span>across all ${A.length} assessments</span></div><div class="kpi"><small>Strongest assessment</small><b>${esc(A[hiM])}</b><span>class mean ${fmt(means[hiM])}</span></div><div class="kpi"><small>Needs attention</small><b>${esc(A[loM])}</b><span>class mean ${fmt(means[loM])}</span></div>`:`<div class="kpi"><b>No data yet</b><span>Add a student and an assessment to begin.</span></div>`;
+  $("legend").innerHTML=A.map((a,j)=>`<span><i style="background:${col(j)}"></i>${esc(a)}</span>`).join("");
+  $("rank").innerHTML=sorted.length?sorted.map((r,k)=>{const st=A.length?stand(r.a):["No scores yet","p-dev"];return`<div class="rk"><div class="h"><span>${k+1}. ${esc(r.s.name)}</span><b>${fmt(r.a)}</b></div><div class="trk"><div style="width:${Math.min(100,r.a)}%"></div></div><span class="pill ${st[1]}">${st[0]}</span></div>`}).join(""):`<p class="empty">No students yet.</p>`;
+  $("hint").textContent=!S.length?"No students yet. Click \u201c+ Add student\u201d, or use Quiz progress below to bring in quiz scores automatically.":!A.length?"Click \u201c+ Add assessment\u201d to create a column such as Quiz 1, Project, or Exam.":"";
+  chart();save();
+}
+
+function chart(){
+  const A=data.assess,S=data.students;
+  if(!S.length||!A.length){$("chart").innerHTML=`<p class="empty">Add students and assessments to see the chart.</p>`;return}
+  const bw=22,g=4,grp=A.length*(bw+g)+44,L=38,T=22,B=30,H=300,ph=H-T-B,W=Math.max(560,L+grp*S.length+10);
+  const y=v=>T+ph*(1-v/100);
+  let s=`<svg viewBox="0 0 ${W} ${H}" style="min-width:${Math.min(W,560)}px;width:100%;height:auto" role="img" aria-label="Grouped bar chart of scores by student and assessment">`;
+  [0,25,50,75,100].forEach(v=>{s+=`<line x1="${L}" x2="${W-6}" y1="${y(v)}" y2="${y(v)}" stroke="#dde4ef"/><text x="${L-8}" y="${y(v)+4}" font-size="10" text-anchor="end" opacity=".7">${v}</text>`});
+  S.forEach((st,i)=>{
+    const x0=L+i*grp+22;
+    st.scores.forEach((v,j)=>{const x=x0+j*(bw+g);s+=`<rect x="${x}" y="${y(v)}" width="${bw}" height="${ph*v/100}" fill="${col(j)}" rx="2"/><text x="${x+bw/2}" y="${y(v)-4}" font-size="10" font-weight="700" text-anchor="middle">${v}</text>`});
+    s+=`<text x="${x0+(A.length*(bw+g)-g)/2}" y="${H-8}" font-size="12" text-anchor="middle">${esc(st.name)}</text>`;
+  });
+  $("chart").innerHTML=s+`<line x1="${L}" x2="${W-6}" y1="${y(0)}" y2="${y(0)}" stroke="#1c2b4a"/></svg>`;
+}
+
+$("tbl").addEventListener("input",e=>{
+  const t=e.target,d=t.dataset;
+  if(t.classList.contains("sc")){const v=t.value===""?0:Math.max(0,Math.min(100,parseFloat(t.value)||0));data.students[d.i].scores[d.j]=v}
+  else if(d.s!==undefined)data.students[d.s].name=t.value;
+  else if(d.a!==undefined)data.assess[d.a]=t.value;
+  update();
+});
+$("tbl").addEventListener("click",e=>{
+  const d=e.target.dataset;
+  if(d.rs!==undefined)data.students.splice(d.rs,1);
+  else if(d.ra!==undefined){data.assess.splice(d.ra,1);data.students.forEach(s=>s.scores.splice(d.ra,1))}
+  else return;
+  buildTable();update();
+});
+$("sec").oninput=e=>{data.sec=e.target.value;save()};
+$("addS").onclick=()=>{data.students.push({name:"New student",scores:data.assess.map(()=>0)});buildTable();update();const n=$("tbl").querySelectorAll("input.l");n[n.length-1].select()};
+$("addA").onclick=()=>{data.assess.push("Assessment "+(data.assess.length+1));data.students.forEach(s=>s.scores.push(0));buildTable();update()};
+$("reset").onclick=()=>{if(confirm("Delete all students and assessments?")){data=BLANK();buildTable();update()}};
+$("print").onclick=()=>window.print();
+$("csv").onclick=()=>{
+  const q=v=>'"'+String(v).replace(/"/g,'""')+'"',{rows}=stats();
+  const lines=[["Student",...data.assess,"Total","Average","Standing"].map(q).join(",")].concat(rows.map(r=>[r.s.name,...r.s.scores,r.t,fmt(r.a),stand(r.a)[0]].map(q).join(",")));
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+lines.join("\n")],{type:"text/csv"}));a.download="class-record.csv";a.click();
+};
+const QK="quiz-log";
+const qlog=()=>{try{const a=JSON.parse(localStorage.getItem(QK));return Array.isArray(a)?a:[]}catch(e){return[]}};
+const qsave=a=>{try{localStorage.setItem(QK,JSON.stringify(a.slice(-1000)))}catch(e){}};
+const pct=e=>e.t?e.sc/e.t*100:0;
+function qgroup(){
+  const log=qlog(),subs=[],S={};
+  log.forEach(e=>{
+    if(!subs.some(x=>x.s===e.s))subs.push({s:e.s,sn:e.sn});
+    const k=e.n.trim().toLowerCase(),st=S[k]||(S[k]={name:e.n.trim(),best:{},att:0,last:0});
+    st.att++;st.last=Math.max(st.last,e.d);st.best[e.s]=Math.max(st.best[e.s]||0,pct(e));
+  });
+  return{log,subs,S};
+}
+function qrender(){
+  const {log,subs,S}=qgroup(),people=Object.values(S).sort((a,b)=>a.name.localeCompare(b.name));
+  if(!people.length){$("qtbl").innerHTML='<p class="empty">No quiz results yet. When a student takes a quiz, the score appears here automatically.</p>';$("ins").innerHTML="";return}
+  people.forEach(q=>{const v=Object.values(q.best);q.ov=v.reduce((a,b)=>a+b,0)/v.length});
+  $("qtbl").innerHTML=`<table><thead><tr><th class="l">Student</th>${subs.map(x=>`<th>${esc(x.sn)}</th>`).join("")}<th>Overall</th><th>Attempts</th><th>Last active</th></tr></thead><tbody>${people.map(q=>{const st=stand(q.ov);return`<tr><td class="l" style="font-family:var(--serif);font-size:1.05rem">${esc(q.name)}</td>${subs.map(x=>`<td>${q.best[x.s]===undefined?"—":Math.round(q.best[x.s])+"%"}</td>`).join("")}<td><span class="pill ${st[1]}">${Math.round(q.ov)}%</span></td><td>${q.att}</td><td>${new Date(q.last).toLocaleDateString()}</td></tr>`}).join("")}</tbody></table>`;
+  const low=people.filter(q=>q.ov<75).sort((a,b)=>a.ov-b.ov);
+  const att={};log.forEach(e=>att[e.s]=(att[e.s]||0)+1);
+  const mm={};log.forEach(e=>(e.m||[]).forEach(t=>{const k=e.s+"|"+t;(mm[k]=mm[k]||{sn:e.sn,t,c:0,a:att[e.s]}).c++}));
+  const top=Object.values(mm).sort((a,b)=>b.c/b.a-a.c/a.a||b.c-a.c).slice(0,5);
+  $("ins").innerHTML=`<div class="ins"><h3>Needs support</h3>${low.length?`<ul>${low.map(q=>`<li>${esc(q.name)} · ${Math.round(q.ov)}% overall</li>`).join("")}</ul>`:"<p>Everyone is at 75% or above.</p>"}<p class="sub">Overall is the average of each student's best score per subject. 75% is the usual passing mark.</p></div><div class="ins"><h3>Most-missed questions</h3>${top.length?`<ul>${top.map(x=>`<li>${esc(x.t)} <small>(${esc(x.sn)} · missed in ${x.c} of ${x.a} ${x.a===1?"attempt":"attempts"})</small></li>`).join("")}</ul>`:"<p>No missed questions yet.</p>"}<p class="sub">Use these to decide what to reteach.</p></div>`;
+}
+$("q2r").onclick=()=>{
+  const {subs,S}=qgroup();
+  if(!subs.length){alert("No quiz results to add yet.");return}
+  subs.forEach(sb=>{const n="Quiz: "+sb.sn;if(!data.assess.includes(n)){data.assess.push(n);data.students.forEach(s=>s.scores.push(0))}});
+  Object.values(S).forEach(q=>{
+    let st=data.students.find(s=>s.name.trim().toLowerCase()===q.name.toLowerCase());
+    if(!st){st={name:q.name,scores:data.assess.map(()=>0)};data.students.push(st)}
+    subs.forEach(sb=>{if(q.best[sb.s]!==undefined)st.scores[data.assess.indexOf("Quiz: "+sb.sn)]=Math.round(q.best[sb.s])});
+  });
+  buildTable();update();
+};
+$("qimp").onclick=()=>{$("qimpbox").hidden=!$("qimpbox").hidden};
+$("qgo").onclick=()=>{
+  const codes=$("qcodes").value.split(/\s+/).filter(Boolean),log=qlog();
+  const seen=new Set(log.map(e=>e.n.toLowerCase()+"|"+e.s+"|"+e.d));let added=0,bad=0;
+  codes.forEach(c=>{
+    try{
+      if(!c.startsWith("LH1:"))throw 0;
+      const arr=JSON.parse(decodeURIComponent(escape(atob(c.slice(4)))));
+      if(!Array.isArray(arr))throw 0;
+      arr.forEach(e=>{
+        if(!e||typeof e.n!=="string"||!e.n.trim()||typeof e.s!=="string"||typeof e.sn!=="string"||!(e.t>0&&e.t<=100)||!(e.sc>=0&&e.sc<=e.t)||!(e.d>0))return;
+        const k=e.n.toLowerCase()+"|"+e.s+"|"+e.d;if(seen.has(k))return;seen.add(k);
+        log.push({n:e.n.slice(0,60),s:e.s.slice(0,30),sn:e.sn.slice(0,60),sc:+e.sc,t:+e.t,d:+e.d,m:Array.isArray(e.m)?e.m.slice(0,100).map(x=>String(x).slice(0,300)):[]});added++;
+      });
+    }catch(x){bad++}
+  });
+  qsave(log);qrender();
+  $("qmsg").className="msg "+(bad?"r":"g");
+  $("qmsg").textContent=added+" new result(s) imported"+(bad?"; "+bad+" code(s) could not be read":"")+".";
+  if(added&&!bad)$("qcodes").value="";
+};
+$("qclr").onclick=()=>{if(confirm("Delete all saved quiz results on this device?")){try{localStorage.removeItem(QK)}catch(e){}qrender()}};
+$("qcsv").onclick=()=>{
+  const q=v=>'"'+String(v).replace(/"/g,'""')+'"';
+  const lines=[["Student","Subject","Score","Total","Percent","Date"].map(q).join(",")].concat(qlog().map(e=>[e.n,e.sn,e.sc,e.t,fmt(pct(e)),new Date(e.d).toISOString().slice(0,10)].map(q).join(",")));
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+lines.join("\n")],{type:"text/csv"}));a.download="quiz-progress.csv";a.click();
+};
+window.addEventListener("storage",e=>{if(e.key===QK)qrender()});
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)qrender()});
+qrender();
+buildTable();update();
+qrender();
+if(location.hash==="#quiz")document.getElementById("qp").scrollIntoView();
+</script>
+</body>
+</html>

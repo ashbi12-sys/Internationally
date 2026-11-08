@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fun Games | Learning Hub</title>
+<style>
+:root{--bg:#eef3f1;--ink:#12302f;--card:#fff;--line:#c9d8d4;--ok:#15803d;--bad:#b91c1c;--head:#12302f;--headtxt:#f4f7f6;--acc:#0f766e;--onacc:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#0d1c1c;--ink:#e6efed;--card:#142a2a;--line:#2b4545;--ok:#4ade80;--bad:#f87171;--head:#071212;--acc:#2dd4bf;--onacc:#04201d}}
+*{box-sizing:border-box}
+body{margin:0;font-family:Lexend,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+.top{background:var(--head);color:var(--headtxt);position:sticky;top:0;z-index:5}
+.top .wrap{display:flex;align-items:center;gap:8px 22px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
+.brand{font-weight:800;font-size:1.05rem;color:inherit;text-decoration:none;margin-right:auto}
+.top nav{display:flex;gap:4px;flex-wrap:wrap}
+.top nav a{color:inherit;text-decoration:none;font-weight:600;font-size:.9rem;padding:6px 12px;border-radius:6px;opacity:.8}
+.top nav a:hover{opacity:1}
+.top nav a[aria-current=page]{background:rgba(255,255,255,.16);opacity:1}
+main{padding-top:28px;padding-bottom:56px}
+h1{font-size:clamp(1.8rem,5vw,2.7rem);font-weight:800;letter-spacing:-.02em;line-height:1.15;margin:0 0 8px}
+.lead{max-width:56ch;opacity:.85;margin:0 0 26px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.hub{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-top:8px solid var(--c);border-radius:8px;padding:22px}
+.hub:hover{border-color:var(--c)}
+.hub .ic{font-size:2.2rem}
+.hub h2{margin:6px 0}
+.hub p{margin:0;opacity:.85;font-size:.95rem}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0;padding:0;list-style:none}
+.chips li{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:4px 14px;font-size:.88rem;font-weight:600}
+h3{margin:34px 0 12px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tab{font:inherit;font-weight:600;padding:9px 16px;border-radius:6px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.tab[aria-selected=true]{background:var(--acc);border-color:var(--acc);color:var(--onacc)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:24px}
+.panel h2{margin:0 0 4px}
+.panel>p{margin:0 0 12px;opacity:.85}
+.btn{font:inherit;font-weight:600;border:2px solid var(--acc);background:var(--acc);color:var(--onacc);padding:8px 18px;border-radius:6px;cursor:pointer}
+.btn.alt{background:transparent;color:var(--ink);border-color:var(--ink)}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:6px;padding:8px 10px;max-width:100%}
+textarea{width:100%;min-height:100px}
+label{display:block;font-weight:600;margin:12px 0 4px}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.big{font-size:2.6rem;font-weight:800;color:var(--acc);line-height:1.2}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.cols{display:flex;gap:14px;flex-wrap:wrap}
+.cols>div{flex:1 1 140px}
+.cols input,.cols select{width:100%}
+.bits{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}
+.bit{font:inherit;width:56px;border:2px solid var(--line);background:var(--bg);color:var(--ink);border-radius:6px;padding:6px 0;cursor:pointer;display:flex;flex-direction:column;align-items:center}
+.bit small{font-size:.75rem;opacity:.75}
+.bit b{font-size:1.5rem}
+.bit.on{background:var(--acc);border-color:var(--acc);color:var(--onacc)}
+.out{margin-top:16px;padding:14px;border-radius:6px;background:var(--bg);border:1px solid var(--line)}
+.out ul{margin:6px 0 0;padding-left:20px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:480px;margin-top:14px}
+.card{aspect-ratio:1;font:inherit;font-weight:600;font-size:.82rem;border-radius:8px;border:2px solid var(--line);background:var(--acc);color:var(--onacc);cursor:pointer;display:grid;place-items:center;padding:2px}
+.card.up,.card.done{background:var(--bg);color:var(--ink)}
+.card.done{border-color:var(--ok)}
+.card.emo{font-size:1.9rem}
+.scr{font-size:clamp(1.6rem,6vw,2.4rem);font-weight:800;letter-spacing:.3em;margin:10px 0;word-break:break-all}
+.msg{min-height:1.6em;font-weight:600;margin-top:10px}
+.msg.g{color:var(--ok)}.msg.r{color:var(--bad)}
+footer{text-align:center;font-size:.8rem;opacity:.7;padding:0 20px 28px}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+<a class="brand" href="learn.html">Learning Hub</a>
+<nav aria-label="Main"><a href="learn.html">Home</a><a href="quiz.html">Quizzes</a><a href="labs.html">Labs</a><a href="games.html" aria-current="page">Games</a><a href="records.html">Records</a><a href="index.html">Marketplace</a></nav>
+</div></header>
+<main class="wrap">
+<h1>Fun Games</h1>
+<p class="lead">Learn vocabulary from every subject while you play.</p>
+<div class="tabs" id="tabs" role="tablist"></div>
+<section class="panel" id="panel"></section>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const ls={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+function memory(el){
+  const P=[["🔨","Hammer"],["🪚","Saw"],["📏","Ruler"],["🖱️","Mouse"],["⌨️","Keyboard"],["🥄","Spoon"],["🌱","Seedling"],["🐟","Tilapia"]];
+  const deck=shuffle(P.flatMap((p,i)=>[{i,t:p[0],e:1},{i,t:p[1]}]));
+  let open=[],moves=0,found=0,lock=false;
+  const best=ls.get("best-mem");
+  el.innerHTML=`<h2>Memory Match</h2><p>Flip two cards to match each picture with its name.</p><div class="row"><b id="mv">Moves: 0</b><span>${best?"Best: "+best+" moves":"No best score yet"}</span><button class="btn alt" id="again">Restart</button></div><div class="cards" id="cd"></div><div class="msg" id="msg" aria-live="polite"></div>`;
+  $("again").onclick=()=>memory(el);
+  deck.forEach(c=>{
+    const b=document.createElement("button");b.className="card"+(c.e?" emo":"");b.textContent="?";b.setAttribute("aria-label","Face-down card");
+    b.onclick=()=>{
+      if(lock||b.classList.contains("up"))return;
+      b.classList.add("up");b.textContent=c.t;b.setAttribute("aria-label",c.e?"Picture: "+P[c.i][1]:c.t);open.push([b,c]);
+      if(open.length<2)return;
+      moves++;$("mv").textContent="Moves: "+moves;
+      const [[b1,c1],[b2,c2]]=open;
+      if(c1.i===c2.i){
+        b1.disabled=b2.disabled=true;b1.classList.add("done");b2.classList.add("done");open=[];
+        if(++found===P.length){
+          $("msg").className="msg g";$("msg").textContent="You matched them all in "+moves+" moves!";
+          if(!best||moves<best)ls.set("best-mem",moves);
+        }
+      }else{
+        lock=true;
+        setTimeout(()=>{[b1,b2].forEach(x=>{x.classList.remove("up");x.textContent="?";x.setAttribute("aria-label","Face-down card")});open=[];lock=false},900);
+      }
+    };
+    $("cd").append(b);
+  });
+}
+
+function scramble(el){
+  const W=[["KEYBOARD","Input device used for typing"],["COMPOST","Organic fertilizer from decayed matter"],["HAMMER","Its claw pulls out nails"],["SEEDLING","Young plant ready to transplant"],["PANDIWA","Salitang nagsasaad ng kilos"],["PANGNGALAN","Ngalan ng tao, hayop, bagay, o lugar"],["TILAPIA","Popular freshwater fish"],["PASSWORD","Secret code that protects your account"],["RECIPE","Instructions for cooking a dish"],["BAYANIHAN","Pagtutulungan ng komunidad"]];
+  const list=shuffle(W);let i=0,score=0;
+  const scr=w=>{let s;do{s=shuffle([...w]).join("")}while(s===w);return s};
+  const best=ls.get("best-scr");
+  const next=()=>{
+    if(i>=list.length){
+      if(!best||score>best)ls.set("best-scr",score);
+      el.innerHTML=`<h2>Word Scramble</h2><div class="big">${score} / ${list.length}</div><p>${score>=8?"Excellent vocabulary!":"Good effort. Play again to improve."}</p><button class="btn" id="re">Play again</button>`;
+      $("re").onclick=()=>scramble(el);return;
+    }
+    const [w,h]=list[i];
+    el.innerHTML=`<h2>Word Scramble</h2><p>Word ${i+1} of ${list.length}. Score: ${score}${best?" (best "+best+")":""}</p><div class="scr" aria-label="Scrambled letters">${scr(w)}</div><p><b>Hint:</b> ${h}</p>
+    <form id="f"><label for="a">Your answer</label><input id="a" autocomplete="off" autocapitalize="characters" required><div class="row"><button class="btn" type="submit">Check</button><button class="btn alt" type="button" id="skip">Skip</button></div></form><div class="msg" id="msg" aria-live="polite"></div>`;
+    $("a").focus();
+    $("skip").onclick=()=>{i++;next()};
+    $("f").onsubmit=e=>{
+      e.preventDefault();
+      if($("a").value.trim().toUpperCase()===w){score++;$("msg").className="msg g";$("msg").textContent="Correct!";setTimeout(()=>{i++;next()},700)}
+      else{$("msg").className="msg r";$("msg").textContent="Not quite. Try again or skip.";$("a").select()}
+    };
+  };
+  next();
+}
+
+const GAMES=[{n:"🧠 Memory Match",f:memory},{n:"🔤 Word Scramble",f:scramble}];
+GAMES.forEach((g,k)=>{
+  const b=document.createElement("button");b.className="tab";b.setAttribute("role","tab");b.textContent=g.n;
+  b.onclick=ev=>{if(ev&&ev.isTrusted)try{localStorage.setItem("hub-last",JSON.stringify({t:g.n.replace(/^\S+\s/,""),href:"games.html#"+["memory","scramble"][k]}))}catch(e){}document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected",t===b));g.f($("panel"))};
+  $("tabs").append(b);
+  if(!k)b.click();
+});
+if(location.hash==="#scramble")document.querySelectorAll(".tab")[1].click();
+</script>
+</body>
+</html>
