@@ -177,7 +177,7 @@ if(hr<5||hr>=18){$("#orb").innerHTML=`<path d="M112 104a42 42 0 1 1-32-66 34 34 
 else{let r="";for(let i=0;i<12;i++){const a=i*Math.PI/6;r+=`<line x1="${80+48*Math.cos(a)}" y1="${80+48*Math.sin(a)}" x2="${80+(i%2?58:64)*Math.cos(a)}" y2="${80+(i%2?58:64)*Math.sin(a)}" stroke="#ffb627" stroke-width="5" stroke-linecap="round"/>`}
  $("#orb").innerHTML=`<defs><radialGradient id="sg" cx=".4" cy=".35"><stop offset="0" stop-color="#ffe27a"/><stop offset="1" stop-color="#ff9f1c"/></radialGradient></defs><g class="rays">${r}</g><circle cx="80" cy="80" r="34" fill="url(#sg)"/>`}
 const last=ls.get("hub-last",null);
-if(last&&last.href&&last.t)$("#cont").innerHTML=`<a class="cont" href="${esc(last.href)}" data-t="${esc(last.t)}">Continue: ${esc(last.t)}<svg class="ic"><use href="#i-arrow"/></svg></a>`;
+if(last&&last.href&&last.t&&!/^(index|market)/i.test(String(last.href)))$("#cont").innerHTML=`<a class="cont" href="${esc(last.href)}" data-t="${esc(last.t)}">Continue: ${esc(last.t)}<svg class="ic"><use href="#i-arrow"/></svg></a>`;
 
 /* ---- content ---- */
 const QZ=[["ict","ICT"],["he","Home Economics"],["ia","Industrial Arts"],["afa","Agri-Fishery Arts"],["fil","Filipino"],["math","Mathematics"],["sci","Science"],["ap","Araling Panlipunan"]];
