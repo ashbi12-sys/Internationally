@@ -6,12 +6,13 @@
 <script>try{localStorage.setItem("hub-last",JSON.stringify({t:"Class Record",href:"records.html"}))}catch(e){}</script>
 <title>Class Record Dashboard | Learning Hub</title>
 <style>
-:root{--bg:#eef3f1;--ink:#12302f;--card:#fff;--line:#c9d8d4;--ok:#15803d;--bad:#b91c1c;--head:#12302f;--headtxt:#f4f7f6;--acc:#0f766e;--onacc:#fff}
-@media (prefers-color-scheme:dark){:root{--bg:#0d1c1c;--ink:#e6efed;--card:#142a2a;--line:#2b4545;--ok:#4ade80;--bad:#f87171;--head:#071212;--acc:#2dd4bf;--onacc:#04201d}}
+:root{--bg:#fff3f8;--ink:#2a1050;--card:#fff;--line:#f4cade;--ok:#15803d;--bad:#b91c1c;--head:#512889;--head2:#973DA4;--headtxt:#fff;--acc:#973DA4;--onacc:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#1a0a30;--ink:#fdeaf4;--card:#2a1450;--line:#4a2a78;--ok:#4ade80;--bad:#f87171;--head:#12062a;--head2:#512889;--headtxt:#fdeaf4;--acc:#FF8AD8;--onacc:#2a0f45}}
 *{box-sizing:border-box}
 body{margin:0;font-family:Lexend,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
 .wrap{max-width:960px;margin:0 auto;padding:0 20px}
-.top{background:var(--head);color:var(--headtxt);position:sticky;top:0;z-index:5}
+.top{background:linear-gradient(90deg,var(--head),var(--head2));color:var(--headtxt);position:sticky;top:0;z-index:5}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(600px 400px at 0 -5%,rgba(255,92,204,.18),transparent),radial-gradient(500px 380px at 100% 10%,rgba(115,50,150,.14),transparent)}
 .top .wrap{display:flex;align-items:center;gap:8px 22px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
 .brand{font-weight:800;font-size:1.05rem;color:inherit;text-decoration:none;margin-right:auto}
 .top nav{display:flex;gap:4px;flex-wrap:wrap}
@@ -65,18 +66,18 @@ label{display:block;font-weight:600;margin:12px 0 4px}
 footer{text-align:center;font-size:.8rem;opacity:.7;padding:0 20px 28px}
 </style>
 <style>
-:root{color-scheme:light;--bg:#f5f7fb;--ink:#1c2b4a;--card:#fff;--line:#dde4ef;--head:#e3ecf8;--headtxt:#1c2b4a;--acc:#3b6bb5;--onacc:#fff;--serif:Georgia,"Times New Roman",serif;--c0:#5b7db1;--c1:#a9bde0;--c2:#e6b87a;--c3:#d08555;--c4:#7bb394;--c5:#b59ad1}
-.top nav a[aria-current=page]{background:rgba(28,43,74,.1)}
-.band{background:var(--head);padding:26px 0 76px}
-.eyebrow{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:#8a5a2b;font-weight:600}
-.eyebrow input{font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;background:transparent;border:0;border-bottom:1px dashed #c9a57c;border-radius:0;padding:0 2px;width:16em}
+:root{color-scheme:light;--bg:#fff3f8;--ink:#2a1050;--card:#fff;--line:#f4cade;--head:#fbd9e5;--head2:#fec2d6;--headtxt:#2a1050;--acc:#973DA4;--onacc:#fff;--serif:Georgia,"Times New Roman",serif;--c0:#B947B1;--c1:#FF5CCC;--c2:#F99DBC;--c3:#743296;--c4:#FE036A;--c5:#512889}
+.top nav a[aria-current=page]{background:rgba(42,16,80,.12)}
+.band{background:linear-gradient(135deg,#fbd9e5,#fec2d6);padding:26px 0 76px}
+.eyebrow{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:#973DA4;font-weight:600}
+.eyebrow input{font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;background:transparent;border:0;border-bottom:1px dashed #b947b1;border-radius:0;padding:0 2px;width:16em}
 .band h1{font-family:var(--serif);font-weight:400;margin:6px 0 4px}
 .meta{opacity:.75;font-size:.92rem}
 main.wrap{padding-top:0;margin-top:-52px}
 .kpis{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
 .kpi,.box{background:var(--card);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 3px rgba(28,43,74,.06)}
 .kpi{padding:16px 18px}
-.kpi.top1{background:#fdebd3;border-color:#ecc791}
+.kpi.top1{background:#fec2d6;border-color:#f99dbc}
 .kpi small{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;opacity:.75;font-weight:600}
 .kpi b{display:block;font-family:var(--serif);font-weight:400;font-size:2rem;line-height:1.25;overflow-wrap:anywhere}
 .kpi span{font-size:.85rem;opacity:.8}
@@ -92,12 +93,12 @@ main.wrap{padding-top:0;margin-top:-52px}
 .rk{margin-top:14px}
 .rk .h{display:flex;justify-content:space-between;font-family:var(--serif);font-size:1.15rem}
 .rk .h b{font-family:Lexend,sans-serif;font-size:1.05rem}
-.trk{height:10px;border-radius:5px;background:#e8edf5;margin:6px 0}
+.trk{height:10px;border-radius:5px;background:#fde3ee;margin:6px 0}
 .trk div{height:100%;border-radius:5px;background:var(--acc)}
 .pill{display:inline-block;font-size:.78rem;padding:2px 12px;border-radius:20px;border:1px solid transparent;font-weight:600}
-.p-out{background:#dbe7fb;color:#1c3a74;border-color:#b5cbf2}
-.p-pro{background:#fde9cf;color:#7a3f12;border-color:#ecc791}
-.p-dev{background:#ece8df;color:#51493a;border-color:#d8d1c2}
+.p-out{background:#ead7f5;color:#512889;border-color:#c9a4e0}
+.p-pro{background:#fec2d6;color:#8a0f47;border-color:#f99dbc}
+.p-dev{background:#f3e6f8;color:#5a3a74;border-color:#dcc7e8}
 .tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}
 .tablewrap{overflow-x:auto}
 table{border-collapse:collapse;width:100%;min-width:640px}
@@ -108,11 +109,11 @@ td input,th input{border:1px solid transparent;background:transparent;border-rad
 td input:hover,th input:hover{border-color:var(--line)}
 th input.nm{width:125px;text-transform:uppercase;letter-spacing:.08em;font-size:.74rem;font-weight:600}
 td input.l{text-align:left;width:100%;min-width:110px;font-family:var(--serif);font-size:1.05rem}
-input.hi{font-weight:700;color:#1c3a74}
-input.lo{font-weight:700;color:#a4531c}
+input.hi{font-weight:700;color:#512889}
+input.lo{font-weight:700;color:#c2004f}
 .x{font:inherit;border:0;background:transparent;color:var(--ink);opacity:.45;cursor:pointer;font-size:1.1rem}
 .x:hover{opacity:1}
-tr.foot td{background:#f0e6d4;font-weight:700;border-bottom:0;padding:10px 6px}
+tr.foot td{background:#fbd9e5;font-weight:700;border-bottom:0;padding:10px 6px}
 .note{font-size:.8rem;opacity:.75;margin:10px 0 0}
 .empty{opacity:.7;padding:20px 0}
 @media print{.top,.tools,.x{display:none}.band{padding-bottom:70px}}
@@ -215,13 +216,13 @@ function chart(){
   const bw=22,g=4,grp=A.length*(bw+g)+44,L=38,T=22,B=30,H=300,ph=H-T-B,W=Math.max(560,L+grp*S.length+10);
   const y=v=>T+ph*(1-v/100);
   let s=`<svg viewBox="0 0 ${W} ${H}" style="min-width:${Math.min(W,560)}px;width:100%;height:auto" role="img" aria-label="Grouped bar chart of scores by student and assessment">`;
-  [0,25,50,75,100].forEach(v=>{s+=`<line x1="${L}" x2="${W-6}" y1="${y(v)}" y2="${y(v)}" stroke="#dde4ef"/><text x="${L-8}" y="${y(v)+4}" font-size="10" text-anchor="end" opacity=".7">${v}</text>`});
+  [0,25,50,75,100].forEach(v=>{s+=`<line x1="${L}" x2="${W-6}" y1="${y(v)}" y2="${y(v)}" stroke="#f4cade"/><text x="${L-8}" y="${y(v)+4}" font-size="10" text-anchor="end" opacity=".7">${v}</text>`});
   S.forEach((st,i)=>{
     const x0=L+i*grp+22;
     st.scores.forEach((v,j)=>{const x=x0+j*(bw+g);s+=`<rect x="${x}" y="${y(v)}" width="${bw}" height="${ph*v/100}" fill="${col(j)}" rx="2"/><text x="${x+bw/2}" y="${y(v)-4}" font-size="10" font-weight="700" text-anchor="middle">${v}</text>`});
     s+=`<text x="${x0+(A.length*(bw+g)-g)/2}" y="${H-8}" font-size="12" text-anchor="middle">${esc(st.name)}</text>`;
   });
-  $("chart").innerHTML=s+`<line x1="${L}" x2="${W-6}" y1="${y(0)}" y2="${y(0)}" stroke="#1c2b4a"/></svg>`;
+  $("chart").innerHTML=s+`<line x1="${L}" x2="${W-6}" y1="${y(0)}" y2="${y(0)}" stroke="#2a1050"/></svg>`;
 }
 
 $("tbl").addEventListener("input",e=>{

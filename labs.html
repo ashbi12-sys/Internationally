@@ -5,12 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Interactive Labs | Learning Hub</title>
 <style>
-:root{--bg:#eef3f1;--ink:#12302f;--card:#fff;--line:#c9d8d4;--ok:#15803d;--bad:#b91c1c;--head:#12302f;--headtxt:#f4f7f6;--acc:#0f766e;--onacc:#fff}
-@media (prefers-color-scheme:dark){:root{--bg:#0d1c1c;--ink:#e6efed;--card:#142a2a;--line:#2b4545;--ok:#4ade80;--bad:#f87171;--head:#071212;--acc:#2dd4bf;--onacc:#04201d}}
+:root{--bg:#fff3f8;--ink:#2a1050;--card:#fff;--line:#f4cade;--ok:#15803d;--bad:#b91c1c;--head:#512889;--head2:#973DA4;--headtxt:#fff;--acc:#973DA4;--onacc:#fff}
+@media (prefers-color-scheme:dark){:root{--bg:#1a0a30;--ink:#fdeaf4;--card:#2a1450;--line:#4a2a78;--ok:#4ade80;--bad:#f87171;--head:#12062a;--head2:#512889;--headtxt:#fdeaf4;--acc:#FF8AD8;--onacc:#2a0f45}}
 *{box-sizing:border-box}
 body{margin:0;font-family:Lexend,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
 .wrap{max-width:960px;margin:0 auto;padding:0 20px}
-.top{background:var(--head);color:var(--headtxt);position:sticky;top:0;z-index:5}
+.top{background:linear-gradient(90deg,var(--head),var(--head2));color:var(--headtxt);position:sticky;top:0;z-index:5}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(600px 400px at 0 -5%,rgba(255,92,204,.18),transparent),radial-gradient(500px 380px at 100% 10%,rgba(115,50,150,.14),transparent)}
 .top .wrap{display:flex;align-items:center;gap:8px 22px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
 .brand{font-weight:800;font-size:1.05rem;color:inherit;text-decoration:none;margin-right:auto}
 .top nav{display:flex;gap:4px;flex-wrap:wrap}
@@ -66,7 +67,7 @@ footer{text-align:center;font-size:.8rem;opacity:.7;padding:0 20px 28px}
 <style>
 .hm{display:grid;grid-template-columns:minmax(0,5fr) minmax(250px,3fr);gap:18px;margin-top:12px}
 @media(max-width:820px){.hm{grid-template-columns:1fr}}
-.hm canvas{width:100%;aspect-ratio:4/3;display:block;border-radius:8px;border:1px solid var(--line);background:#e8eff6;touch-action:none;cursor:grab}
+.hm canvas{width:100%;aspect-ratio:4/3;display:block;border-radius:8px;border:1px solid var(--line);background:#fbe3ee;touch-action:none;cursor:grab}
 .hm canvas:active{cursor:grabbing}
 .hm-top{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 0}
 .hm-tab{font:inherit;font-weight:600;padding:8px 16px;border-radius:6px;border:2px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
@@ -305,7 +306,7 @@ function frame(now){
  const cp=Math.cos(cam.pitch),eye=[tg[0]+cam.dist*cp*Math.sin(cam.yaw),tg[1]+cam.dist*Math.sin(cam.pitch),tg[2]+cam.dist*cp*Math.cos(cam.yaw)];
  const fw=norm(sub(tg,eye)),rt=norm(cross(fw,[0,1,0]));camS={eye,fw,rt,up:cross(rt,fw),W,H,F:H*1.3};
  for(const o of tools){if(!o.drag){o.x+=(o.tx-o.x)*.2;o.z+=(o.tz-o.z)*.2}o.y+=(o.ty-o.y)*.2;o.sx+=(o.tsx-o.sx)*.2;o.sy+=(o.tsy-o.sy)*.2;o.sz+=(o.tsz-o.sz)*.2;o.lift+=(((o.drag||S.sel===o)?.7:0)-o.lift)*.25}
- const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"#d6e5f4");g.addColorStop(1,"#f3f6fa");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+ const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"#fbd9e5");g.addColorStop(1,"#fff3f8");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
  const[tx,tz]=cfg.table,tr=cfg.tray;
  poly(flat([[-tx,-tz],[tx,-tz],[tx,tz],[-tx,tz]],0),cfg.tableCol,"#b99d77",2);
  poly(flat([[tr[0],-tr[1]],[tx-.2,-tr[1]],[tx-.2,tr[1]],[tr[0],tr[1]]],.004),"#cdd8e4","#8ea1b8",2);
