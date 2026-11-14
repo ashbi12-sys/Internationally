@@ -77,6 +77,8 @@ footer{text-align:center;font-size:.8rem;opacity:.7;padding:0 20px 28px}
 <footer>To add questions, edit the BANK list near the top of the script in index.html.</footer>
 
 <script>
+// ===== EDIT HERE: add subjects and questions =====
+// Each question: [question, correct answer, wrong1, wrong2, wrong3, explanation]
 const BANK = [
  {id:"ict",name:"ICT",desc:"Computers, internet safety, and productivity tools",color:"#1d4ed8",fil:false,q:[
   ["Which of these is an input device?","Keyboard","Monitor","Speaker","Printer","A keyboard sends data into the computer. Monitors, speakers, and printers show or produce output."],
@@ -132,6 +134,7 @@ const BANK = [
   ["Ilang pangunahing pangkat ng pulo mayroon ang Pilipinas?","Tatlo","Dalawa","Lima","Pito","Luzon, Visayas, at Mindanao."],
   ["Ano ang pambansang wika ng Pilipinas?","Filipino","Ingles","Kastila","Cebuano","Filipino ang pambansang wika ayon sa Konstitusyon."]]}
 ];
+// ===== END EDIT AREA =====
 
 const $=id=>document.getElementById(id);
 const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};

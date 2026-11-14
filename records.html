@@ -205,7 +205,7 @@ function update(){
   $("kpis").innerHTML=S.length&&A.length?`<div class="kpi top1"><small>Top student</small><b>${esc(top.s.name)}</b><span>${fmt(top.a)} average · ${top.t} total</span></div><div class="kpi"><small>Class average</small><b>${fmt(cavg)}</b><span>across all ${A.length} assessments</span></div><div class="kpi"><small>Strongest assessment</small><b>${esc(A[hiM])}</b><span>class mean ${fmt(means[hiM])}</span></div><div class="kpi"><small>Needs attention</small><b>${esc(A[loM])}</b><span>class mean ${fmt(means[loM])}</span></div>`:`<div class="kpi"><b>No data yet</b><span>Add a student and an assessment to begin.</span></div>`;
   $("legend").innerHTML=A.map((a,j)=>`<span><i style="background:${col(j)}"></i>${esc(a)}</span>`).join("");
   $("rank").innerHTML=sorted.length?sorted.map((r,k)=>{const st=A.length?stand(r.a):["No scores yet","p-dev"];return`<div class="rk"><div class="h"><span>${k+1}. ${esc(r.s.name)}</span><b>${fmt(r.a)}</b></div><div class="trk"><div style="width:${Math.min(100,r.a)}%"></div></div><span class="pill ${st[1]}">${st[0]}</span></div>`}).join(""):`<p class="empty">No students yet.</p>`;
-  $("hint").textContent=!S.length?"No students yet. Click “+ Add student”, or use Quiz progress below to bring in quiz scores automatically.":!A.length?"Click “+ Add assessment” to create a column such as Quiz 1, Project, or Exam.":"";
+  $("hint").textContent=!S.length?"No students yet. Click \u201c+ Add student\u201d, or use Quiz progress below to bring in quiz scores automatically.":!A.length?"Click \u201c+ Add assessment\u201d to create a column such as Quiz 1, Project, or Exam.":"";
   chart();save();
 }
 
