@@ -4,6 +4,8 @@ What you have: ONE website.
   - The MARKETPLACE is the home page (anyone in the world can browse, sell, and chat).
   - Your school features (Quizzes, Labs, Games, Class Record) are inside ONE button: "Learn".
 
+Your link will NOT show your name if you host on Cloudflare Pages (see PART 8).
+
 Two folders:
   website/    -> goes to GitHub (this is your site)
   database/   -> you paste these into Supabase (do NOT upload them to GitHub)
@@ -74,7 +76,7 @@ PART 4 - LOGIN SETTINGS (3 minutes)
      (Before you launch to the public, turn it ON and set up your own email sender (SMTP),
       so fake emails and bots are blocked. See the checklist at the bottom.)
 2. Left menu > "Authentication" > "URL Configuration":
-   - Site URL:  https://ashbi12-sys.github.io/YOUR-REPO-NAME/
+   - Site URL:  your site address (after PART 8: https://your-name.pages.dev)
    - Redirect URLs: add the same address, then Save.
    (This makes password-reset links come back to your site.)
 
@@ -154,3 +156,40 @@ BEFORE YOU LAUNCH TO THE PUBLIC (checklist)
     use. Check Supabase pricing. Consider a paid plan if the site grows.
 [ ] No payments happen on the site. Users arrange payment and delivery themselves.
 [ ] Chat checks for new messages every few seconds. There are no push notifications.
+
+
+
+=====================================================================
+PART 8 - HIDE YOUR NAME + EXTRA SECURITY (Cloudflare Pages)
+=====================================================================
+Problem: a GitHub Pages link looks like  ashbi12-sys.github.io/...  and shows your GitHub name.
+Fix: host the same files on Cloudflare Pages. Your link becomes  your-chosen-name.pages.dev .
+It is free, uses HTTPS, and adds protection. Your GitHub name will not be in the link.
+
+STEP A  Make a free Cloudflare account at cloudflare.com (use a normal email). Verify the email.
+STEP B  Dashboard > "Workers & Pages" > "Create" > the "Pages" tab > "Upload assets" (Direct Upload).
+STEP C  Project name: choose a NEUTRAL name, for example  shopworld  or  marketplace-ph .
+        (This becomes the link: https://THE-NAME.pages.dev . Do not use your real name.)
+STEP D  Upload the file  website-for-cloudflare.zip  (the files are at the top level of the zip).
+        Click "Deploy site". Wait until you see "Success".
+STEP E  Open the new link  https://THE-NAME.pages.dev  and check that it works.
+STEP F  Supabase > Authentication > URL Configuration:
+        Site URL = https://THE-NAME.pages.dev   and add it under Redirect URLs. Save.
+STEP G  (Optional but good) On GitHub, turn the old site OFF so only the new link exists:
+        your repository > Settings > Pages > "Unpublish site" (or make the repository Private).
+
+Every time you change files later: Cloudflare > your project > "Create deployment" > upload the new zip.
+
+WHAT THE _headers FILE DOES (already inside the zip)
+  - Only allows your own files and your Supabase project (blocks injected scripts)
+  - Stops other websites from putting your site in a frame (clickjacking)
+  - Forces HTTPS and hides the page address from other sites you link to
+  - Turns off camera, microphone and location for the site
+
+KEEP YOUR IDENTITY PRIVATE
+  - In config.js use a NEW email just for the marketplace (it is shown to the public).
+  - Use a business or nickname for "operator" in config.js (it is shown in Terms and Privacy).
+  - Turn on 2-step login (2FA) on GitHub, Supabase and Cloudflare.
+  - Never share: database password, secret key, service_role key.
+  - A custom domain (like mymarketplace.com) is optional. You can buy one in Cloudflare
+    ("Domain Registration"). Cloudflare hides your personal WHOIS details for free.
