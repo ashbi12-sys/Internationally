@@ -8,10 +8,13 @@
 <meta property="og:title" content="Marketplace">
 <meta property="og:description" content="Buy, sell and give things away anywhere in the world.">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#1a56db">
+<meta name="theme-color" content="#743296">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
 <style>
-:root{--bg:#f6f7fb;--card:#fff;--ink:#14213d;--mute:#5b6479;--line:#e2e6f0;--pri:#1a56db;--pri2:#0e9f8e;--onpri:#fff;--acc:#f5a400;--red:#d62839;--ok:#15803d;--soft:#e8efff;--shadow:0 1px 2px rgba(20,33,61,.05),0 8px 24px rgba(20,33,61,.07)}
-@media(prefers-color-scheme:dark){:root{--bg:#0e1424;--card:#161e33;--ink:#eaf0ff;--mute:#9aa6c4;--line:#263152;--pri:#6ea0ff;--pri2:#35d1bd;--onpri:#08122b;--acc:#ffc233;--red:#ff6b7a;--ok:#4ade80;--soft:#1d2a4d;--shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.3)}}
+:root{--bg:#fff3f8;--card:#fff;--ink:#2a1050;--mute:#6b5486;--line:#f4cade;--pri:#973DA4;--pri2:#FE036A;--onpri:#fff;--acc:#FE036A;--red:#d62839;--ok:#15803d;--soft:#fde3ee;--shadow:0 1px 2px rgba(81,40,137,.06),0 10px 28px rgba(81,40,137,.09)}
+@media(prefers-color-scheme:dark){:root{--bg:#1a0a30;--card:#2a1450;--ink:#fdeaf4;--mute:#cdb3e3;--line:#4a2a78;--pri:#FF8AD8;--pri2:#FF5CCC;--onpri:#2a0f45;--acc:#FF5CCC;--red:#ff6b7a;--ok:#4ade80;--soft:#3a1d66;--shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.3)}}
 *{box-sizing:border-box}
 html{color-scheme:light dark}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55}
@@ -22,11 +25,11 @@ a{color:var(--pri)}
 .nav{display:flex;align-items:center;gap:6px;min-height:62px;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-weight:800;font-size:1.2rem;margin-right:auto;letter-spacing:-.02em}
 .brand small{display:block;font-weight:500;font-size:.66rem;color:var(--mute);letter-spacing:.14em;text-transform:uppercase;line-height:1}
-.brand svg{width:36px;height:36px}
+.brand img{width:38px;height:38px;display:block}
 #nav{display:flex;align-items:center;gap:2px;flex-wrap:wrap}
 .nl{font:inherit;font-weight:600;font-size:.9rem;color:var(--ink);background:transparent;border:0;text-decoration:none;padding:8px 11px;border-radius:10px;cursor:pointer;position:relative;white-space:nowrap}
 .nl:hover{background:var(--soft)}
-.nl.learn{color:var(--pri2)}
+.nl.learn{color:var(--pri)}
 .badge{position:absolute;top:2px;right:0;background:var(--red);color:#fff;font-size:.68rem;font-weight:800;border-radius:999px;min-width:18px;height:18px;display:grid;place-items:center;padding:0 5px}
 .btn{font:inherit;font-weight:600;border:1.5px solid var(--pri);background:var(--pri);color:var(--onpri);border-radius:12px;padding:10px 18px;cursor:pointer;text-decoration:none;display:inline-block;text-align:center}
 .btn.sm{padding:7px 14px;font-size:.9rem}
@@ -37,20 +40,20 @@ a{color:var(--pri)}
 .lnk{font:inherit;background:none;border:0;color:var(--pri);text-decoration:underline;cursor:pointer;padding:0}
 :focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 main{padding-bottom:90px;min-height:70vh}
-.hero{margin:18px 0 22px;padding:34px 26px;border-radius:28px;color:#fff;background:radial-gradient(500px 260px at 90% 0%,rgba(245,164,0,.35),transparent),linear-gradient(135deg,#1a56db,#0e9f8e);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero{margin:18px 0 22px;padding:34px 26px;border-radius:28px;color:#fff;background:radial-gradient(420px 260px at 88% 8%,rgba(255,92,204,.65),transparent),radial-gradient(360px 240px at 0% 100%,rgba(254,3,106,.35),transparent),linear-gradient(135deg,#B947B1 0%,#743296 52%,#512889 100%);box-shadow:var(--shadow);position:relative;overflow:hidden}
 .hero .eyebrow{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;opacity:.9}
 .hero h1{font-size:clamp(2.2rem,6.5vw,3.4rem);font-weight:700;letter-spacing:-.04em;line-height:1.08;margin:6px 0 6px}
 .hero p{margin:0 0 20px;font-size:1.08rem;opacity:.95;max-width:46ch}
 .hs{display:flex;gap:10px;flex-wrap:wrap}
 .hs .search{flex:1 1 260px;background:#fff;border-color:transparent}
-.hs select{background:#fff;color:#14213d;border-color:transparent;min-width:200px}
+.hs select{background:#fff;color:#2a1050;border-color:transparent;min-width:200px}
 .trust{display:flex;gap:6px 18px;flex-wrap:wrap;margin-top:16px;font-size:.84rem;font-weight:600;opacity:.95}
 .note-bar{background:color-mix(in srgb,var(--acc) 18%,var(--card));border:1px solid color-mix(in srgb,var(--acc) 50%,transparent);border-radius:14px;padding:10px 16px;font-size:.9rem;margin-bottom:14px}
 .off{display:none;background:var(--red);color:#fff;text-align:center;padding:6px;font-size:.88rem;font-weight:600}
 .search{display:flex;align-items:center;gap:10px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:0 14px}
 .search:focus-within{border-color:var(--pri)}
-.search input{flex:1;border:0;background:transparent;color:#14213d;font:inherit;padding:13px 0;outline:none;min-width:0}
-.search .ic{color:#5b6479}
+.search input{flex:1;border:0;background:transparent;color:#2a1050;font:inherit;padding:13px 0;outline:none;min-width:0}
+.search .ic{color:#973DA4}
 select,input,textarea{font:inherit;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;max-width:100%}
 select:focus,input:focus,textarea:focus{outline:none;border-color:var(--pri)}
 .bar2{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
@@ -150,16 +153,48 @@ ul.rules{padding-left:20px}ul.rules li{margin:6px 0}
 .sp{display:inline-block;width:16px;height:16px;border:2.5px solid currentColor;border-right-color:transparent;border-radius:50%;animation:rot .7s linear infinite;vertical-align:-3px}
 @keyframes rot{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.em{display:inline-block;transform-origin:50% 80%}
+.a-bob{animation:aBob 2.6s ease-in-out infinite}.a-wig{animation:aWig 2.8s ease-in-out infinite}.a-clap{animation:aClap 1.6s ease-in-out infinite}.a-float{animation:aFloat 4s ease-in-out infinite}.a-pulse{animation:aPulse 2.2s ease-in-out infinite}.a-sway{animation:aSway 3s ease-in-out infinite}
+[class*="a-"]{animation-delay:var(--d,0s)}
+@keyframes aBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes aWig{0%,100%{transform:rotate(0)}25%{transform:rotate(-9deg)}75%{transform:rotate(9deg)}}
+@keyframes aClap{0%,100%{transform:scale(1) rotate(0)}30%{transform:scale(1.2) rotate(-6deg)}60%{transform:scale(.95) rotate(4deg)}}
+@keyframes aFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(3px,-6px)}}
+@keyframes aPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+@keyframes aSway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+.orbit{position:absolute;right:34px;top:50%;width:190px;height:190px;margin-top:-95px}
+.orbit .gc{position:absolute;left:50%;top:50%;font-size:4.2rem;transform:translate(-50%,-50%);animation:aFloat 5s ease-in-out infinite;filter:drop-shadow(0 8px 18px rgba(0,0,0,.28))}
+.orbit .o{position:absolute;left:50%;top:50%;font-size:1.7rem;margin:-14px 0 0 -14px;animation:orb 12s linear infinite;filter:drop-shadow(0 4px 8px rgba(0,0,0,.25))}
+.orbit .o2{animation-delay:-4s}.orbit .o3{animation-delay:-8s}
+@keyframes orb{from{transform:rotate(0) translateX(84px) rotate(0)}to{transform:rotate(360deg) translateX(84px) rotate(-360deg)}}
+@media(max-width:760px){.orbit{display:none}}
+.ph{animation:aFloat 4s ease-in-out infinite}
+.h2{font-size:1.4rem;letter-spacing:-.02em;margin:40px 0 14px}
+.steps3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media(max-width:700px){.steps3{grid-template-columns:1fr}}
+.st{position:relative;background:var(--card);border:1.5px solid var(--line);border-radius:22px;padding:20px;box-shadow:var(--shadow)}
+.st .n{position:absolute;top:14px;right:16px;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#FE036A,#B947B1);color:#fff;font-weight:800;font-size:.85rem;display:grid;place-items:center}
+.st .em{font-size:2.3rem;display:block;margin-bottom:6px}
+.st b{display:block;font-size:1.05rem}.st p{margin:6px 0 0;color:var(--mute);font-size:.9rem}
+.cta{margin-top:30px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;border-radius:26px;padding:24px 28px;color:#fff;background:linear-gradient(135deg,#FE036A,#B947B1 55%,#512889);box-shadow:0 16px 36px rgba(81,40,137,.28)}
+.cta h3{margin:0;font-size:1.4rem;letter-spacing:-.02em}.cta p{margin:4px 0 0;opacity:.95}
+.cta .btn{background:#fff;color:#743296;border-color:#fff}
+.ft{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:24px;text-align:left;margin-top:40px;padding:26px 0 8px;border-top:1px solid var(--line)}
+@media(max-width:700px){.ft{grid-template-columns:1fr}}
+.ft b{display:block;color:var(--ink);margin-bottom:6px}.ft a{display:block;margin:4px 0;font-weight:500}
+.ft .fb{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--ink);font-size:1.05rem;margin-bottom:8px}.ft .fb img{width:30px;height:30px}
+.copy{text-align:center;font-size:.78rem;color:var(--mute);padding:18px 0 4px}
+#cnt{font-weight:800}
 </style>
 </head>
 <body>
 <div class="off" id="off" role="status">You are offline. Some things will not work until you reconnect.</div>
 <header class="top"><div class="wrap nav">
-<a class="brand" href="#/"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="8" fill="#f5a400"/><g stroke="#f5a400" stroke-width="3" stroke-linecap="round"><path d="M20 3v5M20 32v5M3 20h5M32 20h5M8 8l3.500 3.500M28.500 28.500 32 32M8 32l3.500-3.500M28.500 11.500 32 8"/></g><circle cx="20" cy="20" r="3" fill="#1a56db"/></svg><span>Marketplace<small>Worldwide</small></span></a>
+<a class="brand" href="#/"><img src="logo-mark.svg" alt=""><span>Marketplace<small>Worldwide</small></span></a>
 <nav id="nav" aria-label="Main"></nav>
 </div></header>
 <main class="wrap" id="view" tabindex="-1"></main>
-<footer class="wrap foot"><a href="learn.html">Learn</a>·<a href="#/safety">Safety</a>·<a href="#/terms">Terms</a>·<a href="#/privacy">Privacy</a><span id="contact"></span></footer>
+<footer class="wrap foot"><div class="ft"><div><div class="fb"><img src="logo-mark.svg" alt="">Marketplace</div><span>Buy, sell and give things away anywhere in the world. Free to use, with photos, chat and safety tools.</span></div><div><b>Explore</b><a href="#/">Browse items</a><a href="#/sell">Sell something</a><a href="#/saved">Saved items</a><a href="learn.html">🎓 Learn</a></div><div><b>Trust</b><a href="#/safety">Safety tips</a><a href="#/terms">Terms of use</a><a href="#/privacy">Privacy policy</a><span id="contact"></span></div></div><div class="copy">© <span id="yr"></span> Marketplace · Worldwide</div></footer>
 <dialog id="dlg"></dialog>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script src="config.js"></script>
@@ -330,13 +365,16 @@ const setSaved=a=>{try{localStorage.setItem("mk-saved",JSON.stringify(a))}catch(
 let timers=[];const stopTimers=()=>{timers.forEach(clearInterval);timers=[]};
 const F={q:"",cat:"",country:"",min:"",max:"",cur:"",ship:"",free:false,sort:"new"};let gridReq=0,gridOff=0;
 function home(){
- view.innerHTML=`<section class="hero"><span class="eyebrow">Worldwide marketplace</span><h1>Marketplace</h1><p>Buy, sell and give things away anywhere in the world.</p>
+ view.innerHTML=`<section class="hero"><div class="orbit" aria-hidden="true"><span class="gc">🌏</span><span class="o o1">🛍️</span><span class="o o2">💜</span><span class="o o3">🏷️</span></div><span class="eyebrow">Worldwide marketplace</span><h1>Marketplace</h1><p>Buy, sell and give things away anywhere in the world.</p>
 <div class="hs"><label class="search"><svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/></svg><input id="q" type="search" placeholder="Search Marketplace" aria-label="Search" autocomplete="off" value="${esc(F.q)}"></label><select id="country" aria-label="Country">${cOpts(F.country,"Anywhere in the world")}</select></div>
-<div class="trust"><span>✓ Free to use</span><span>✓ Photos and chat</span><span>✓ Ships-worldwide filter</span><span>✓ Report and block tools</span></div></section>
+<div class="trust"><span>✓ Free to use</span><span>✓ Photos and chat</span><span>✓ Ships-worldwide filter</span><span>✓ Report and block tools</span><span id="cnt" hidden></span></div></section>
 <div class="bar2"><select id="sort" aria-label="Sort"><option value="new"${F.sort==="new"?" selected":""}>Newest</option><option value="low"${F.sort==="low"?" selected":""}${F.cur?"":" disabled"}>Price: low to high</option><option value="high"${F.sort==="high"?" selected":""}${F.cur?"":" disabled"}>Price: high to low</option></select><select id="ship" aria-label="Delivery"><option value="">Any delivery option</option>${Object.entries(SHIP).map(([k,v])=>`<option value="${k}"${F.ship===k?" selected":""}>${v}</option>`).join("")}</select></div>
 <div class="cats" id="cats"></div>
 <details class="more"${F.cur||F.free?" open":""}><summary>Price filters</summary><div class="row3"><div><label for="cur">Currency</label><select id="cur">${curOpts(F.cur,"Choose currency")}</select></div><div><label for="min">Min price</label><input id="min" type="number" min="0" value="${esc(F.min)}"${F.cur?"":" disabled"}></div><div><label for="max">Max price</label><input id="max" type="number" min="0" value="${esc(F.max)}"${F.cur?"":" disabled"}></div></div><p class="note">Pick a currency to filter or sort by price.</p><label class="chk"><input type="checkbox" id="free"${F.free?" checked":""}> <span>Free items only</span></label></details>
-<div id="grid" class="grid" aria-live="polite"></div><div id="more" class="center"></div>`;
+<div id="grid" class="grid" aria-live="polite"></div><div id="more" class="center"></div>
+<h2 class="h2">How it works</h2><div class="steps3"><div class="st"><span class="n">1</span><span class="em a-bob">🔎</span><b>Browse</b><p>Search by item, country or delivery option. No account needed to look around.</p></div><div class="st"><span class="n">2</span><span class="em a-wig" style="--d:.4s">💬</span><b>Chat</b><p>Message the seller inside Marketplace. Ask about the price, shipping or where to meet.</p></div><div class="st"><span class="n">3</span><span class="em a-clap" style="--d:.8s">🤝</span><b>Meet or ship</b><p>Meet in a public place or use tracked shipping. Check the item before you pay.</p></div></div>
+<h2 class="h2">Built to be trusted</h2><div class="steps3"><div class="st"><span class="em a-pulse">🛡️</span><b>Report and block</b><p>Report scams in one tap and block anyone you do not want to hear from. Admins review every report.</p></div><div class="st"><span class="em a-sway" style="--d:.5s">🔒</span><b>Your email stays private</b><p>Other people only see your display name and country. Delete your account any time.</p></div><div class="st"><span class="em a-float" style="--d:1s">🌍</span><b>Worldwide, any currency</b><p>Prices in 30 currencies, and a filter for items that ship worldwide.</p></div></div>
+<div class="cta"><div><h3>Got something to sell or give away?</h3><p>Post it with photos in about two minutes. It is free.</p></div><a class="btn" href="#/sell">+ Sell something</a></div>`;
  const cats=()=>{$("#cats").innerHTML=[["","All"],...CATS.map(c=>[c[0],c[1]+" "+c[0]])].map(c=>`<button class="cat" data-cat="${esc(c[0])}" aria-pressed="${F.cat===c[0]}">${esc(c[1])}</button>`).join("")};cats();
  let deb;const reload=()=>{cats();loadGrid(true)};
  $("#q").oninput=e=>{F.q=e.target.value;clearTimeout(deb);deb=setTimeout(reload,300)};
@@ -344,7 +382,8 @@ function home(){
  $("#cur").onchange=e=>{F.cur=e.target.value;$("#min").disabled=$("#max").disabled=!F.cur;$$("#sort option").forEach(o=>{if(o.value!=="new")o.disabled=!F.cur});if(!F.cur&&F.sort!=="new"){F.sort="new";$("#sort").value="new"}reload()};
  $("#min").onchange=e=>{F.min=e.target.value;reload()};$("#max").onchange=e=>{F.max=e.target.value;reload()};$("#free").onchange=e=>{F.free=e.target.checked;reload()};
  $("#cats").onclick=e=>{const b=e.target.closest("[data-cat]");if(b){F.cat=b.dataset.cat;reload()}};
- loadGrid(true)}
+ loadGrid(true);countAvail().then(c=>{const el=$("#cnt");if(el&&c!==null){el.hidden=false;el.textContent="🛍️ "+c.toLocaleString()+" item"+(c===1?"":"s")+" available now"}})}
+async function countAvail(){try{const h={apikey:KEY,Prefer:"count=exact",Range:"0-0"};if(sess)h.Authorization="Bearer "+sess.access_token;else if(KEY.startsWith("eyJ"))h.Authorization="Bearer "+KEY;const r=await fetch(BASE+"/rest/v1/listings?select=id&status=eq.available",{headers:h});const m=(r.headers.get("content-range")||"").match(/\/(\d+)$/);return m?+m[1]:null}catch(e){return null}}
 async function loadGrid(reset){
  const id=++gridReq;if(reset){gridOff=0;$("#grid").innerHTML='<p class="none" style="grid-column:1/-1"><span class="sp"></span> Loading…</p>';$("#more").innerHTML=""}
  try{const rows=await fetchListings(F,gridOff);if(id!==gridReq||!$("#grid"))return;
@@ -568,6 +607,7 @@ if(!navigator.onLine)$("#off").style.display="block";
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)pollUnread()});
 (async function boot(){
  renderHeader();
+ {const y=$("#yr");if(y)y.textContent=new Date().getFullYear()}
  if(READY){await takeAuthHash();if(sess){await loadMe()}setInterval(pollUnread,30000);pollUnread()}
  route()})();
 })();
