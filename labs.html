@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Interactive Labs | Learning Hub</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#743296">
 <style>
 :root{--bg:#fff3f8;--ink:#2a1050;--card:#fff;--line:#f4cade;--ok:#15803d;--bad:#b91c1c;--head:#512889;--head2:#973DA4;--headtxt:#fff;--acc:#973DA4;--onacc:#fff}
 @media (prefers-color-scheme:dark){:root{--bg:#1a0a30;--ink:#fdeaf4;--card:#2a1450;--line:#4a2a78;--ok:#4ade80;--bad:#f87171;--head:#12062a;--head2:#512889;--headtxt:#fdeaf4;--acc:#FF8AD8;--onacc:#2a0f45}}
@@ -97,15 +101,28 @@ footer{text-align:center;font-size:.8rem;opacity:.7;padding:0 20px 28px}
 .hm-lbl{font-size:.8rem;font-weight:600;opacity:.8;margin-bottom:6px}
 .hm-skin{display:inline-flex;align-items:center;gap:6px;margin:0;font-weight:600;font-size:.88rem}
 .hm-skin select{padding:4px 8px}
+.em{display:inline-block;transform-origin:50% 80%}
+.a-bob{animation:aBob 2.6s ease-in-out infinite}.a-wig{animation:aWig 2.8s ease-in-out infinite}.a-pulse{animation:aPulse 2.2s ease-in-out infinite}.a-sway{animation:aSway 3s ease-in-out infinite}.a-shake{animation:aShake 3s ease-in-out infinite}.a-clap{animation:aClap 1.6s ease-in-out infinite}.a-bars{animation:aBars 2.4s ease-in-out infinite;transform-origin:50% 100%}.a-tilt{animation:aTilt 3.4s ease-in-out infinite}
+.em[class*="a-"]{animation-delay:var(--d,0s)}
+@keyframes aBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes aWig{0%,100%{transform:rotate(0)}25%{transform:rotate(-9deg)}75%{transform:rotate(9deg)}}
+@keyframes aPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+@keyframes aSway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+@keyframes aShake{0%,70%,100%{transform:translateX(0)}75%{transform:translateX(-3px) rotate(-6deg)}85%{transform:translateX(3px) rotate(6deg)}}
+@keyframes aClap{0%,100%{transform:scale(1) rotate(0)}30%{transform:scale(1.2) rotate(-6deg)}60%{transform:scale(.95) rotate(4deg)}}
+@keyframes aBars{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.78)}}
+@keyframes aTilt{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(12deg)}}
+.pglogo{width:30px;height:30px;vertical-align:-9px;margin-right:8px}
+@media(prefers-reduced-motion:reduce){.em{animation:none!important}}
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap">
-<a class="brand" href="learn.html">Learning Hub</a>
+<a class="brand" href="learn.html"><img class="pglogo" src="logo-mark.svg" alt="">Learning Hub</a>
 <nav aria-label="Main"><a href="learn.html">Home</a><a href="quiz.html">Quizzes</a><a href="labs.html" aria-current="page">Labs</a><a href="games.html">Games</a><a href="records.html">Records</a><a href="index.html">Marketplace</a></nav>
 </div></header>
 <main class="wrap">
-<h1>Interactive Labs</h1>
+<h1><span class="em a-tilt" style="--d:0s">🧪</span> Interactive Labs</h1>
 <p class="lead">Experiment with real numbers and see the result right away.</p>
 <div class="tabs" id="tabs" role="tablist"></div>
 <section class="panel" id="panel"></section>
@@ -115,7 +132,7 @@ const $=id=>document.getElementById(id);
 
 function binary(el){
   let bits=[0,0,0,0,0,0,0,0];
-  el.innerHTML=`<h2>Binary Lab (ICT)</h2><p>Computers count with 0s and 1s. Tap a bit to flip it.</p><div class="bits" id="bits"></div><div class="big" id="dec"></div><div id="eq"></div><label for="n">Or type a number from 0 to 255</label><input id="n" type="number" min="0" max="255">`;
+  el.innerHTML=`<h2><span class="em a-bob" style="--d:0s">💻</span> Binary Lab (ICT)</h2><p>Computers count with 0s and 1s. Tap a bit to flip it.</p><div class="bits" id="bits"></div><div class="big" id="dec"></div><div id="eq"></div><label for="n">Or type a number from 0 to 255</label><input id="n" type="number" min="0" max="255">`;
   const draw=()=>{
     $("bits").innerHTML="";
     bits.forEach((b,i)=>{
@@ -133,7 +150,7 @@ function binary(el){
 }
 
 function recipe(el){
-  el.innerHTML=`<h2>Recipe Scaler (Home Economics)</h2><p>Change the number of servings and every ingredient adjusts.</p>
+  el.innerHTML=`<h2><span class="em a-shake" style="--d:0s">🍳</span> Recipe Scaler (Home Economics)</h2><p>Change the number of servings and every ingredient adjusts.</p>
   <div class="cols"><div><label for="o">Recipe makes</label><input id="o" type="number" min="1" value="4"></div><div><label for="d">You need</label><input id="d" type="number" min="1" value="10"></div></div>
   <label for="ing">Ingredients (one per line, start with the amount)</label><textarea id="ing">2 cups rice\n1/2 tsp salt\n1 1/2 tbsp cooking oil\n3 cloves garlic</textarea>
   <div class="out"><b>Scaled ingredients</b><ul id="res"></ul></div>`;
@@ -152,7 +169,7 @@ function recipe(el){
 function measure(el){
   const U={mm:1,cm:10,m:1000,in:25.4,ft:304.8};
   const opts=k=>Object.keys(U).map(u=>`<option ${u===k?"selected":""}>${u}</option>`).join("");
-  el.innerHTML=`<h2>Measurement Converter (Industrial Arts)</h2><p>Convert between metric and inch units before you cut.</p>
+  el.innerHTML=`<h2><span class="em a-bob" style="--d:0s">📏</span> Measurement Converter (Industrial Arts)</h2><p>Convert between metric and inch units before you cut.</p>
   <div class="cols"><div><label for="v">Value</label><input id="v" type="number" value="2.5" step="any"></div><div><label for="f">From</label><select id="f">${opts("m")}</select></div><div><label for="t">To</label><select id="t">${opts("cm")}</select></div></div>
   <div class="out"><div class="big" id="r"></div><div id="note"></div></div>`;
   const run=()=>{
@@ -164,7 +181,7 @@ function measure(el){
 }
 
 function planting(el){
-  el.innerHTML=`<h2>Planting Calculator (Agri-Fishery Arts)</h2><p>Estimate how many seedlings your garden plot needs.</p>
+  el.innerHTML=`<h2><span class="em a-sway" style="--d:0s">🌱</span> Planting Calculator (Agri-Fishery Arts)</h2><p>Estimate how many seedlings your garden plot needs.</p>
   <div class="cols"><div><label for="L">Plot length (m)</label><input id="L" type="number" value="10" min="1" step="any"></div><div><label for="W">Plot width (m)</label><input id="W" type="number" value="4" min="1" step="any"></div></div>
   <div class="cols"><div><label for="rs">Space between rows (cm)</label><input id="rs" type="number" value="50" min="5"></div><div><label for="ps">Space between plants (cm)</label><input id="ps" type="number" value="30" min="5"></div></div>
   <div class="out"><div class="big" id="tot"></div><div id="det"></div></div>`;
@@ -192,7 +209,7 @@ function prism(p0,p1,r0,r1,n,c,c2){const a=norm(sub(p1,p0)),h=Math.abs(a[1])<.9?
  const ring=(p,r)=>Array.from({length:n},(_,i)=>{const t=i/n*2*PI;return add(p,add(mul(u,r*Math.cos(t)),mul(v,r*Math.sin(t))))});
  const A=ring(p0,r0),B=ring(p1,r1),f=[];for(let i=0;i<n;i++){const j=(i+1)%n;f.push({v:[A[i],A[j],B[j],B[i]],c})}
  f.push({v:A,c:c2||c},{v:B,c:c2||c});return f}
-function ell(c,rx,ry,rz,col,n=8,m=5){const Q=(i,j)=>{const th=i/m*PI,ph=j/n*2*PI;return[c[0]+rx*Math.sin(th)*Math.cos(ph),c[1]+ry*Math.cos(th),c[2]+rz*Math.sin(th)*Math.sin(ph)]},f=[];for(let i=0;i<m;i++)for(let j=0;j<n;j++)f.push({v:[Q(i,j),Q(i,j+1),Q(i+1,j+1),Q(i+1,j)],c:col});return f}
+function ell(c,rx,ry,rz,col,n=8,m=5,half){const Q=(i,j)=>{const th=i/m*PI,ph=j/n*2*PI;return[c[0]+rx*Math.sin(th)*Math.cos(ph),c[1]+ry*Math.cos(th),c[2]+rz*Math.sin(th)*Math.sin(ph)]},f=[];for(let i=(half==="bottom"?Math.floor(m/2):0);i<(half==="top"?Math.ceil(m/2):m);i++)for(let j=0;j<n;j++)f.push({v:[Q(i,j),Q(i,j+1),Q(i+1,j+1),Q(i+1,j)],c:col});return f}
 function loft(secs,n,col,colB,p=.55){const ring=s=>Array.from({length:n},(_,i)=>{const t=i/n*2*PI,c=Math.cos(t),z=Math.sin(t);return[(s.x||0)+s.w/2*Math.sign(c)*Math.pow(Math.abs(c),p),(s.y||0)+s.h/2*Math.sign(z)*Math.pow(Math.abs(z),p),s.z]});
  const R=secs.map(ring),f=[];for(let a=0;a<R.length-1;a++)for(let i=0;i<n;i++){const j=(i+1)%n;f.push({v:[R[a][i],R[a][j],R[a+1][j],R[a+1][i]],c:Math.sin((i+.5)/n*2*PI)<0?(colB||col):col})}
  f.push({v:R[0],c:col},{v:R[R.length-1],c:col});return f}
@@ -204,6 +221,16 @@ const quad=(y,x0,z0,x1,z1,c,b)=>({v:[[x0,y,z0],[x1,y,z0],[x1,y,z1],[x0,y,z1]],c,
 const mapF=(faces,fn)=>faces.map(f=>({...f,v:f.v.map(fn)}));
 const circ=(x,z,r)=>Array.from({length:25},(_,i)=>[x+r*Math.cos(i/24*2*PI),z+r*Math.sin(i/24*2*PI)]);
 const ellp=(cx,y,cz,rx,rz)=>Array.from({length:33},(_,i)=>[cx+rx*Math.cos(i/32*2*PI),y,cz+rz*Math.sin(i/32*2*PI)]);
+const mat=(faces,sp,sh,o)=>{for(const f of faces){if(sp!==undefined)f.s=sp;if(sh!==undefined)f.h=sh;if(o)f.o=1}return faces};
+const jit=n=>{const x=Math.sin(n*12.9898)*43758.5453;return x-Math.floor(x)};
+const rotY=(faces,c,a)=>{const ca=Math.cos(a),sa=Math.sin(a);return mapF(faces,p=>{const dx=p[0]-c[0],dz=p[2]-c[2];return[c[0]+dx*ca-dz*sa,p[1],c[2]+dx*sa+dz*ca]})};
+function tube(P,RX,RY,n,colAt,colBAt,pw){pw=pw||.6;const m=P.length,rings=[];
+ for(let i=0;i<m;i++){const a=P[Math.max(0,i-1)],b=P[Math.min(m-1,i+1)],d=norm(sub(b,a));let u=cross(d,[0,1,0]);if(Math.hypot(u[0],u[1],u[2])<1e-4)u=[1,0,0];u=norm(u);let v=norm(cross(u,d));if(v[1]<0)v=mul(v,-1);
+  rings.push(Array.from({length:n},(_,k)=>{const t=k/n*2*PI,c=Math.cos(t),sn=Math.sin(t);return add(P[i],add(mul(u,RX[i]*Math.sign(c)*Math.pow(Math.abs(c),pw)),mul(v,RY[i]*Math.sign(sn)*Math.pow(Math.abs(sn),pw))))}))}
+ const f=[];for(let i=0;i<m-1;i++)for(let k=0;k<n;k++){const j=(k+1)%n,t=(i+.5)/(m-1),bt=Math.sin((k+.5)/n*2*PI)<0;f.push({v:[rings[i][k],rings[i][j],rings[i+1][j],rings[i+1][k]],c:bt?colBAt(t,i,k):colAt(t,i,k),o:1})}
+ const L=rings[m-1],T=P[m-1],F0=rings[0],B0=P[0];for(let k=0;k<n;k++){const j=(k+1)%n;f.push({v:[L[k],L[j],T],c:colAt(1,m,k),o:1},{v:[F0[j],F0[k],B0],c:colAt(0,0,k),o:1})}
+ return f}
+const darkHex=(c,k)=>{const r=rgbOf(c);return"#"+[0,1,2].map(i=>Math.max(0,Math.min(255,Math.round(r[i]*k))).toString(16).padStart(2,"0")).join("")};
 
 /* ================= the shared studio engine ================= */
 function studio(el,cfg){
@@ -211,17 +238,17 @@ const TASKS=cfg.tasks,TOOLS=cfg.tools,LES=cfg.lessons,SLOTS=cfg.slots,PLACED=cfg
 let P;try{P=JSON.parse(localStorage.getItem(cfg.key))||{}}catch(e){P={}}P.d=P.d||{};P.fl=P.fl||0;
 const savep=()=>{try{localStorage.setItem(cfg.key,JSON.stringify(P))}catch(e){}};
 const S={mode:"learn",step:0,level:1,skin:cfg.skin?1:0,sel:null,info:null};
-let body=cfg.build(S.skin),tools=[],run=null,drag=null,down=null,camDrag=null,hov=null,raf=0,path=null,camS=null,hang=0,hT=0;
+let dirtyUntil=0,drawn=false;const poke=()=>{dirtyUntil=performance.now()+700};let body=cfg.build(S.skin),tools=[],run=null,drag=null,down=null,camDrag=null,hov=null,raf=0,path=null,camS=null,hang=0,hT=0;
 const CP=cfg.camP;let cam={yaw:0,pitch:CP.pitch,dist:CP.dist},camT={...cam},tg=CP.tg.slice(),tgT=CP.tg.slice();
 const ACC="#0f766e",RING="#f59e0b";
 
-el.innerHTML=`<h2>${cfg.title}</h2><p>${cfg.intro}</p>
+el.innerHTML=`<h2>${cfg.ic?`<span class="em a-${cfg.ia}">${cfg.ic}</span> `:""}${cfg.title}</h2><p>${cfg.intro}</p>
 <div class="hm-top"><button class="hm-tab" data-m="learn">1. Learn the steps</button><button class="hm-tab" data-m="practice">2. Practice with tools</button></div>
 <div class="hm"><div><canvas id="hmc" role="img" aria-label="${cfg.title} 3D scene"></canvas>
 <div class="hm-ctl">${cfg.flip?'<button class="btn alt" id="hflip">Flip hand</button>':''}<button class="btn alt" id="hzin">Zoom +</button><button class="btn alt" id="hzout">Zoom −</button><button class="btn alt" id="hreset">Reset view</button>${cfg.skin?'<label class="hm-skin">Skin tone <select id="skin"><option value="0">Light</option><option value="1" selected>Medium</option><option value="2">Deep</option></select></label>':''}</div>
 <p class="hm-hint">Drag empty space to rotate the view. Tap a tool to see its name. On a phone you can also tap a tool, then tap where it goes.</p></div>
 <div class="hm-side" id="hside"></div></div>`;
-const cv=el.querySelector("#hmc"),ctx=cv.getContext("2d"),side=el.querySelector("#hside");
+const cv=el.querySelector("#hmc"),ctx=cv.getContext("2d"),side=el.querySelector("#hside");["pointerdown","pointermove","pointerup","wheel","click","change","keydown"].forEach(ev=>el.addEventListener(ev,poke,true));window.addEventListener("resize",poke);
 
 const makeTools=shuf=>{const order=SLOTS.map((_,i)=>i);if(shuf)for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]]}
  return TOOLS.map((d,i)=>{const s=SLOTS[order[i]];return{d,id:d.id,x:s[0],z:s[1],y:0,lift:0,sx:1,sy:1,sz:1,tx:s[0],tz:s[1],ty:0,tsx:1,tsy:1,tsz:1,hx:s[0],hz:s[1],placed:false,drag:false,faces:d.build()}})};
@@ -291,7 +318,12 @@ function drop(t){const k=run;if(!k||k.done)return;
 /* ---------- drawing ---------- */
 const LD=norm([-.35,.9,.5]),hexc={};
 const rgb=c=>hexc[c]||(hexc[c]=rgbOf(c));
-const shade=(c,n)=>{const r=rgb(c),k=.5+.5*Math.abs(dot(n,LD));return`rgb(${r[0]*k|0},${r[1]*k|0},${r[2]*k|0})`};
+const KEY=norm([-.45,.85,.55]),FILL=norm([.8,.3,.15]);
+const shade=(c,n,pos,sp,sh)=>{const r=rgb(c),V=norm(sub(camS.eye,pos));if(dot(n,V)<0)n=mul(n,-1);
+ const diff=Math.max(0,dot(n,KEY)),fill=Math.max(0,dot(n,FILL))*.22,up=.5+.5*n[1],ao=.66+.34*Math.min(1,Math.max(0,pos[1]+.1)/.5),amb=.30+.20*up;
+ const Hh=norm(add(KEY,V)),spc=(sp||.05)*Math.pow(Math.max(0,dot(n,Hh)),sh||8),rim=Math.pow(1-Math.max(0,dot(n,V)),3)*.14,kk=(amb+diff*.78+fill)*ao;
+ return`rgb(${Math.min(255,r[0]*kk*1.03+255*(spc+rim*.6))|0},${Math.min(255,r[1]*kk+255*(spc+rim*.45))|0},${Math.min(255,r[2]*kk*.97+255*(spc+rim*.5))|0})`};
+function blob(x,z,rx,rz,a){const cp=proj([x,.006,z]);if(cp[2]<.3)return;const pts=Array.from({length:22},(_,k)=>{const t=k/22*2*PI;return proj([x+rx*Math.cos(t),.006,z+rz*Math.sin(t)])});const R=Math.max(rx,rz)*camS.F/cp[2],gr=ctx.createRadialGradient(cp[0],cp[1],0,cp[0],cp[1],R);gr.addColorStop(0,`rgba(45,15,60,${a})`);gr.addColorStop(.55,`rgba(45,15,60,${a*.5})`);gr.addColorStop(1,"rgba(45,15,60,0)");poly(pts,gr,null,0)}
 const poly=(pts,fill,stroke,lw)=>{ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]));ctx.closePath();if(fill){ctx.fillStyle=fill;ctx.fill()}if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=lw||1;ctx.stroke()}};
 const flat=(pts,y)=>pts.map(p=>proj([p[0],y,p[1]]));
 function label(txt,p,col){const H=camS.H;ctx.font=`600 ${Math.round(H*.026)}px Lexend,system-ui,sans-serif`;const w=ctx.measureText(txt).width+16,h=H*.05;ctx.fillStyle="rgba(255,255,255,.93)";ctx.fillRect(p[0]-w/2,p[1]-h/2,w,h);ctx.strokeStyle=col;ctx.lineWidth=2;ctx.strokeRect(p[0]-w/2,p[1]-h/2,w,h);ctx.fillStyle="#12302f";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(txt,p[0],p[1]+1)}
@@ -302,16 +334,29 @@ function frame(now){
  const dpr=Math.min(2,window.devicePixelRatio||1),W=Math.round(cv.clientWidth*dpr),H=Math.round(cv.clientHeight*dpr);
  if(!W||!H)return;if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}
  const t=now/1000;
+ let moving=Math.abs(camT.yaw-cam.yaw)+Math.abs(camT.pitch-cam.pitch)+Math.abs(camT.dist-cam.dist)>.0015||Math.abs(hT-hang)>.002||tg.some((v,i)=>Math.abs(tgT[i]-v)>.002)||tools.some(o=>o.drag||Math.abs(o.tx-o.x)+Math.abs(o.tz-o.z)+Math.abs(o.ty-o.y)+Math.abs(o.tsx-o.sx)+Math.abs(o.tsy-o.sy)+Math.abs(o.tsz-o.sz)+Math.abs((((o.drag||S.sel===o)?.7:0)-o.lift))>.004);
+ const pulsing=(S.mode==="learn"&&path&&path.tot)||(S.mode==="learn"&&S.info)||(S.mode==="practice"&&run&&!run.done&&S.level<3);
+ if(!moving&&!pulsing&&now>dirtyUntil&&drawn&&cv.width===W&&cv.height===H)return;
+ drawn=true;
  for(const k of["yaw","pitch","dist"])cam[k]+=(camT[k]-cam[k])*.1;tg=tg.map((v,i)=>v+(tgT[i]-v)*.1);hang+=(hT-hang)*.12;
  const cp=Math.cos(cam.pitch),eye=[tg[0]+cam.dist*cp*Math.sin(cam.yaw),tg[1]+cam.dist*Math.sin(cam.pitch),tg[2]+cam.dist*cp*Math.cos(cam.yaw)];
  const fw=norm(sub(tg,eye)),rt=norm(cross(fw,[0,1,0]));camS={eye,fw,rt,up:cross(rt,fw),W,H,F:H*1.3};
  for(const o of tools){if(!o.drag){o.x+=(o.tx-o.x)*.2;o.z+=(o.tz-o.z)*.2}o.y+=(o.ty-o.y)*.2;o.sx+=(o.tsx-o.sx)*.2;o.sy+=(o.tsy-o.sy)*.2;o.sz+=(o.tsz-o.sz)*.2;o.lift+=(((o.drag||S.sel===o)?.7:0)-o.lift)*.25}
- const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,"#fbd9e5");g.addColorStop(1,"#fff3f8");ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+ const sk=cfg.sky||["#f6c9dc","#fbe3ee","#fff3f8"],g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,sk[0]);g.addColorStop(.5,sk[1]);g.addColorStop(1,sk[2]);ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
  const[tx,tz]=cfg.table,tr=cfg.tray;
- poly(flat([[-tx,-tz],[tx,-tz],[tx,tz],[-tx,tz]],0),cfg.tableCol,"#b99d77",2);
- poly(flat([[tr[0],-tr[1]],[tx-.2,-tr[1]],[tx-.2,tr[1]],[tr[0],tr[1]]],.004),"#cdd8e4","#8ea1b8",2);
+ poly([proj([-tx,0,tz]),proj([tx,0,tz]),proj([tx,-.8,tz]),proj([-tx,-.8,tz])],darkHex(cfg.tableCol,.62),null,0);
+ poly([proj([tx,0,-tz]),proj([tx,0,tz]),proj([tx,-.8,tz]),proj([tx,-.8,-tz])],darkHex(cfg.tableCol,.5),null,0);
+ poly(flat([[-tx,-tz],[tx,-tz],[tx,tz],[-tx,tz]],0),cfg.tableCol,null,0);
+ ctx.save();ctx.beginPath();flat([[-tx,-tz],[tx,-tz],[tx,tz],[-tx,tz]],0).forEach((q,i)=>i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]));ctx.closePath();ctx.clip();
+ const gc=cfg.grain||"110,70,40";ctx.lineCap="round";
+ for(let i=0;i<70;i++){const z0=-tz+(i+.5)*(2*tz/70),w=jit(i+3);ctx.strokeStyle=`rgba(${gc},${.05+.10*jit(i*3+1)})`;ctx.lineWidth=Math.max(1,H*(.0012+.0034*jit(i*5+2)));ctx.beginPath();for(let k=0;k<=10;k++){const q=proj([-tx+k*(2*tx/10),0,z0+Math.sin(k*.9+i)*.09*w]);k?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1])}ctx.stroke()}
+ const tc=proj([tg[0],0,tg[2]]),lp=ctx.createRadialGradient(tc[0],tc[1],H*.05,tc[0],tc[1],H*.85);lp.addColorStop(0,"rgba(255,246,232,.30)");lp.addColorStop(1,"rgba(70,30,50,.22)");ctx.fillStyle=lp;ctx.fillRect(0,0,W,H);ctx.restore();
+ poly(flat([[-tx,-tz],[tx,-tz],[tx,tz],[-tx,tz]],0),null,"rgba(60,30,20,.35)",2);
+ poly(flat([[tr[0],-tr[1]],[tx-.2,-tr[1]],[tx-.2,tr[1]],[tr[0],tr[1]]],.004),"#dfe6ef","#9fb0c4",2);
+ for(const sd of(cfg.shadows||[]))blob(sd.x+.15,sd.z-.1,sd.rx,sd.rz,sd.a);
+ for(const o of tools){const hi=o.y+o.lift>.3,al=hi?.16:.30*(1-Math.min(1,o.lift/1.5)*.5);blob(o.x+.2+o.lift*.35,o.z-.12,(o.d.w*o.sx)*.6+.12,(o.d.sd||o.d.w*.7)*o.sz*.6+.12,al)}
  const polys=[];
- const addF=(faces,tf,bias)=>{for(const fc of faces){const v3=fc.v.map(tf),p=v3.map(proj);if(p.some(a=>a[2]<.3))continue;let z=0;for(const a of p)z+=a[2];polys.push({p,z:z/p.length-(bias||0)-(fc.b||0),c:fc.c,n:norm(cross(sub(v3[1],v3[0]),sub(v3[2],v3[0])))})}};
+ const addF=(faces,tf,bias)=>{for(const fc of faces){const v3=fc.v.map(tf),p=v3.map(proj);if(p.some(a=>a[2]<.3))continue;let z=0;for(const a of p)z+=a[2];let cx=0,cy=0,cz=0;for(const q of v3){cx+=q[0];cy+=q[1];cz+=q[2]}const L=v3.length;polys.push({p,z:z/p.length-(bias||0)-(fc.b||0),c:fc.c,n:norm(v3.length===4?cross(sub(v3[2],v3[0]),sub(v3[3],v3[1])):cross(sub(v3[1],v3[0]),sub(v3[2],v3[0]))),pos:[cx/L,cy/L,cz/L],s:fc.s,h:fc.h,o:fc.o})}};
  const ca=Math.cos(hang),sa=Math.sin(hang),hy=cfg.hy||0;
  addF(body.flip,p=>[p[0]*ca-p[1]*sa,p[0]*sa+p[1]*ca+hy,p[2]]);addF(body.fixed,p=>p);
  for(const o of tools)addF(o.faces,p=>[p[0]*o.sx+o.x,p[1]*o.sy+o.y+o.lift,p[2]*o.sz+o.z]);
@@ -322,7 +367,7 @@ function frame(now){
   if(S.level<3){const lst=S.level===1?[run.idx]:TASKS.map((_,i)=>i).filter(i=>i>=run.idx);
    for(const i of lst){const z=TASKS[i];polys.push({zone:1,p:flat(disc(z.zx,z.zz,z.zr),z.zy),z:proj([z.zx,z.zy,z.zz])[2]-.2,col:ACC,a:S.level===1?.3+.15*Math.sin(now/250):.18,c:rgb(ACC)})}}}
  polys.sort((a,b)=>b.z-a.z);
- for(const o of polys){if(o.zone){poly(o.p,`rgba(${o.c[0]},${o.c[1]},${o.c[2]},${o.a})`,o.col,Math.max(2,H*.006));continue}poly(o.p,shade(o.c,o.n),"rgba(0,0,0,.14)",1)}
+ for(const o of polys){if(o.zone){poly(o.p,`rgba(${o.c[0]},${o.c[1]},${o.c[2]},${o.a})`,o.col,Math.max(2,H*.006));continue}const col=shade(o.c,o.n,o.pos,o.s,o.h);poly(o.p,col,o.o?col:"rgba(30,10,45,.30)",o.o?.9:1)}
  if(path&&path.tot){
   const hp=q=>proj(path.hand?[q[0]*ca-q[1]*sa,q[0]*sa+q[1]*ca+hy,q[2]]:q);
   ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle=path.col+"bb";ctx.lineWidth=H*.012;
@@ -331,6 +376,7 @@ function frame(now){
   const st=path.strokes[i];let acc=0,pos=st[0];
   for(let k=1;k<st.length;k++){const sl=Math.hypot(st[k][0]-st[k-1][0],st[k][1]-st[k-1][1],st[k][2]-st[k-1][2]);if(acc+sl>=s){const f=(s-acc)/(sl||1);pos=[0,1,2].map(a=>st[k-1][a]+(st[k][a]-st[k-1][a])*f);break}acc+=sl;pos=st[k]}
   const dp=hp(pos);ctx.beginPath();ctx.arc(dp[0],dp[1],H*.022,0,2*PI);ctx.fillStyle="#fff";ctx.fill();ctx.lineWidth=H*.008;ctx.strokeStyle=path.col;ctx.stroke()}
+ {const vg=ctx.createRadialGradient(W/2,H/2,H*.38,W/2,H/2,H*.98);vg.addColorStop(0,"rgba(70,20,90,0)");vg.addColorStop(1,"rgba(70,20,90,.22)");ctx.fillStyle=vg;ctx.fillRect(0,0,W,H)}
  const showAll=S.mode==="learn"||(run&&S.level===1);
  for(const o of tools){if(o.placed)continue;
   if(showAll||(S.mode==="practice"&&S.level===2&&(o===hov||o===drag||o===S.sel)))label(o.d.name,proj([o.x,o.y+o.d.h*o.sy+.55+o.lift,o.z]),ACC)}
@@ -344,24 +390,59 @@ window.__hm={proj:p=>proj(p),get tools(){return tools},get run(){return run},S,T
 /* ================= HAND MASSAGE ================= */
 const SKINS=["#e6bb9b","#c68a64","#8d5a3b"];
 function buildHand(i){
- const S=SKINS[i],Pm=mixHex(S,"#f2b8a2",.45),Nl=mixHex(S,"#ffd9d0",.55),Cr=mixHex(S,"#5a2e1a",.4);
- const f=[...loft([{z:-1.15,w:1.95,h:.4},{z:-.5,w:2.05,h:.5},{z:.4,w:1.95,h:.5},{z:1.1,w:1.55,h:.38},{z:1.7,w:1.5,h:.36},{z:2.7,w:1.7,h:.44},{z:3.9,w:1.95,h:.5}],14,S,Pm),
-  ...ell([-.9,-.1,.5],.5,.26,.7,Pm),...ell([.75,-.08,.35],.32,.22,.5,Pm),
-  ...box(0,-.257,-.3,1.3,.01,.04,Cr,null,.2),...box(0,-.257,.25,1.1,.01,.04,Cr,null,.2),...box(0,-.2,1.15,1.35,.01,.03,Cr,null,.2)];
- const fing=(p,d,L,r)=>{f.push(...ell(p,r*1.05,r,r*1.05,S));L.forEach((len,k)=>{const qq=add(p,mul(d,len)),r1=r*(1-(k+1)*.1);f.push(...prism(p,qq,r*(1-k*.1),r1,8,S),...ell(qq,r1*1.04,r1,r1*1.04,S));p=qq});f.push(...ell([p[0]-d[0]*.2,r*.62,p[2]-d[2]*.2],r*.55,.03,.2,Nl))};
- [[-.72,-5,[.85,.55,.45],.2],[-.24,-1,[.95,.62,.5],.21],[.24,3,[.88,.58,.47],.2],[.72,8,[.7,.45,.4],.17]].forEach(([x,a,L,r])=>fing([x,.02,-1.1],[Math.sin(a*D),0,-Math.cos(a*D)],L,r));
- fing([-1,-.03,.6],[-Math.sin(40*D),0,-Math.cos(40*D)],[.85,.65],.25);
+ const S=SKINS[i],Pm=mixHex(S,"#f2b8a2",.42),Nl=mixHex(S,"#ffe9e3",.66),Cr=mixHex(S,"#4a2416",.28),Tip=mixHex(S,"#e7867b",.30),Ten=mixHex(S,"#ffffff",.07);
+ const f=[];
+ const secs=[{z:-1.15,w:1.9,h:.38},{z:-.95,w:1.98,h:.44},{z:-.6,w:2.06,h:.5},{z:-.1,w:2.08,h:.52},{z:.4,w:1.98,h:.5},{z:.85,w:1.74,h:.44},{z:1.15,w:1.52,h:.37},{z:1.5,w:1.46,h:.35},{z:2.0,w:1.52,h:.38},{z:2.6,w:1.66,h:.43},{z:3.3,w:1.82,h:.47},{z:3.9,w:1.92,h:.5}];
+ const hAt=z=>{for(let k=0;k<secs.length-1;k++){const a=secs[k],b=secs[k+1];if(z>=a.z&&z<=b.z){const t=(z-a.z)/(b.z-a.z);return(a.h+(b.h-a.h)*t)/2}}return .19};
+ f.push(...mat(loft(secs,30,S,Pm,.55),.10,18,1));
+ for(const x of[-.6,-.2,.2,.6])f.push(...mat(ell([x,hAt(-.1)-.012,-.1],.07,.03,.95,Ten,14,6,"top"),.08,14,1));
+ f.push(...mat(ell([-.88,-.1,.5],.52,.27,.72,Pm,18,10,"bottom"),.10,18,1),...mat(ell([.78,-.08,.35],.33,.23,.52,Pm,16,10,"bottom"),.10,18,1));
+ f.push(...mat(ell([.72,.1,1.45],.16,.1,.2,S,12,8,"top"),.1,18,1));
+ const arc=(pts,w)=>{for(let k=0;k<pts.length-1;k++){f.push(...slab(pts[k],pts[k+1],w,w*.8,.008,Cr).map(q=>({...q,b:.25})))}};
+ const cy=z=>-hAt(z)-.003;
+ arc([[.85,cy(-.35),-.35],[.4,cy(-.5),-.5],[-.1,cy(-.45),-.45],[-.6,cy(-.25),-.25]],.024);
+ arc([[.85,cy(0),0],[.3,cy(-.1),-.1],[-.3,cy(-.1),-.1],[-.75,cy(.15),.15]],.022);
+ arc([[-.3,cy(-.15),-.15],[-.45,cy(.2),.2],[-.5,cy(.55),.55],[-.35,cy(.95),.95]],.024);
+ arc([[.65,cy(1.12),1.12],[0,cy(1.15),1.15],[-.65,cy(1.12),1.12]],.02);
+ const mk=(base,dir,L,r,bend,fan)=>{
+  const tot=L.reduce((a,b)=>a+b,0),j1=L[0]/tot,j2=(L[0]+L[1])/tot,N=16,side=norm(cross(dir,[0,1,0])),P=[],RX=[],RY=[];
+  for(let k=0;k<=N;k++){const t=k/N;P.push(add(add(base,mul(dir,tot*t)),mul(side,bend*Math.sin(PI*t))));
+   const m=1-.30*t+.07*Math.exp(-Math.pow((t-j1)/.05,2))+.06*Math.exp(-Math.pow((t-j2)/.05,2)),tc=Math.sqrt(Math.max(0,1-Math.pow(Math.max(0,(t-.88)/.12),2)));
+   RX.push(r*m*tc);RY.push(r*m*tc*.84)}
+  f.push(...mat(tube(P,RX,RY,18,(t,i,k)=>mixHex(mixHex(S,Tip,Math.pow(t,3)),"#5a2e1a",.03*jit(i*17+k)),(t,i,k)=>mixHex(mixHex(Pm,Tip,Math.pow(t,2)),"#5a2e1a",.03*jit(i*13+k)),.62),.10,18,1));
+  const tip=P[N],pre=P[N-3],len=Math.hypot(...sub(tip,pre)),nc=add(add(pre,mul(sub(tip,pre),.5)),[0,RY[N-3]*.97,0]);
+  f.push(...mat(rotY(ell(nc,r*.5,.03,len*.52,Nl,16,8),nc,fan),.6,60,1));
+  for(const jt of[j1,j2]){const k=Math.round(jt*N),q=P[k];f.push(...mat(rotY(ell([q[0],q[1]+RY[k]*.9,q[2]],RX[k]*.6,.01,.014,mixHex(S,Cr,.3),10,4,"top"),[q[0],q[1],q[2]],fan),0,1,1))}
+ };
+ [[-.72,-5,[.85,.55,.45],.2,.03],[-.24,-1,[.95,.62,.5],.21,0],[.24,3,[.88,.58,.47],.2,-.02],[.72,8,[.7,.45,.4],.17,-.03]].forEach(([x,a,L,r,bd])=>{
+  const dir=[Math.sin(a*D),0,-Math.cos(a*D)];f.push(...mat(ell([x,hAt(-1.05)-.025,-1.03],r*1.0,.07,.13,S,14,6,"top"),.10,18,1));mk([x,.02,-1.12],dir,L,r,bd,a*D)});
+ mk([-1.02,-.02,.62],[-Math.sin(40*D),0,-Math.cos(40*D)],[.95,.72],.255,.04,-40*D);
  return{flip:f,fixed:[]}}
+const GL=f=>mat(f,.7,56,1),MET=f=>mat(f,.95,95),FAB=f=>mat(f,.02,3,1),MATT=f=>mat(f,.08,10,1);
 const MT=[
- {id:"san",name:"Hand sanitizer",ic:"🧴",job:"Cleans your hands before you touch the client.",h:1.8,w:.8,build:()=>[...prism([0,0,0],[0,1.25,0],.36,.36,14,"#bfe2f5"),...prism([0,.3,0],[0,.85,0],.372,.372,14,"#2e7fd0"),...prism([0,1.25,0],[0,1.45,0],.36,.16,14,"#bfe2f5"),...prism([0,1.45,0],[0,1.6,0],.16,.16,10,"#f2f4f6"),...prism([0,1.6,0],[0,1.74,0],.07,.07,8,"#f2f4f6"),...box(.12,1.8,0,.55,.13,.17,"#f2f4f6"),...box(.38,1.76,0,.1,.05,.08,"#dde2e8")]},
- {id:"tow",name:"Hand towel",ic:"🧻",job:"Protects the table and gives the hand a soft, clean surface.",h:.25,w:2,build:()=>[...box(0,.11,0,2,.22,1.5,"#f7f7f4"),...box(0,.075,0,2.012,.01,1.512,"#dfe3e8"),...box(0,.15,0,2.012,.01,1.512,"#dfe3e8"),...box(.7,.115,0,.14,.225,1.52,"#7fa6d1")]},
- {id:"pad",name:"Wrist pad",ic:"🩹",job:"Supports the wrist so the muscles can relax.",h:.14,w:1.7,build:()=>ell([0,.06,0],.85,.08,.5,"#8a96a6",14,5)},
- {id:"lot",name:"Massage lotion",ic:"🧴",job:"Helps your hands glide smoothly over the skin.",h:1.5,w:.95,build:()=>[...prism([0,0,0],[0,1,0],.46,.46,14,"#f7f0e4"),...prism([0,.25,0],[0,.72,0],.472,.472,14,"#e8a0b8"),...prism([0,1,0],[0,1.14,0],.3,.3,12,"#ffffff"),...prism([0,1.14,0],[0,1.34,0],.07,.07,8,"#ffffff"),...box(.1,1.4,0,.5,.14,.2,"#ffffff")]},
- {id:"oil",name:"Cuticle oil",ic:"🫙",job:"Softens the cuticles and nails at the end.",h:1.35,w:.56,build:()=>[...prism([0,0,0],[0,.75,0],.28,.28,12,"#9c5420"),...prism([0,.2,0],[0,.5,0],.288,.288,12,"#f1e2c8"),...prism([0,.75,0],[0,.9,0],.28,.13,12,"#9c5420"),...prism([0,.9,0],[0,1.05,0],.15,.15,12,"#1f1f1f"),...ell([0,1.27,0],.12,.22,.12,"#1f1f1f")]},
- {id:"wt",name:"Warm towel",ic:"♨️",job:"Relaxes the hand at the end. Test the heat on your own wrist first.",h:.84,w:1.7,build:()=>[...prism([-.85,.42,0],[.85,.42,0],.42,.42,14,"#f5efe4","#e8dcc6"),...prism([-.6,.42,0],[-.5,.42,0],.43,.43,14,"#c8a97e"),...prism([.5,.42,0],[.6,.42,0],.43,.43,14,"#c8a97e")]}
+ {id:"san",name:"Hand sanitizer",ic:"🧴",job:"Cleans your hands before you touch the client.",h:1.9,w:.8,sd:.8,build:()=>[
+  ...GL(prism([0,.05,0],[0,.95,0],.36,.36,28,"#9fd6f2")),...GL(prism([0,0,0],[0,.06,0],.30,.36,28,"#8cc6e4")),...GL(prism([0,.95,0],[0,1.25,0],.36,.36,28,"#e6f4fb")),...GL(prism([0,1.25,0],[0,1.46,0],.36,.17,28,"#e6f4fb")),
+  ...MATT(prism([0,.28,0],[0,.8,0],.366,.366,28,"#ffffff")),...MATT(prism([0,.34,0],[0,.46,0],.368,.368,28,"#2e7fd0")),...MATT(prism([0,.62,0],[0,.74,0],.368,.368,28,"#2e7fd0")),
+  ...GL(prism([0,1.46,0],[0,1.62,0],.17,.17,24,"#f4f6f8")),...[0,1,2].flatMap(k=>GL(prism([0,1.47+k*.05,0],[0,1.49+k*.05,0],.185,.185,24,"#e3e8ee"))),
+  ...GL(prism([0,1.62,0],[0,1.78,0],.075,.075,16,"#f4f6f8")),...GL(ell([0,1.8,0],.2,.1,.15,"#f4f6f8",18,10)),...GL(prism([.05,1.8,0],[.5,1.8,0],.07,.055,14,"#f4f6f8"))]},
+ {id:"tow",name:"Hand towel",ic:"🧻",job:"Protects the table and gives the hand a soft, clean surface.",h:.3,w:2,sd:1.5,build:()=>{const f=[];
+  for(let k=0;k<4;k++){const o=k%2?.012:-.01;f.push(...FAB(box(o,.055+k*.062,-o,2-.02*k,.062,1.5-.014*k,k%2?"#f1f2f4":"#ffffff")))}
+  f.push(...FAB(box(.72,.15,0,.13,.30,1.52,"#7fa6d1")));for(let i=0;i<9;i++)f.push(...FAB(box(-.8+i*.2,.304,0,.012,.004,1.4,"#e1e4e8",null,.4)));return f}},
+ {id:"pad",name:"Wrist pad",ic:"🩹",job:"Supports the wrist so the muscles can relax.",h:.16,w:1.7,sd:1,build:()=>[...GL(ell([0,.07,0],.85,.09,.5,"#8d99ab",30,12)),...mat(ell([-.2,.14,-.05],.34,.012,.2,"#c9d2de",12,5),.4,30,1)]},
+ {id:"lot",name:"Massage lotion",ic:"🧴",job:"Helps your hands glide smoothly over the skin.",h:1.6,w:.95,sd:.9,build:()=>[
+  ...GL(prism([0,.04,0],[0,1.0,0],.46,.46,30,"#f8f1e6")),...GL(prism([0,0,0],[0,.05,0],.38,.46,30,"#efe5d6")),...MATT(prism([0,.24,0],[0,.74,0],.465,.465,30,"#eba5bb")),...MATT(prism([0,.38,0],[0,.6,0],.467,.467,30,"#fbe9f0")),
+  ...GL(prism([0,1.0,0],[0,1.16,0],.46,.3,30,"#ffffff")),...GL(prism([0,1.16,0],[0,1.3,0],.3,.3,30,"#ffffff")),...[0,1,2,3].flatMap(k=>GL(prism([0,1.18+k*.03,0],[0,1.2+k*.03,0],.31,.31,30,"#ececec"))),
+  ...GL(prism([0,1.3,0],[0,1.46,0],.07,.07,16,"#ffffff")),...GL(ell([0,1.5,0],.22,.1,.17,"#ffffff",18,10)),...GL(prism([.05,1.5,0],[.52,1.5,0],.07,.055,14,"#ffffff"))]},
+ {id:"oil",name:"Cuticle oil",ic:"🫙",job:"Softens the cuticles and nails at the end.",h:1.5,w:.56,sd:.5,build:()=>[
+  ...GL(prism([0,.03,0],[0,.72,0],.28,.28,26,"#8f4a14")),...GL(prism([0,0,0],[0,.04,0],.22,.28,26,"#6e3510")),...MATT(prism([0,.2,0],[0,.5,0],.285,.285,26,"#f1e2c8")),...MATT(prism([0,.28,0],[0,.32,0],.287,.287,26,"#a16207")),
+  ...GL(prism([0,.72,0],[0,.9,0],.28,.14,26,"#8f4a14")),...GL(prism([0,.9,0],[0,1.08,0],.15,.15,24,"#1c1c1f")),...[0,1,2].flatMap(k=>GL(prism([0,.92+k*.055,0],[0,.94+k*.055,0],.158,.158,24,"#2c2c30"))),
+  ...mat(ell([0,1.32,0],.12,.26,.12,"#1c1c1f",16,10),.6,40,1)]},
+ {id:"wt",name:"Warm towel",ic:"♨️",job:"Relaxes the hand at the end. Test the heat on your own wrist first.",h:.9,w:1.7,sd:1.1,build:()=>{
+  const f=[...FAB(prism([-.85,.44,0],[.85,.44,0],.42,.42,32,"#f5efe4","#e8dcc6")),...FAB(prism([-.6,.44,0],[-.5,.44,0],.428,.428,32,"#c8a97e")),...FAB(prism([.5,.44,0],[.6,.44,0],.428,.428,32,"#c8a97e"))];
+  [.38,.3,.22,.14].forEach((r,i)=>{const c=i%2?"#f0e7d6":"#dccdb2";f.push(...FAB(prism([-.856,.44,0],[-.85,.44,0],r,r,28,c)),...FAB(prism([.85,.44,0],[.856,.44,0],r,r,28,c)))});return f}}
 ];
-const massageCfg=()=>({key:"lab-massage-v2",title:"Hand Massage",intro:"Learn each step on a realistic hand, then practice by dragging real tools into place until you master it.",
- build:buildHand,flip:true,skin:true,hy:.35,table:[7.6,5.2],tableCol:"#e7d6bd",tray:[3,4.6],tgLearn:[.3,.3,.4],
+const massageCfg=()=>({key:"lab-massage-v2",title:"Hand Massage",ic:"🙌",ia:"clap",intro:"Learn each step on a realistic hand, then practice by dragging real tools into place until you master it.",
+ build:buildHand,flip:true,skin:true,hy:.35,table:[7.6,5.2],tableCol:"#e7d6bd",grain:"125,82,48",shadows:[{x:0,z:.1,rx:1.7,rz:1.8,a:.30},{x:0,z:-2.1,rx:1.4,rz:1.5,a:.2},{x:0,z:2.9,rx:1.4,rz:1.5,a:.28}],tray:[3,4.6],tgLearn:[.3,.3,.4],
  camP:{pitch:.95,dist:17.5,tg:[1.2,.3,.4]},tools:MT,
  slots:[[4.3,-3.2],[6.2,-3.2],[4.3,0],[6.2,0],[4.3,3.2],[6.2,3.2]],
  placed:{san:{x:-4.4,z:3.4},tow:{x:0,z:.8,sx:1.3,sy:.5,sz:2.8},pad:{x:0,z:3.2,y:.1},lot:{x:0,z:-.8,y:.6},oil:{x:0,z:-2.7,y:.58},wt:{x:0,z:.9,y:.62,sx:1.3,sy:.45,sz:2.6}},
@@ -383,39 +464,60 @@ const massageCfg=()=>({key:"lab-massage-v2",title:"Hand Massage",intro:"Learn ea
 
 /* ================= DRESSMAKING ================= */
 function buildDress(){
- const lin="#e8dcc0",fixed=[],fx=-4.6,fz=-.8;
- const torso=mapF(loft([{z:2.2,w:2.3,h:1.45},{z:2.3,w:2.4,h:1.5},{z:3.0,w:1.9,h:1.3},{z:3.8,w:2.4,h:1.6},{z:4.5,w:2.5,h:1.2},{z:4.85,w:.7,h:.7},{z:5.1,w:.6,h:.6}],16,lin,lin,.6),p=>[p[0]+fx,p[2],p[1]+fz]);
- fixed.push(...torso,...prism([fx,.15,fz],[fx,2.2,fz],.1,.1,8,"#3a3a3a"),...prism([fx,0,fz],[fx,.15,fz],.9,.9,16,"#2f2f2f"),...ell([fx,5.1,fz],.32,.15,.32,"#2b2b2b"));
- fixed.push(...box(0,.03,1.2,4.2,.06,3.2,"#eef4fa"));
- for(let i=0;i<12;i++)fixed.push(quad(.062,-2.1+i*.35+.09,-.4,-2.1+i*.35+.26,2.8,"#a9c7e8",.6));
- for(let j=0;j<9;j++)fixed.push(quad(.063,-2.1,-.4+j*.36+.09,2.1,-.4+j*.36+.26,"#a9c7e8",.6));
+ const lin="#eadfc6",fixed=[],fx=-4.6,fz=-.8;
+ const secs=[{z:2.2,w:2.3,h:1.45},{z:2.3,w:2.4,h:1.5},{z:2.6,w:2.2,h:1.42},{z:3.0,w:1.9,h:1.3},{z:3.4,w:2.15,h:1.46},{z:3.8,w:2.4,h:1.6},{z:4.15,w:2.5,h:1.45},{z:4.5,w:2.5,h:1.2},{z:4.7,w:1.6,h:.9},{z:4.85,w:.7,h:.7},{z:5.1,w:.6,h:.6}];
+ const sec=y=>{for(let k=0;k<secs.length-1;k++){const a=secs[k],b=secs[k+1];if(y>=a.z&&y<=b.z){const t=(y-a.z)/(b.z-a.z);return{w:a.w+(b.w-a.w)*t,h:a.h+(b.h-a.h)*t}}}return secs[0]};
+ fixed.push(...mat(mapF(loft(secs,36,lin,lin,.6),p=>[p[0]+fx,p[2],p[1]+fz]),.06,12,1));
+ for(const sx of[-.5,0,.5])for(let y=2.4;y<4.5;y+=.12){const s=sec(y),inner=1-Math.pow(Math.abs(sx)/(s.w/2),2/.6);if(inner<=0)continue;fixed.push(...box(fx+sx,y,fz+(s.h/2)*Math.pow(inner,.6/2*1)+.004,.022,.09,.008,"#bfae86",null,.3))}
+ fixed.push(...GL(ell([fx,5.12,fz],.32,.15,.32,"#1e1e22",20,10)),...MET(prism([fx,.15,fz],[fx,2.2,fz],.09,.09,16,"#d3d8de")),...MET(ell([fx,.2,fz],.28,.14,.28,"#c5cad1",20,10)));
+ for(let k=0;k<3;k++){const a=Math.PI/2+k*2*PI/3;fixed.push(...GL(slab([fx,.1,fz],[fx+Math.cos(a)*1.05,.06,fz+Math.sin(a)*1.05],.22,.16,.1,"#2b2b30")))}
+ const W0=-2.1,Z0=-.4,FW=4.2,FD=3.2,NX=28,NZ=22,sz=.35,hg=(x,z)=>.045+.02*Math.sin(x*1.7+z*.9)+.015*Math.sin(x*3.1-z*2.2);
+ for(let i=0;i<NX;i++)for(let k=0;k<NZ;k++){const x0=W0+i*FW/NX,x1=W0+(i+1)*FW/NX,z0=Z0+k*FD/NZ,z1=Z0+(k+1)*FD/NZ,cx=(x0+x1)/2,cz=(z0+z1)/2,a=Math.floor((cx-W0)/sz)%2===0,b=Math.floor((cz-Z0)/sz)%2===0;
+  fixed.push({v:[[x0,hg(x0,z0),z0],[x1,hg(x1,z0),z0],[x1,hg(x1,z1),z1],[x0,hg(x0,z1),z1]],c:(a&&b)?"#7ea6d3":(a||b)?"#b6d0ea":"#f2f7fc",s:.03,h:4,o:1})}
  return{flip:[],fixed}}
-const rd="#d6453d",st="#cfd4db",pinC=["#f2c94c","#e74c3c","#3b82f6","#ffffff"];
+const rd="#d6453d",pinC=["#f2c94c","#e74c3c","#3b82f6","#ffffff"];
 const DT=[
- {id:"tape",name:"Tape measure",ic:"📏",job:"Soft tape for measuring the bust, waist, hip, and length.",h:.3,w:1.9,build:()=>{const f=[...prism([0,0,0],[0,.28,0],.45,.45,16,"#f4cf4d"),...prism([0,.28,0],[0,.3,0],.2,.2,12,"#d3a92f"),...box(1.0,.008,0,1.1,.016,.22,"#f6e089"),...box(1.58,.012,0,.06,.022,.24,"#9aa3ad")];for(let i=0;i<9;i++)f.push(...box(.55+i*.11,.017,0,.014,.004,.12,"#1f2937",null,.4));return f}},
- {id:"chalk",name:"Tailor's chalk",ic:"🔷",job:"Marks cutting and seam lines on fabric. It brushes off.",h:.16,w:1.1,build:()=>[...prism([0,0,0],[0,.1,0],.6,.6,3,"#4f8fd6"),...prism([0,.1,0],[0,.15,0],.5,.42,3,"#76a9e6")]},
- {id:"pins",name:"Pins and pincushion",ic:"📌",job:"Hold fabric layers or a pattern in place before cutting or sewing.",h:1,w:1.1,build:()=>{const f=[...ell([0,.26,0],.52,.3,.52,"#c43d33",12,6),...prism([0,0,0],[0,.08,0],.5,.5,12,"#7a2a24")];for(let i=0;i<8;i++){const a=i/8*2*PI+.3,r0=.15+.12*(i%2),p=[r0*Math.cos(a),.5,r0*Math.sin(a)],d=norm([Math.cos(a)*.4,1,Math.sin(a)*.4]),e=add(p,mul(d,.55));f.push(...prism(p,e,.018,.018,4,"#d5dae0"),...ell(add(p,mul(d,.58)),.05,.05,.05,pinC[i%4],6,4))}return f}},
- {id:"shears",name:"Fabric shears",ic:"✂️",job:"Long blades cut fabric smoothly. Use them only on fabric.",h:.3,w:1.3,build:()=>[...slab([0,.12,.3],[.22,.12,-1.45],.2,.03,.04,"#cfd4db"),...slab([0,.17,.3],[-.22,.17,-1.45],.2,.03,.04,"#bcc2ca"),...slab([-.05,.14,.25],[-.28,.14,.7],.14,.2,.1,"#1f2937"),...slab([.05,.14,.25],[.28,.14,.7],.14,.2,.1,"#1f2937"),...ell([-.3,.14,.95],.26,.08,.4,"#1f2937",10,5),...ell([.3,.14,.95],.26,.08,.4,"#1f2937",10,5),...ell([0,.23,.3],.06,.04,.06,"#b8860b")]},
- {id:"needle",name:"Needle and thread",ic:"🪡",job:"For hand stitching and basting (temporary stitches).",h:.75,w:1.1,build:()=>[...prism([0,0,0],[0,.08,0],.34,.34,12,"#d9b97a"),...prism([0,.08,0],[0,.62,0],.27,.27,12,rd),...prism([0,.62,0],[0,.7,0],.34,.34,12,"#d9b97a"),...slab([.5,.04,.4],[.5,.04,-.55],.04,.04,.03,"#d5dae0"),...slab([.3,.02,.1],[.5,.03,.35],.02,.02,.015,rd)]},
- {id:"mach",name:"Sewing machine",ic:"🧵",job:"Sews strong, even seams quickly.",h:1.8,w:1.9,build:()=>{const c="#ecebe6";return[...box(0,.09,0,1.9,.18,.9,c),...box(.7,.75,0,.45,1.3,.62,c),...box(-.05,1.25,0,1.65,.42,.62,c),...box(-.75,1.05,0,.5,.8,.6,"#e2e1db"),...prism([-.8,.8,.05],[-.8,.28,.05],.04,.025,6,st),...box(-.8,.24,.05,.28,.05,.2,"#aeb4bd"),...box(-.75,.19,0,.7,.02,.5,st),...prism([.95,1.2,0],[1.1,1.2,0],.28,.28,12,"#3b3b3b"),...prism([.2,1.46,0],[.2,1.75,0],.03,.03,6,"#aeb4bd"),...prism([.2,1.46,0],[.2,1.72,0],.12,.12,8,rd),...box(0,1.25,.32,1.5,.1,.02,"#3b82f6",null,.3),...prism([.7,.8,.31],[.7,.8,.36],.14,.14,10,"#2d3a4a")]}},
- {id:"ripper",name:"Seam ripper",ic:"🪝",job:"Removes wrong stitches without cutting the fabric.",h:.3,w:.6,build:()=>[...prism([0,.12,.55],[0,.12,-.15],.13,.1,8,"#b5651d"),...slab([0,.12,-.15],[0,.12,-.75],.05,.04,.04,"#bfc5cc"),...slab([-.07,.12,-.75],[-.07,.12,-1],.03,.03,.03,st),...slab([.07,.12,-.75],[.07,.12,-1.05],.03,.03,.03,st),...ell([.1,.12,-1.05],.07,.07,.07,"#d33")]},
- {id:"iron",name:"Iron",ic:"♨️",job:"Presses seams and hems flat for a neat finish.",h:1.1,w:1,build:()=>{const o=[[-.45,.7],[.45,.7],[.45,-.1],[.14,-.85],[-.14,-.85],[-.45,-.1]],i=o.map(p=>[p[0]*.88,p[1]*.9]);return[...extrude(o,0,.12,"#c9ced6"),...extrude(i,.12,.5,"#3b6ea8"),...box(0,.9,.2,.18,.15,.9,"#1f2937"),...box(0,.7,.58,.18,.4,.1,"#1f2937"),...box(0,.7,-.18,.18,.4,.1,"#1f2937"),...ell([0,.52,-.45],.12,.06,.12,"#e2e8f0")]}}
+ {id:"tape",name:"Tape measure",ic:"📏",job:"Soft tape for measuring the bust, waist, hip, and length.",h:.34,w:1.9,sd:.9,build:()=>{const f=[...GL(prism([0,0,0],[0,.3,0],.45,.45,32,"#f4cf4d")),...GL(prism([0,.3,0],[0,.32,0],.22,.22,24,"#d3a92f")),...MET(prism([0,.32,0],[0,.34,0],.08,.08,16,"#b8bec6")),...[0,1,2,3,4].flatMap(k=>GL(prism([0,.04+k*.06,0],[0,.045+k*.06,0],.455,.455,32,"#e4bd36")))];
+  f.push(...FAB(box(1.0,.008,0,1.1,.016,.22,"#f6e089")));for(let i=0;i<20;i++)f.push(...box(.5+i*.055,.0175,0,.01,.004,i%5===0?.14:.08,"#1f2937",null,.4));f.push(...MET(box(1.58,.012,0,.06,.022,.24,"#9aa3ad")));return f}},
+ {id:"chalk",name:"Tailor's chalk",ic:"🔷",job:"Marks cutting and seam lines on fabric. It brushes off.",h:.2,w:1.1,sd:.9,build:()=>[...MATT(prism([0,0,0],[0,.1,0],.6,.6,3,"#4f8fd6")),...MATT(prism([0,.1,0],[0,.15,0],.5,.42,3,"#76a9e6")),...MATT(prism([0,.15,0],[0,.16,0],.42,.4,3,"#9bc2f0"))]},
+ {id:"pins",name:"Pins and pincushion",ic:"📌",job:"Hold fabric layers or a pattern in place before cutting or sewing.",h:1.05,w:1.1,sd:.9,build:()=>{const f=[...mat(ell([0,.26,0],.52,.3,.52,"#c43d33",24,14),.12,10,1),...MATT(prism([0,0,0],[0,.08,0],.52,.5,24,"#5a1f1a"))];
+  for(let i=0;i<10;i++){const a=i/10*2*PI+.3,r0=.12+.1*(i%3),p=[r0*Math.cos(a),.5-.15*r0,r0*Math.sin(a)],d=norm([Math.cos(a)*.35,1,Math.sin(a)*.35]),e=add(p,mul(d,.58));f.push(...MET(prism(p,e,.016,.012,8,"#d5dae0")),...GL(ell(add(p,mul(d,.61)),.055,.055,.055,pinC[i%4],12,8)))}return f}},
+ {id:"shears",name:"Fabric shears",ic:"✂️",job:"Long blades cut fabric smoothly. Use them only on fabric.",h:.34,w:1.3,sd:2.6,build:()=>{const f=[...MET(slab([0,.12,.3],[.22,.12,-1.45],.2,.03,.04,"#e1e6ec")),...MET(slab([0,.17,.3],[-.22,.17,-1.45],.2,.03,.04,"#cfd5dc")),...MET(slab([0,.115,.3],[.22,.115,-1.45],.05,.02,.045,"#aeb6c0")),...MET(ell([0,.23,.3],.07,.045,.07,"#b8860b",14,8))];
+  const loop=(cx,cz,col)=>{const P=Array.from({length:17},(_,k)=>{const t=k/16*1.88*PI+.06*PI;return[cx+.28*Math.cos(t),.14,cz+.38*Math.sin(t)]});f.push(...GL(tube(P,P.map(()=>.065),P.map(()=>.06),12,()=>col,()=>col,.8)))};
+  loop(-.3,.98,"#1f2937");loop(.3,1.02,"#d97706");f.push(...GL(slab([-.05,.14,.28],[-.26,.14,.7],.12,.2,.1,"#1f2937")),...GL(slab([.05,.14,.28],[.27,.14,.72],.12,.2,.1,"#d97706")));return f}},
+ {id:"needle",name:"Needle and thread",ic:"🪡",job:"For hand stitching and basting (temporary stitches).",h:.78,w:1.1,sd:.9,build:()=>{const f=[...MATT(prism([0,0,0],[0,.08,0],.34,.34,28,"#d9b97a")),...MATT(prism([0,.62,0],[0,.7,0],.34,.34,28,"#d9b97a"))];
+  for(let k=0;k<18;k++)f.push(...FAB(prism([0,.08+k*.03,0],[0,.095+k*.03,0],k%2?.282:.272,k%2?.282:.272,28,k%2?"#e14a42":"#c93c35")));
+  f.push(...MET(slab([.5,.04,.4],[.5,.04,-.55],.045,.045,.03,"#e6eaee")),...GL(ell([.5,.05,-.5],.02,.012,.05,"#2c3138",8,5)));const P=[[.3,.03,.12],[.38,.02,.25],[.46,.02,.18],[.5,.03,0]];f.push(...FAB(tube(P,P.map(()=>.014),P.map(()=>.012),8,()=>"#e14a42",()=>"#e14a42",.9)));return f}},
+ {id:"mach",name:"Sewing machine",ic:"🧵",job:"Sews strong, even seams quickly.",h:1.85,w:1.9,sd:1.0,build:()=>{const E=f=>mat(f,.5,34,0),c="#efede8";return[
+  ...E(box(0,.09,0,1.9,.18,.9,c)),...E(box(.7,.75,0,.45,1.3,.62,c)),...E(box(-.05,1.25,0,1.65,.42,.62,c)),...E(box(-.75,1.05,0,.5,.8,.6,"#e6e4de")),
+  ...MET(prism([-.8,.8,.05],[-.8,.28,.05],.04,.025,10,"#d9dee4")),...MET(box(-.8,.24,.05,.28,.05,.2,"#bfc6cf")),...MET(box(-.75,.19,0,.7,.02,.5,"#d3d8de")),
+  ...MET(prism([.95,1.2,0],[1.1,1.2,0],.28,.28,24,"#3b3b3b")),...MET(prism([1.1,1.2,0],[1.12,1.2,0],.24,.24,24,"#c9ced6")),
+  ...MET(prism([.2,1.46,0],[.2,1.75,0],.03,.03,8,"#bcc3cc")),...[0,1,2,3,4,5].flatMap(k=>FAB(prism([.2,1.47+k*.04,0],[.2,1.485+k*.04,0],.125,.125,16,k%2?"#e14a42":"#c93c35"))),
+  ...E(box(0,1.25,.32,1.5,.1,.02,"#3b82f6",null,.3)),...MET(prism([.7,.8,.31],[.7,.8,.36],.14,.14,20,"#2d3a4d")),...MET(prism([.7,.8,.36],[.7,.8,.37],.1,.1,20,"#cbd2da")),
+  ...GL(ell([.35,.45,.34],.07,.05,.03,"#ef4444",10,6)),...GL(ell([.5,.45,.34],.07,.05,.03,"#22c55e",10,6)),...GL(box(-.75,.62,.31,.3,.1,.02,"#fef3c7",null,.3)),
+  ...FAB(tube([[.2,1.72,0],[0,1.6,.1],[-.5,1.46,.15],[-.8,1.1,.1],[-.8,.8,.06]],[.012,.012,.012,.012,.012],[.012,.012,.012,.012,.012],8,()=>"#e14a42",()=>"#e14a42",.9))]}},
+ {id:"ripper",name:"Seam ripper",ic:"🪝",job:"Removes wrong stitches without cutting the fabric.",h:.34,w:.6,sd:1.4,build:()=>[...MATT(prism([0,.12,.6],[0,.12,.3],.07,.13,18,"#b5651d")),...MATT(prism([0,.12,.3],[0,.12,-.15],.13,.1,18,"#b5651d")),...[.55,.45,.35,.25,.15].flatMap(z=>MATT(prism([0,.12,z],[0,.12,z-.02],.135,.135,18,"#8c4a12"))),
+  ...MET(slab([0,.12,-.15],[0,.12,-.75],.05,.04,.04,"#d9dee4")),...MET(slab([-.07,.12,-.75],[-.07,.12,-1],.03,.03,.03,"#cfd5dc")),...MET(slab([.07,.12,-.75],[.07,.12,-1.05],.03,.03,.03,"#cfd5dc")),...GL(ell([.1,.12,-1.05],.07,.07,.07,"#e0262d",14,10))]},
+ {id:"iron",name:"Iron",ic:"♨️",job:"Presses seams and hems flat for a neat finish.",h:1.15,w:1,sd:1.2,build:()=>{const o=[[-.45,.7],[.45,.7],[.45,-.1],[.14,-.85],[-.14,-.85],[-.45,-.1]],i=o.map(p=>[p[0]*.88,p[1]*.9]);return[
+  ...MET(extrude(o,0,.12,"#d6dbe2")),...GL(extrude(i,.12,.5,"#3b6ea8")),...GL(box(0,.52,.2,.5,.06,.5,"#cfe6fb",null,.3)),
+  ...GL(box(0,.9,.2,.18,.15,.9,"#1f2937")),...GL(box(0,.7,.58,.18,.4,.1,"#1f2937")),...GL(box(0,.7,-.18,.18,.4,.1,"#1f2937")),...GL(ell([0,.56,-.45],.13,.06,.13,"#f3f4f6",16,8)),...GL(ell([0,.55,-.3],.05,.03,.05,"#ef4444",10,6)),
+  ...[-.2,-.07,.07,.2].flatMap(x=>MET(prism([x,.121,-.45],[x,.124,-.45],.03,.03,10,"#555e68")))]}}
 ];
 const FY=.12;
-const dressCfg=()=>({key:"lab-dress-v1",title:"Dressmaking",intro:"Learn the basic steps of making a garment, then practice by placing real dressmaking tools where they belong until you master it.",
- build:buildDress,flip:false,skin:false,hy:0,table:[7.6,5.2],tableCol:"#d9c3a0",tray:[3,4.6],tgLearn:[0,.1,1.2],
+const dressCfg=()=>({key:"lab-dress-v1",title:"Dressmaking",ic:"👗",ia:"sway",intro:"Learn the basic steps of making a garment, then practice by placing real dressmaking tools where they belong until you master it.",
+ build:buildDress,flip:false,skin:false,hy:0,table:[7.6,5.2],tableCol:"#d9c3a0",grain:"120,80,45",shadows:[{x:-4.6,z:-.8,rx:1.5,rz:1.5,a:.38},{x:-4.2,z:-.7,rx:1.3,rz:1,a:.2},{x:0,z:1.2,rx:2.5,rz:2,a:.26}],tray:[3,4.6],tgLearn:[0,.1,1.2],
  camP:{pitch:.95,dist:16.5,tg:[.6,.6,.5]},tools:DT,
  slots:[[4.2,-3.6],[6.2,-3.6],[4.2,-1.2],[6.2,-1.2],[4.2,1.2],[6.2,1.2],[4.2,3.6],[6.2,3.6]],
- placed:{tape:{x:-3.2,z:-.3},chalk:{x:-1.5,z:.3,y:.06},pins:{x:0,z:.3,y:.06},shears:{x:1.5,z:.3,y:.06},needle:{x:-1.5,z:1.4,y:.06},mach:{x:-.2,z:3.6},ripper:{x:0,z:1.4,y:.06},iron:{x:1.5,z:1.4,y:.06}},
+ placed:{tape:{x:-3.2,z:-.3},chalk:{x:-1.5,z:.3,y:.09},pins:{x:0,z:.3,y:.09},shears:{x:1.5,z:.3,y:.09},needle:{x:-1.5,z:1.4,y:.09},mach:{x:-.2,z:3.6},ripper:{x:0,z:1.4,y:.09},iron:{x:1.5,z:1.4,y:.09}},
  tasks:[
   {t:"tape",zx:-4.6,zz:-.8,zr:1.5,zy:.02,label:"Dress form",goal:"Take the body measurements first."},
-  {t:"chalk",zx:-1.5,zz:.3,zr:.8,zy:.07,label:"Mark the cutting line",goal:"Mark the cutting line on the fabric."},
-  {t:"pins",zx:0,zz:.3,zr:.8,zy:.07,label:"Pin the pattern",goal:"Hold the pattern and fabric together so they do not shift."},
-  {t:"shears",zx:1.5,zz:.3,zr:.8,zy:.07,label:"Cut along the line",goal:"Cut the fabric along the marked line."},
-  {t:"needle",zx:-1.5,zz:1.4,zr:.7,zy:.07,label:"Baste the seam",goal:"Hold the seam with long temporary stitches before machine sewing."},
+  {t:"chalk",zx:-1.5,zz:.3,zr:.8,zy:.1,label:"Mark the cutting line",goal:"Mark the cutting line on the fabric."},
+  {t:"pins",zx:0,zz:.3,zr:.8,zy:.1,label:"Pin the pattern",goal:"Hold the pattern and fabric together so they do not shift."},
+  {t:"shears",zx:1.5,zz:.3,zr:.8,zy:.1,label:"Cut along the line",goal:"Cut the fabric along the marked line."},
+  {t:"needle",zx:-1.5,zz:1.4,zr:.7,zy:.1,label:"Baste the seam",goal:"Hold the seam with long temporary stitches before machine sewing."},
   {t:"mach",zx:-.2,zz:3.6,zr:1.3,zy:.02,label:"Sewing station",goal:"Sew the seam with strong, even stitches."},
-  {t:"ripper",zx:0,zz:1.4,zr:.7,zy:.07,label:"Wrong stitch",goal:"Undo a crooked stitch without cutting the fabric."},
-  {t:"iron",zx:1.5,zz:1.4,zr:.7,zy:.07,label:"Press the seam",goal:"Press the seam flat for a neat finish."}],
+  {t:"ripper",zx:0,zz:1.4,zr:.7,zy:.1,label:"Wrong stitch",goal:"Undo a crooked stitch without cutting the fabric."},
+  {t:"iron",zx:1.5,zz:1.4,zr:.7,zy:.1,label:"Press the seam",goal:"Press the seam flat for a neat finish."}],
  lessons:[
  {t:"Know your tools",y:FY,cam:[0,1.05,13],tg:[4.8,.4,.3],col:"#2563eb",strokes:[],pts:["Measuring: tape measure.","Marking: tailor's chalk.","Holding: pins and pincushion.","Cutting: fabric shears.","Sewing: needle and thread by hand, sewing machine for speed.","Fixing and finishing: seam ripper and iron."],chips:[["Try it","Tap each tool"],["Rule","Shears only cut fabric"]],tip:"Keep pins in the pincushion and carry scissors with the blades pointing down."},
  {t:"Take body measurements",y:FY,cam:[.4,.6,10],tg:[-4.6,2.9,-.8],col:"#be185d",strokes:[ellp(-4.6,3.8,-.8,1.3,.9),ellp(-4.6,3.0,-.8,1.05,.75),ellp(-4.6,2.3,-.8,1.3,.85)].map(s=>s.map(p=>[p[0],p[1],p[2]])),pts:["Bust: around the fullest part of the chest, with the tape level.","Waist: around the natural waistline, the narrowest part of the torso.","Hip: around the fullest part, usually about 20 cm (8 in) below the waist.","Keep the tape snug but not tight, and write each measurement down right away."],chips:[["Units","Centimeters or inches"],["Tape","Level all around"]],tip:"Measure over light clothing and stand relaxed and straight."},

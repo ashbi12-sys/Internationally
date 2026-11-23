@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>try{localStorage.setItem("hub-last",JSON.stringify({t:"Class Record",href:"records.html"}))}catch(e){}</script>
 <title>Class Record Dashboard | Learning Hub</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#743296">
 <style>
 :root{--bg:#fff3f8;--ink:#2a1050;--card:#fff;--line:#f4cade;--ok:#15803d;--bad:#b91c1c;--head:#512889;--head2:#973DA4;--headtxt:#fff;--acc:#973DA4;--onacc:#fff}
 @media (prefers-color-scheme:dark){:root{--bg:#1a0a30;--ink:#fdeaf4;--card:#2a1450;--line:#4a2a78;--ok:#4ade80;--bad:#f87171;--head:#12062a;--head2:#512889;--headtxt:#fdeaf4;--acc:#FF8AD8;--onacc:#2a0f45}}
@@ -126,16 +130,29 @@ tr.foot td{background:#fbd9e5;font-weight:700;border-bottom:0;padding:10px 6px}
 .ins li{margin:4px 0;font-size:.92rem}
 .ins p{margin:6px 0 0}
 #qcodes{font-size:.8rem}
+.em{display:inline-block;transform-origin:50% 80%}
+.a-bob{animation:aBob 2.6s ease-in-out infinite}.a-wig{animation:aWig 2.8s ease-in-out infinite}.a-pulse{animation:aPulse 2.2s ease-in-out infinite}.a-sway{animation:aSway 3s ease-in-out infinite}.a-shake{animation:aShake 3s ease-in-out infinite}.a-clap{animation:aClap 1.6s ease-in-out infinite}.a-bars{animation:aBars 2.4s ease-in-out infinite;transform-origin:50% 100%}.a-tilt{animation:aTilt 3.4s ease-in-out infinite}
+.em[class*="a-"]{animation-delay:var(--d,0s)}
+@keyframes aBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes aWig{0%,100%{transform:rotate(0)}25%{transform:rotate(-9deg)}75%{transform:rotate(9deg)}}
+@keyframes aPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+@keyframes aSway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+@keyframes aShake{0%,70%,100%{transform:translateX(0)}75%{transform:translateX(-3px) rotate(-6deg)}85%{transform:translateX(3px) rotate(6deg)}}
+@keyframes aClap{0%,100%{transform:scale(1) rotate(0)}30%{transform:scale(1.2) rotate(-6deg)}60%{transform:scale(.95) rotate(4deg)}}
+@keyframes aBars{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.78)}}
+@keyframes aTilt{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(12deg)}}
+.pglogo{width:30px;height:30px;vertical-align:-9px;margin-right:8px}
+@media(prefers-reduced-motion:reduce){.em{animation:none!important}}
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap">
-<a class="brand" href="learn.html">Learning Hub</a>
+<a class="brand" href="learn.html"><img class="pglogo" src="logo-mark.svg" alt="">Learning Hub</a>
 <nav aria-label="Main"><a href="learn.html">Home</a><a href="quiz.html">Quizzes</a><a href="labs.html">Labs</a><a href="games.html">Games</a><a href="records.html" aria-current="page">Records</a><a href="index.html">Marketplace</a></nav>
 </div></header>
 <div class="band"><div class="wrap">
 <div class="eyebrow">Class record &middot; <input id="sec" aria-label="Section or subject" placeholder="Section / Subject"></div>
-<h1>Student Grade Dashboard</h1>
+<h1><span class="em a-bars" style="--d:0s">📊</span> Student Grade Dashboard</h1>
 <div class="meta" id="meta"></div>
 </div></div>
 <main class="wrap">

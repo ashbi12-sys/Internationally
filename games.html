@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fun Games | Learning Hub</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#743296">
 <style>
 :root{--bg:#fff3f8;--ink:#2a1050;--card:#fff;--line:#f4cade;--ok:#15803d;--bad:#b91c1c;--head:#512889;--head2:#973DA4;--headtxt:#fff;--acc:#973DA4;--onacc:#fff}
 @media (prefers-color-scheme:dark){:root{--bg:#1a0a30;--ink:#fdeaf4;--card:#2a1450;--line:#4a2a78;--ok:#4ade80;--bad:#f87171;--head:#12062a;--head2:#512889;--headtxt:#fdeaf4;--acc:#FF8AD8;--onacc:#2a0f45}}
@@ -63,15 +67,28 @@ label{display:block;font-weight:600;margin:12px 0 4px}
 .msg{min-height:1.6em;font-weight:600;margin-top:10px}
 .msg.g{color:var(--ok)}.msg.r{color:var(--bad)}
 footer{text-align:center;font-size:.8rem;opacity:.7;padding:0 20px 28px}
+.em{display:inline-block;transform-origin:50% 80%}
+.a-bob{animation:aBob 2.6s ease-in-out infinite}.a-wig{animation:aWig 2.8s ease-in-out infinite}.a-pulse{animation:aPulse 2.2s ease-in-out infinite}.a-sway{animation:aSway 3s ease-in-out infinite}.a-shake{animation:aShake 3s ease-in-out infinite}.a-clap{animation:aClap 1.6s ease-in-out infinite}.a-bars{animation:aBars 2.4s ease-in-out infinite;transform-origin:50% 100%}.a-tilt{animation:aTilt 3.4s ease-in-out infinite}
+.em[class*="a-"]{animation-delay:var(--d,0s)}
+@keyframes aBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes aWig{0%,100%{transform:rotate(0)}25%{transform:rotate(-9deg)}75%{transform:rotate(9deg)}}
+@keyframes aPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+@keyframes aSway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+@keyframes aShake{0%,70%,100%{transform:translateX(0)}75%{transform:translateX(-3px) rotate(-6deg)}85%{transform:translateX(3px) rotate(6deg)}}
+@keyframes aClap{0%,100%{transform:scale(1) rotate(0)}30%{transform:scale(1.2) rotate(-6deg)}60%{transform:scale(.95) rotate(4deg)}}
+@keyframes aBars{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.78)}}
+@keyframes aTilt{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(12deg)}}
+.pglogo{width:30px;height:30px;vertical-align:-9px;margin-right:8px}
+@media(prefers-reduced-motion:reduce){.em{animation:none!important}}
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap">
-<a class="brand" href="learn.html">Learning Hub</a>
+<a class="brand" href="learn.html"><img class="pglogo" src="logo-mark.svg" alt="">Learning Hub</a>
 <nav aria-label="Main"><a href="learn.html">Home</a><a href="quiz.html">Quizzes</a><a href="labs.html">Labs</a><a href="games.html" aria-current="page">Games</a><a href="records.html">Records</a><a href="index.html">Marketplace</a></nav>
 </div></header>
 <main class="wrap">
-<h1>Fun Games</h1>
+<h1><span class="em a-wig" style="--d:0s">🎮</span> Fun Games</h1>
 <p class="lead">Learn vocabulary from every subject while you play.</p>
 <div class="tabs" id="tabs" role="tablist"></div>
 <section class="panel" id="panel"></section>
@@ -86,7 +103,7 @@ function memory(el){
   const deck=shuffle(P.flatMap((p,i)=>[{i,t:p[0],e:1},{i,t:p[1]}]));
   let open=[],moves=0,found=0,lock=false;
   const best=ls.get("best-mem");
-  el.innerHTML=`<h2>Memory Match</h2><p>Flip two cards to match each picture with its name.</p><div class="row"><b id="mv">Moves: 0</b><span>${best?"Best: "+best+" moves":"No best score yet"}</span><button class="btn alt" id="again">Restart</button></div><div class="cards" id="cd"></div><div class="msg" id="msg" aria-live="polite"></div>`;
+  el.innerHTML=`<h2><span class="em a-pulse" style="--d:0s">🧠</span> Memory Match</h2><p>Flip two cards to match each picture with its name.</p><div class="row"><b id="mv">Moves: 0</b><span>${best?"Best: "+best+" moves":"No best score yet"}</span><button class="btn alt" id="again">Restart</button></div><div class="cards" id="cd"></div><div class="msg" id="msg" aria-live="polite"></div>`;
   $("again").onclick=()=>memory(el);
   deck.forEach(c=>{
     const b=document.createElement("button");b.className="card"+(c.e?" emo":"");b.textContent="?";b.setAttribute("aria-label","Face-down card");
@@ -123,7 +140,7 @@ function scramble(el){
       $("re").onclick=()=>scramble(el);return;
     }
     const [w,h]=list[i];
-    el.innerHTML=`<h2>Word Scramble</h2><p>Word ${i+1} of ${list.length}. Score: ${score}${best?" (best "+best+")":""}</p><div class="scr" aria-label="Scrambled letters">${scr(w)}</div><p><b>Hint:</b> ${h}</p>
+    el.innerHTML=`<h2><span class="em a-wig" style="--d:0s">🔤</span> Word Scramble</h2><p>Word ${i+1} of ${list.length}. Score: ${score}${best?" (best "+best+")":""}</p><div class="scr" aria-label="Scrambled letters">${scr(w)}</div><p><b>Hint:</b> ${h}</p>
     <form id="f"><label for="a">Your answer</label><input id="a" autocomplete="off" autocapitalize="characters" required><div class="row"><button class="btn" type="submit">Check</button><button class="btn alt" type="button" id="skip">Skip</button></div></form><div class="msg" id="msg" aria-live="polite"></div>`;
     $("a").focus();
     $("skip").onclick=()=>{i++;next()};

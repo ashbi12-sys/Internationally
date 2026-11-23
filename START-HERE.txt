@@ -6,6 +6,9 @@ What you have: ONE website.
 
 Your link will NOT show your name if you host on Cloudflare Pages (see PART 8).
 
+YOUR LOGO: a shopping bag with an open book (shop + learn). The files are in the logo/ folder.
+They are also inside website/ so your pages and phone home-screen icon use them.
+
 Two folders:
   website/    -> goes to GitHub (this is your site)
   database/   -> you paste these into Supabase (do NOT upload them to GitHub)
@@ -27,7 +30,9 @@ PART 1 - CLEAN YOUR GITHUB (5 minutes)
       README.txt
       files.zip
 3. Click "Add file" > "Upload files". Drag ALL the files that are INSIDE the "website" folder:
-      index.html, config.js, learn.html, quiz.html, labs.html, games.html, records.html
+      ALL 15 files: index.html, learn.html, quiz.html, labs.html, games.html, records.html,
+      config.js, _headers, manifest.webmanifest, logo-mark.svg, logo.svg, favicon.svg,
+      apple-touch-icon.png, icon-192.png, icon-512.png
    (Same names will replace the old ones.) Click "Commit changes".
 4. Settings > Pages: Branch = main, Folder = / (root). Save.
    Your address looks like:  https://ashbi12-sys.github.io/YOUR-REPO-NAME/
@@ -193,3 +198,17 @@ KEEP YOUR IDENTITY PRIVATE
   - Never share: database password, secret key, service_role key.
   - A custom domain (like mymarketplace.com) is optional. You can buy one in Cloudflare
     ("Domain Registration"). Cloudflare hides your personal WHOIS details for free.
+
+
+=====================================================================
+EXTRA - WHAT IS NEW
+=====================================================================
+- Logo + favicon + phone home-screen icon (website/ and logo/ folders).
+- Marketplace and Learning Hub use one pink and purple palette, in light and dark mode.
+- Pictures in titles are animated (they bounce, sway, spin or flip). If a person turns on
+  "Reduce motion" on their phone, the animations stop automatically.
+- Hand Massage and Dressmaking 3D have realistic lighting, soft shadows, a wood-grain table,
+  a smoother human hand with nails and palm lines, and detailed real-looking tools.
+- Learning Hub: learning path, badges, and details on every tile.
+- Marketplace: live item count, "How it works", trust section, and a full footer.
+- "Add to Home Screen" works on phones: open the site, then use Share > Add to Home Screen.

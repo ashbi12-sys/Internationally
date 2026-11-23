@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>try{localStorage.setItem("hub-last",JSON.stringify({t:"Quiz Hub",href:"quiz.html"}))}catch(e){}</script>
 <title>TLE at Filipino Quiz Hub</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#743296">
 <style>
 :root{--bg:#fff3f8;--ink:#2a1050;--card:#fff;--line:#f4cade;--ok:#15803d;--bad:#b91c1c;--head:#512889;--head2:#973DA4;--headtxt:#fff}
 @media (prefers-color-scheme:dark){:root{--bg:#1a0a30;--ink:#fdeaf4;--card:#2a1450;--line:#4a2a78;--ok:#4ade80;--bad:#f87171;--head:#12062a;--head2:#512889;--headtxt:#fdeaf4}}
@@ -51,12 +55,25 @@ footer{text-align:center;font-size:.8rem;opacity:.7;padding:0 20px 28px}
 .saved{font-size:.9rem;opacity:.85}
 .codemsg{font-size:.8rem;word-break:break-all;margin-top:10px}
 @media (prefers-reduced-motion:reduce){.fill{transition:none}}
+.em{display:inline-block;transform-origin:50% 80%}
+.a-bob{animation:aBob 2.6s ease-in-out infinite}.a-wig{animation:aWig 2.8s ease-in-out infinite}.a-pulse{animation:aPulse 2.2s ease-in-out infinite}.a-sway{animation:aSway 3s ease-in-out infinite}.a-shake{animation:aShake 3s ease-in-out infinite}.a-clap{animation:aClap 1.6s ease-in-out infinite}.a-bars{animation:aBars 2.4s ease-in-out infinite;transform-origin:50% 100%}.a-tilt{animation:aTilt 3.4s ease-in-out infinite}
+.em[class*="a-"]{animation-delay:var(--d,0s)}
+@keyframes aBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes aWig{0%,100%{transform:rotate(0)}25%{transform:rotate(-9deg)}75%{transform:rotate(9deg)}}
+@keyframes aPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+@keyframes aSway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+@keyframes aShake{0%,70%,100%{transform:translateX(0)}75%{transform:translateX(-3px) rotate(-6deg)}85%{transform:translateX(3px) rotate(6deg)}}
+@keyframes aClap{0%,100%{transform:scale(1) rotate(0)}30%{transform:scale(1.2) rotate(-6deg)}60%{transform:scale(.95) rotate(4deg)}}
+@keyframes aBars{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.78)}}
+@keyframes aTilt{0%,100%{transform:rotate(-12deg)}50%{transform:rotate(12deg)}}
+.pglogo{width:30px;height:30px;vertical-align:-9px;margin-right:8px}
+@media(prefers-reduced-motion:reduce){.em{animation:none!important}}
 </style>
 </head>
 <body>
 <header><div class="wrap">
-<a href="learn.html" style="color:inherit;opacity:.8;font-weight:600;text-decoration:none">&larr; Back to Learning Hub</a>
-<h1>Quiz Hub</h1>
+<a href="learn.html" style="color:inherit;opacity:.9;font-weight:600;text-decoration:none"><img src="logo-mark.svg" alt="" style="width:26px;height:26px;vertical-align:-7px;margin-right:8px">&larr; Back to Learning Hub</a>
+<h1><span class="em a-wig" style="--d:0s">📝</span> Quiz Hub</h1>
 <p>Pumili ng asignatura at subukan ang iyong kaalaman. Choose a subject and test what you know.</p>
 </div></header>
 <main><div class="wrap">
