@@ -4,8 +4,8 @@
    contact  = your email, shown to users for reports, privacy requests and takedowns.
    operator = your name or organization, shown in the Terms and Privacy pages. */
 window.MARKET_CONFIG = {
-  url: "",
-  key: "",
-  contact: "",
-  operator: ""
+  url: "https://tjbkbfvsokpbcsjsevlk.supabase.co",
+  key: "sb_publishable_5HUYFPMIytQXtbOFg7UYVQ_rjGDNgU6",
+  contact: "Learn Now",
+  operator: "Spread Love"
 };
